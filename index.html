@@ -1,718 +1,926 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Barcelona Viability Insights | Análisis Salarios vs Alquiler 2026</title>
-    <meta name="description" content="Data product interactivo que analiza la viabilidad de vivir en Barcelona cruzando datos reales de salarios y alquileres.">
-    
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Barcelona Viability Insights | Análisis Salarios vs Alquiler 2026
+    </title>
+    <meta
+      name="description"
+      content="Data product interactivo que analiza la viabilidad de vivir en Barcelona cruzando datos reales de salarios y alquileres."
+    />
+
     <!-- Fuentes -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
     <!-- Chart.js (VERSIÓN LIGERA) -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-    
-    <!-- CSS -->
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/dashboard.css">
-    <link rel="stylesheet" href="css/table-chart.css">
-    <link rel="stylesheet" href="css/responsive.css">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-    
-    <!-- Open Graph -->
-    <meta property="og:title" content="Barcelona Viability Insights 2026">
-    <meta property="og:description" content="¿Se puede vivir en Barcelona con los salarios actuales? Análisis interactivo de datos reales.">
-    <meta property="og:type" content="website">
-</head>
 
-<body>
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/dashboard.css" />
+    <link rel="stylesheet" href="css/table-chart.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Barcelona Viability Insights 2026" />
+    <meta
+      property="og:description"
+      content="¿Se puede vivir en Barcelona con los salarios actuales? Análisis interactivo de datos reales."
+    />
+    <meta property="og:type" content="website" />
+  </head>
+
+  <body>
     <!-- ===== MENÚ SUPERIOR STICKY ===== -->
     <header class="main-header" id="mainHeader">
-        <div class="container header-container">
-            <div class="logo">
-                <i class="fas fa-chart-line"></i>
-                <h1>Barcelona Viability</h1>
-            </div>
-            
-            <nav class="main-nav" id="mainNav">
-                <ul class="nav-list">
-                    <li><a href="#hero" class="nav-link active">Inicio</a></li>
-                    <li><a href="#dashboard-section" class="nav-link">Dashboard</a></li>
-                    <li><a href="#insights-section" class="nav-link">Insights</a></li>
-                    <li><a href="#methodology-section" class="nav-link">Metodología</a></li>
-                    <li><a href="#about-section" class="nav-link">About</a></li>
-                </ul>
-            </nav>
-            
-            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Abrir menú">
-                <i class="fas fa-bars"></i>
-            </button>
+      <div class="container header-container">
+        <div class="logo">
+          <i class="fas fa-chart-line"></i>
+          <h1>Barcelona Viability</h1>
         </div>
+
+        <nav class="main-nav" id="mainNav">
+          <ul class="nav-list">
+            <li><a href="#hero" class="nav-link active">Inicio</a></li>
+            <li><a href="#dashboard-section" class="nav-link">Dashboard</a></li>
+            <li><a href="#insights-section" class="nav-link">Insights</a></li>
+            <li>
+              <a href="#methodology-section" class="nav-link">Metodología</a>
+            </li>
+            <li><a href="#about-section" class="nav-link">About</a></li>
+          </ul>
+        </nav>
+
+        <button
+          class="mobile-menu-toggle"
+          id="mobileMenuToggle"
+          aria-label="Abrir menú"
+        >
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
     </header>
 
     <!-- ===== HERO SECTION ===== -->
     <section class="hero" id="hero">
-        <div class="container hero-container">
-            <div class="hero-content">
-                <h1 class="hero-title">Barcelona Viability Insights 2026</h1>
-                <p class="hero-subtitle">¿Puedes permitirte vivir en Barcelona con tu salario?</p>
-                <p class="hero-description">
-                    Estudio socioeconómico multidimensional de alto impacto para el sector tecnológico y digital
-                </p>
-                
-                <div class="hero-stats">
-                    <div class="stat-card">
-                        <div class="stat-top-line">
-                            <i class="fas fa-chart-pie stat-icon"></i>
-                            <div class="stat-number">9</div>
-                        </div>
-                        <div class="stat-label">Perfiles analizados</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-top-line">
-                            <i class="fas fa-city stat-icon"></i>
-                            <div class="stat-number">7</div>
-                        </div>
-                        <div class="stat-label">Distritos analizados</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-top-line">
-                            <i class="fas fa-tachometer-alt stat-icon"></i>
-                            <div class="stat-number">56%</div>
-                        </div>
-                        <div class="stat-label">Esfuerzo salarial medio*</div>
-                    </div>
-                    <div class="stat-label"><em>*Relación entre el alquiler promedio mensual y la mediana del salario bruto mensual agregado.</em></div>
-                </div>
-                
-                <div class="hero-cta">
-                    <a href="#dashboard-section" class="cta-button primary">
-                        <i class="fas fa-search"></i> Explorar Dashboard
-                    </a>
-                    <a href="#insights-section" class="cta-button secondary">
-                        <i class="fas fa-lightbulb"></i> Ver Insights
-                    </a>
-                </div>
+      <div class="container hero-container">
+        <div class="hero-content">
+          <h1 class="hero-title">Barcelona Viability Insights 2026</h1>
+          <p class="hero-subtitle">
+            ¿Puedes permitirte vivir en Barcelona con tu salario?
+          </p>
+          <p class="hero-description">
+            Estudio socioeconómico multidimensional de alto impacto para el
+            sector tecnológico y digital
+          </p>
+
+          <div class="hero-stats">
+            <div class="stat-card">
+              <div class="stat-top-line">
+                <i class="fas fa-chart-pie stat-icon"></i>
+                <div class="stat-number">9</div>
+              </div>
+              <div class="stat-label">Perfiles analizados</div>
             </div>
+            <div class="stat-card">
+              <div class="stat-top-line">
+                <i class="fas fa-city stat-icon"></i>
+                <div class="stat-number">7</div>
+              </div>
+              <div class="stat-label">Distritos analizados</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-top-line">
+                <i class="fas fa-tachometer-alt stat-icon"></i>
+                <div class="stat-number">56%</div>
+              </div>
+              <div class="stat-label">Esfuerzo salarial medio*</div>
+            </div>
+            <div class="stat-label">
+              <em
+                >*Relación entre el alquiler promedio mensual y la mediana del
+                salario bruto mensual agregado.</em
+              >
+            </div>
+          </div>
+
+          <div class="hero-cta">
+            <a href="#dashboard-section" class="cta-button primary">
+              <i class="fas fa-search"></i> Explorar Dashboard
+            </a>
+            <a href="#insights-section" class="cta-button secondary">
+              <i class="fas fa-lightbulb"></i> Ver Insights
+            </a>
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- ===== DASHBOARD SECTION ===== -->
     <section class="dashboard-section" id="dashboard-section">
-        <div class="container">
-            <div class="section-header">
-                <h2><i class="fas fa-chart-bar"></i> Dashboard Interactivo</h2>
-                <p class="dashboard-intro">
-                    Explora los 3 análisis cruzados entre salarios y alquileres y descubre el mejor distrito para vivir en Barcelona según tu perfil profesional. 
-                    Incluye datos de interés como salarios medios del sector tecnológico/digital, precio de alquiler promedio por distrito y % de esfuerzo salarial 
-                    mínimo por barrios.
-                </p>
-            </div>
-
-            <div class="dashboard-layout">
-                <!-- COLUMNA IZQUIERDA: MENÚ VERTICAL -->
-                <aside class="dashboard-sidebar">
-                    <nav class="dashboard-nav" id="dashboardNav">
-                        <a href="#vision-general" class="dashboard-nav-item active">
-                            <span class="nav-icon"><i class="fas fa-chart-line"></i></span>
-                            <span class="nav-text">Resumen</span>
-                        </a>
-                        <a href="#accessibility-section" class="dashboard-nav-item">
-                            <span class="nav-icon"><i class="fas fa-percentage"></i></span>
-                            <span class="nav-text">Accesibilidad</span>
-                        </a>
-                        <a href="#seniority-section" class="dashboard-nav-item">
-                            <span class="nav-icon"><i class="fas fa-users"></i></span>
-                            <span class="nav-text">Seniority</span>
-                        </a>
-                    </nav>
-                </aside>
-
-                <!-- COLUMNA DERECHA: CONTENIDO PRINCIPAL -->
-                <main class="dashboard-main" id="dashboardMain">
-                    <!-- Página ÚNICA: Resumen con 3 subsecciones -->
-                    <article class="dashboard-page active" id="vision-general">
-                        <h3>Resumen</h3>
-                        <p class="page-description">
-                            ¿En qué distrito de Barcelona te puedes permitir vivir según tu perfil profesional?<br>
-                            Analizamos cuál es el distrito más viable económicamente, los barrios más accesibles y el % de esfuerzo salarial requerido en cada uno.
-                        </p>
-                        
-                        <!-- FILTROS INTERACTIVOS -->
-                        <div class="dashboard-filters" id="dashboardFilters">
-                            <div class="filters-container">
-                                <div class="filter-group">
-                                    <label for="categoryFilter"><i class="fas fa-briefcase"></i> Categoría Laboral</label>
-                                    <select id="categoryFilter" class="filter-select">
-                                        <option value="all">Todas las categorías</option>
-                                        <option value="Technology">Technology</option>
-                                        <option value="Marketing">Marketing</option>
-                                        <option value="Design">Design</option>
-                                    </select>
-                                </div>
-                                
-                                <div class="filter-group">
-                                    <label for="levelFilter"><i class="fas fa-user-graduate"></i> Nivel Laboral</label>
-                                    <select id="levelFilter" class="filter-select">
-                                        <option value="all">Todos los niveles</option>
-                                        <option value="Junior">Junior</option>
-                                        <option value="Mid">Mid</option>
-                                        <option value="Senior">Senior</option>
-                                    </select>
-                                </div>
-                                
-                                <div class="filter-group">
-                                    <label for="typeFilter"><i class="fas fa-home"></i> Tipo de Casa</label>
-                                    <select id="typeFilter" class="filter-select">
-                                        <option value="all">Todos los tipos</option>
-                                        <option value="Estudio">Estudio</option>
-                                        <option value="1 hab.">1 habitación</option>
-                                    </select>
-                                </div>
-                                
-                                <div class="filter-group">
-                                    <label for="districtFilter"><i class="fas fa-map-marker-alt"></i> Distrito</label>
-                                    <select id="districtFilter" class="filter-select">
-                                        <option value="all">Todos los distritos</option>
-                                        <option value="Ciutat Vella">Ciutat Vella</option>
-                                        <option value="Eixample">Eixample</option>
-                                        <option value="Gràcia">Gràcia</option>
-                                        <option value="Les Corts">Les Corts</option>
-                                        <option value="Sant Martí">Sant Martí</option>
-                                        <option value="Sants-Montjuïc">Sants-Montjuïc</option>
-                                        <option value="Sarrià-Sant Gervasi">Sarrià-Sant Gervasi</option>
-                                    </select>
-                                    
-                                    <!-- BOTÓN DISCRETO DEBAJO DEL FILTRO DE DISTRITOS -->
-                                    <button class="reset-filters-btn" id="resetFiltersBtn">
-                                        <i class="fas fa-times-circle"></i> Borrar filtros
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- CONTENEDOR DE TARJETAS KPI -->
-                        <div class="kpi-cards-container" id="kpiCardsContainer">
-                            <div class="kpi-card">
-                                <div class="kpi-card-icon">
-                                    <i class="fas fa-euro-sign"></i>
-                                </div>
-                                <div class="kpi-card-content">
-                                    <div class="kpi-card-label">Salario Bruto Mensual</div>
-                                    <div class="kpi-card-value">3.500 €</div>
-                                    <div class="kpi-card-subtext">Technology Senior</div>
-                                </div>
-                            </div>
-                            
-                            <div class="kpi-card">
-                                <div class="kpi-card-icon">
-                                    <i class="fas fa-home"></i>
-                                </div>
-                                <div class="kpi-card-content">
-                                    <div class="kpi-card-label">Alquiler Promedio</div>
-                                    <div class="kpi-card-value">1.125 €</div>
-                                    <div class="kpi-card-subtext">Estudio en Ciutat Vella</div>
-                                </div>
-                            </div>
-                            
-                            <div class="kpi-card">
-                                <div class="kpi-card-icon">
-                                    <i class="fas fa-chart-bar"></i>
-                                </div>
-                                <div class="kpi-card-content">
-                                    <div class="kpi-card-label">% Esfuerzo Mínimo</div>
-                                    <div class="kpi-card-value">32,14%</div>
-                                    <div class="kpi-card-subtext">Mejor barrio en Ciutat Vella</div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- CONTENEDOR PARA LA TABLA Y GRÁFICO (ANÁLISIS DETALLADO) -->
-                        <div class="dashboard-visuals-container">
-                            <div class="visuals-section">
-                                <h4>Tabla de análisis de viabilidad según los filtros aplicados</h4>
-                                <div class="table-placeholder" id="detail-table">
-                                    <p>La tabla de barrios, alquileres y viabilidad aparecerá aquí.</p>
-                                </div>
-                            </div>
-                            
-                            <div class="visuals-section">
-                                <h4>Esfuerzo Salarial por Barrios</h4>
-                                <div class="chart-placeholder" id="chart-visualization">
-                                    <p>El gráfico de barras horizontales aparecerá aquí.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- ===== SUBSECCIÓN DE ACCESIBILIDAD INTEGRADA ===== -->
-                        <section id="accessibility-section" class="dashboard-subsection">
-                            <div class="subsection-header">
-                                <h3><i class="fas fa-percentage"></i> Accesibilidad</h3>
-                                <p class="page-description">
-                                    ¿Qué % de esfuerzo salarial destina cada perfil profesional en cada distrito sobre salario bruto?<br>
-                                    Resumen comparativo de los 9 perfiles profesionales y los 7 distritos analizados para visualizar 
-                                    qué % de salario tiene que destinar al alquiler cada perfil profesional en cada distrito.
-                                </p>
-                            </div>
-                            
-                            <!-- Contenedor para tabla/matriz -->
-                            <div class="dashboard-visuals-container">
-                                <div class="visuals-section">
-                                    <h4>Análisis Comparativo: Esfuerzo por Distrito y Perfil</h4>
-                                    <p class="section-description">
-                                        Matriz de calor que muestra el menor porcentaje de esfuerzo salarial para cada combinación 
-                                        de perfil profesional (Technology/Marketing/Design × Junior/Mid/Senior) y distrito de Barcelona.
-                                        <br><small><i class="fas fa-info-circle"></i> Datos estáticos - independiente de los filtros aplicados arriba.</small>
-                                    </p>
-                                    
-                                    <!-- Contenedor donde se renderizará la matriz -->
-                                    <div class="visualization-container" id="accessibility-heatmap-container">
-                                        <!-- La matriz de calor se renderizará aquí automáticamente -->
-                                    </div>
-                                </div>
-                                
-                                <!-- Gráfico de ranking por distritos -->
-                                <div class="visuals-section">
-                                    <h4>Esfuerzo Salarial por Distritos</h4>
-                                    <p class="section-description">
-                                        Clasificación de los 7 distritos de Barcelona según el % esfuerzo salarial mínimo entre todos los perfiles profesionales analizados.
-                                    </p>
-                                    
-                                    <div class="chart-placeholder" id="district-ranking-chart">
-                                        <div class="data-message">
-                                            <div class="message-icon">📈</div>
-                                            <h5>Gráfico de Ranking (Próximamente)</h5>
-                                            <p>Clasificación de los 7 distritos de Barcelona según el % esfuerzo salarial mínimo entre todos los perfiles profesionales analizados.</p>
-                                            <div class="preview-items">
-                                                <div class="preview-item">
-                                                    <span class="preview-rank">1º</span>
-                                                    <span class="preview-district">Sant Martí</span>
-                                                    <span class="preview-value">~26% esfuerzo</span>
-                                                </div>
-                                                <div class="preview-item">
-                                                    <span class="preview-rank">2º</span>
-                                                    <span class="preview-district">Sants-Montjuïc</span>
-                                                    <span class="preview-value">~28% esfuerzo</span>
-                                                </div>
-                                                <div class="preview-item">
-                                                    <span class="preview-rank">3º</span>
-                                                    <span class="preview-district">Eixample</span>
-                                                    <span class="preview-value">~31% esfuerzo</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-
-                        <!-- ===== SUBSECCIÓN DE SENIORITY INTEGRADA ===== -->
-                        <section id="seniority-section" class="dashboard-subsection">
-                            <div class="subsection-header">
-                                <h3><i class="fas fa-users"></i> Seniority</h3>
-                                <p class="page-description">
-                                    ¿Cómo transforma la experiencia profesional el acceso a la vivienda y al entorno urbano?<br>
-                                    Comparativa de salarios promedios entre los perfiles Junior y los perfiles Senior de Tecnología, Marketing y Diseño.
-                                </p>
-                            </div>
-                            
-                            <div class="dashboard-visuals-container">
-                                <div class="visuals-section">
-                                    <h4>Comparativa % de esfuerzo salarial Junior vs Senior por Categoría</h4>
-                                    <p class="section-description">
-                                        Gráfico de columnas comparativo con el % de esfuerzo salarial entre Junior y Senior de cada categoría: Technology, Marketing y Design.
-                                        <br><small><i class="fas fa-info-circle"></i> Datos estáticos - independiente de los filtros aplicados arriba.</small>
-                                    </p>
-                                    
-                                    <!-- CAMBIO: Ahora es un contenedor .html-chart directamente -->
-                                    <div class="html-chart" id="seniority-comparison-chart">
-                                        <!-- El contenido será generado por seniority-manager.js directamente aquí -->
-                                    </div>
-                                </div>
-                                
-                                <div class="visuals-section">
-                                    <h4>Esfuerzo salarial de todas las categorías de Junior y Senior</h4>
-                                    <p class="section-description">
-                                        Gráfico de barras con el % de esfuerzo salarial de todas las categorías de Junior y Senior.
-                                    </p>
-                                    
-                                    <!-- CAMBIO: También cambiado a .html-chart para consistencia -->
-                                    <div class="html-chart" id="salary-difference-chart">
-                                        <!-- El contenido será generado por seniority-manager.js directamente aquí -->
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-                    </article>
-                    
-                    <!-- NO HAY MÁS PÁGINAS REDIRECCIONALES -->
-                </main>
-            </div>
+      <div class="container">
+        <div class="section-header">
+          <h2><i class="fas fa-chart-bar"></i> Dashboard Interactivo</h2>
+          <p class="dashboard-intro">
+            Explora los 3 análisis cruzados entre salarios y alquileres y
+            descubre el mejor distrito para vivir en Barcelona según tu perfil
+            profesional. Incluye datos de interés como salarios medios del
+            sector tecnológico/digital, precio de alquiler promedio por distrito
+            y % de esfuerzo salarial mínimo por barrios.
+          </p>
         </div>
+
+        <div class="dashboard-layout">
+          <!-- COLUMNA IZQUIERDA: MENÚ VERTICAL -->
+          <aside class="dashboard-sidebar">
+            <nav class="dashboard-nav" id="dashboardNav">
+              <a href="#vision-general" class="dashboard-nav-item active">
+                <span class="nav-icon"><i class="fas fa-chart-line"></i></span>
+                <span class="nav-text">Resumen</span>
+              </a>
+              <a href="#accessibility-section" class="dashboard-nav-item">
+                <span class="nav-icon"><i class="fas fa-percentage"></i></span>
+                <span class="nav-text">Accesibilidad</span>
+              </a>
+              <a href="#seniority-section" class="dashboard-nav-item">
+                <span class="nav-icon"><i class="fas fa-users"></i></span>
+                <span class="nav-text">Seniority</span>
+              </a>
+            </nav>
+          </aside>
+
+          <!-- COLUMNA DERECHA: CONTENIDO PRINCIPAL -->
+          <main class="dashboard-main" id="dashboardMain">
+            <!-- Página ÚNICA: Resumen con 3 subsecciones -->
+            <article class="dashboard-page active" id="vision-general">
+              <h3>Resumen</h3>
+              <p class="page-description">
+                ¿En qué distrito de Barcelona te puedes permitir vivir según tu
+                perfil profesional?<br />
+                Analizamos cuál es el distrito más viable económicamente, los
+                barrios más accesibles y el % de esfuerzo salarial requerido en
+                cada uno.
+              </p>
+
+              <!-- FILTROS INTERACTIVOS -->
+              <div class="dashboard-filters" id="dashboardFilters">
+                <div class="filters-container">
+                  <div class="filter-group">
+                    <label for="categoryFilter"
+                      ><i class="fas fa-briefcase"></i> Categoría Laboral</label
+                    >
+                    <select id="categoryFilter" class="filter-select">
+                      <option value="all">Todas las categorías</option>
+                      <option value="Technology">Technology</option>
+                      <option value="Marketing">Marketing</option>
+                      <option value="Design">Design</option>
+                    </select>
+                  </div>
+
+                  <div class="filter-group">
+                    <label for="levelFilter"
+                      ><i class="fas fa-user-graduate"></i> Nivel Laboral</label
+                    >
+                    <select id="levelFilter" class="filter-select">
+                      <option value="all">Todos los niveles</option>
+                      <option value="Junior">Junior</option>
+                      <option value="Mid">Mid</option>
+                      <option value="Senior">Senior</option>
+                    </select>
+                  </div>
+
+                  <div class="filter-group">
+                    <label for="typeFilter"
+                      ><i class="fas fa-home"></i> Tipo de Casa</label
+                    >
+                    <select id="typeFilter" class="filter-select">
+                      <option value="all">Todos los tipos</option>
+                      <option value="Estudio">Estudio</option>
+                      <option value="1 hab.">1 habitación</option>
+                    </select>
+                  </div>
+
+                  <div class="filter-group">
+                    <label for="districtFilter"
+                      ><i class="fas fa-map-marker-alt"></i> Distrito</label
+                    >
+                    <select id="districtFilter" class="filter-select">
+                      <option value="all">Todos los distritos</option>
+                      <option value="Ciutat Vella">Ciutat Vella</option>
+                      <option value="Eixample">Eixample</option>
+                      <option value="Gràcia">Gràcia</option>
+                      <option value="Les Corts">Les Corts</option>
+                      <option value="Sant Martí">Sant Martí</option>
+                      <option value="Sants-Montjuïc">Sants-Montjuïc</option>
+                      <option value="Sarrià-Sant Gervasi">
+                        Sarrià-Sant Gervasi
+                      </option>
+                    </select>
+
+                    <!-- BOTÓN DISCRETO DEBAJO DEL FILTRO DE DISTRITOS -->
+                    <button class="reset-filters-btn" id="resetFiltersBtn">
+                      <i class="fas fa-times-circle"></i> Borrar filtros
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- CONTENEDOR DE TARJETAS KPI -->
+              <div class="kpi-cards-container" id="kpiCardsContainer">
+                <div class="kpi-card">
+                  <div class="kpi-card-icon">
+                    <i class="fas fa-euro-sign"></i>
+                  </div>
+                  <div class="kpi-card-content">
+                    <div class="kpi-card-label">Salario Bruto Mensual</div>
+                    <div class="kpi-card-value">3.500 €</div>
+                    <div class="kpi-card-subtext">Technology Senior</div>
+                  </div>
+                </div>
+
+                <div class="kpi-card">
+                  <div class="kpi-card-icon">
+                    <i class="fas fa-home"></i>
+                  </div>
+                  <div class="kpi-card-content">
+                    <div class="kpi-card-label">Alquiler Promedio</div>
+                    <div class="kpi-card-value">1.125 €</div>
+                    <div class="kpi-card-subtext">Estudio en Ciutat Vella</div>
+                  </div>
+                </div>
+
+                <div class="kpi-card">
+                  <div class="kpi-card-icon">
+                    <i class="fas fa-chart-bar"></i>
+                  </div>
+                  <div class="kpi-card-content">
+                    <div class="kpi-card-label">% Esfuerzo Mínimo</div>
+                    <div class="kpi-card-value">32,14%</div>
+                    <div class="kpi-card-subtext">
+                      Mejor barrio en Ciutat Vella
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- CONTENEDOR PARA LA TABLA Y GRÁFICO (ANÁLISIS DETALLADO) -->
+              <div class="dashboard-visuals-container">
+                <div class="visuals-section">
+                  <h4>
+                    Tabla de análisis de viabilidad según los filtros aplicados
+                  </h4>
+                  <div class="table-placeholder" id="detail-table">
+                    <p>
+                      La tabla de barrios, alquileres y viabilidad aparecerá
+                      aquí.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="visuals-section">
+                  <h4>Esfuerzo Salarial por Barrios</h4>
+                  <div class="chart-placeholder" id="chart-visualization">
+                    <p>El gráfico de barras horizontales aparecerá aquí.</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- ===== SUBSECCIÓN DE ACCESIBILIDAD INTEGRADA ===== -->
+              <section id="accessibility-section" class="dashboard-subsection">
+                <div class="subsection-header">
+                  <h3><i class="fas fa-percentage"></i> Accesibilidad</h3>
+                  <p class="page-description">
+                    ¿Qué % de esfuerzo salarial destina cada perfil profesional
+                    en cada distrito sobre salario bruto?<br />
+                    Resumen comparativo de los 9 perfiles profesionales y los 7
+                    distritos analizados para visualizar qué % de salario tiene
+                    que destinar al alquiler cada perfil profesional en cada
+                    distrito.
+                  </p>
+                </div>
+
+                <!-- Contenedor para tabla/matriz -->
+                <div class="dashboard-visuals-container">
+                  <div class="visuals-section">
+                    <h4>
+                      Análisis Comparativo: Esfuerzo por Distrito y Perfil
+                    </h4>
+                    <p class="section-description">
+                      Matriz de calor que muestra el menor porcentaje de
+                      esfuerzo salarial para cada combinación de perfil
+                      profesional (Technology/Marketing/Design ×
+                      Junior/Mid/Senior) y distrito de Barcelona.
+                      <br /><small
+                        ><i class="fas fa-info-circle"></i> Datos estáticos -
+                        independiente de los filtros aplicados arriba.</small
+                      >
+                    </p>
+
+                    <!-- Contenedor donde se renderizará la matriz -->
+                    <div
+                      class="visualization-container"
+                      id="accessibility-heatmap-container"
+                    >
+                      <!-- La matriz de calor se renderizará aquí automáticamente -->
+                    </div>
+                  </div>
+
+                  <!-- Gráfico de ranking por distritos -->
+                  <div class="visuals-section">
+                    <h4>Esfuerzo Salarial por Distritos</h4>
+                    <p class="section-description">
+                      Clasificación de los 7 distritos de Barcelona según el %
+                      esfuerzo salarial mínimo entre todos los perfiles
+                      profesionales analizados.
+                    </p>
+
+                    <div class="chart-placeholder" id="district-ranking-chart">
+                      <div class="data-message">
+                        <div class="message-icon">📈</div>
+                        <h5>Gráfico de Ranking (Próximamente)</h5>
+                        <p>
+                          Clasificación de los 7 distritos de Barcelona según el
+                          % esfuerzo salarial mínimo entre todos los perfiles
+                          profesionales analizados.
+                        </p>
+                        <div class="preview-items">
+                          <div class="preview-item">
+                            <span class="preview-rank">1º</span>
+                            <span class="preview-district">Sant Martí</span>
+                            <span class="preview-value">~26% esfuerzo</span>
+                          </div>
+                          <div class="preview-item">
+                            <span class="preview-rank">2º</span>
+                            <span class="preview-district">Sants-Montjuïc</span>
+                            <span class="preview-value">~28% esfuerzo</span>
+                          </div>
+                          <div class="preview-item">
+                            <span class="preview-rank">3º</span>
+                            <span class="preview-district">Eixample</span>
+                            <span class="preview-value">~31% esfuerzo</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <!-- ===== SUBSECCIÓN DE SENIORITY INTEGRADA ===== -->
+              <section id="seniority-section" class="dashboard-subsection">
+                <div class="subsection-header">
+                  <h3><i class="fas fa-users"></i> Seniority</h3>
+                  <p class="page-description">
+                    ¿Cómo transforma la experiencia profesional el acceso a la
+                    vivienda y al entorno urbano?<br />
+                    Comparativa de salarios promedios entre los perfiles Junior
+                    y los perfiles Senior de Tecnología, Marketing y Diseño.
+                  </p>
+                </div>
+
+                <div class="dashboard-visuals-container">
+                  <div class="visuals-section">
+                    <h4>
+                      Comparativa % de esfuerzo salarial Junior vs Senior por
+                      Categoría
+                    </h4>
+                    <p class="section-description">
+                      Gráfico de columnas comparativo con el % de esfuerzo
+                      salarial entre Junior y Senior de cada categoría:
+                      Technology, Marketing y Design.
+                      <br /><small
+                        ><i class="fas fa-info-circle"></i> Datos estáticos -
+                        independiente de los filtros aplicados arriba.</small
+                      >
+                    </p>
+
+                    <!-- CAMBIO: Ahora es un contenedor .html-chart directamente -->
+                    <div class="html-chart" id="seniority-comparison-chart">
+                      <!-- El contenido será generado por seniority-manager.js directamente aquí -->
+                    </div>
+                  </div>
+
+                  <div class="visuals-section">
+                    <h4>
+                      Esfuerzo salarial de todas las categorías de Junior y
+                      Senior
+                    </h4>
+                    <p class="section-description">
+                      Gráfico de barras con el % de esfuerzo salarial de todas
+                      las categorías de Junior y Senior.
+                    </p>
+
+                    <!-- CAMBIO: También cambiado a .html-chart para consistencia -->
+                    <div class="html-chart" id="salary-difference-chart">
+                      <!-- El contenido será generado por seniority-manager.js directamente aquí -->
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </article>
+
+            <!-- NO HAY MÁS PÁGINAS REDIRECCIONALES -->
+          </main>
+        </div>
+      </div>
     </section>
 
     <!-- ===== BANNER DESCARGA INFORME PDF ===== -->
     <section class="report-banner" id="reportBanner">
-        <div class="container">
-            <div class="report-banner-content">
-                <div class="banner-text">
-                    <h3><i class="fas fa-file-pdf"></i> Informe de Análisis Completo</h3>
-                    <p>Descarga el estudio detallado con la metodología completa, datos tabulados, gráficos estáticos y conclusiones ejecutivas.</p>
-                    <ul class="banner-features">
-                        <li><i class="fas fa-check"></i> Metodología paso a paso</li>
-                        <li><i class="fas fa-check"></i> Datos tratados y tabulados</li>
-                        <li><i class="fas fa-check"></i> Conclusiones accionables</li>
-                        <li><i class="fas fa-check"></i> Gráficos de alta calidad</li>
-                    </ul>
-                </div>
-                <div class="banner-action">                
-                    <a href="https://github.com/Sisuca/barcelona-viability-insights/raw/main/docs/Barcelona-viability-insights.pdf" 
-                    download="Barcelona-viability-insights.pdf" 
-                    class="btn-download-pdf" 
-                    id="downloadReportBtn">
-                        <i class="fas fa-download"></i> Descargar informe en PDF
-                    </a>
-                
-                    <small>Documento de portfolio. Datos anonimizados.</small>
-                </div>
-            </div>
+      <div class="container">
+        <div class="report-banner-content">
+          <div class="banner-text">
+            <h3>
+              <i class="fas fa-file-pdf"></i> Informe de Análisis Completo
+            </h3>
+            <p>
+              Descarga el estudio detallado con la metodología completa, datos
+              tabulados, gráficos estáticos y conclusiones ejecutivas.
+            </p>
+            <ul class="banner-features">
+              <li><i class="fas fa-check"></i> Metodología paso a paso</li>
+              <li><i class="fas fa-check"></i> Datos tratados y tabulados</li>
+              <li><i class="fas fa-check"></i> Conclusiones accionables</li>
+              <li><i class="fas fa-check"></i> Gráficos de alta calidad</li>
+            </ul>
+          </div>
+          <div class="banner-action">
+            <a
+              href="docs/Barcelona-viability-insights.pdf"
+              download="Barcelona-viability-insights.pdf"
+              target="_blank"
+              class="btn-download-pdf"
+              id="downloadReportBtn"
+            >
+              <i class="fas fa-download"></i> Descargar informe en PDF
+            </a>
+
+            <small>Documento de portfolio. Datos anonimizados.</small>
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- ===== INSIGHTS DESTACADOS ===== -->
     <section class="highlighted-insights" id="insights-section">
-        <div class="container">
-            <div class="section-header">
-                <h2><i class="fas fa-star"></i> Insights Destacados</h2>
-                <p>Hallazgos clave del análisis para lectura rápida</p>
-            </div>
-            
-            <div class="insights-grid">
-                <article class="insight-card">
-                    <div class="insight-header">
-                        <span class="insight-category">📊 Tendencia Principal</span>
-                        <span class="insight-badge critical">Crítico</span>
-                    </div>
-                    <h3 class="insight-title">La seniority marca la diferencia en la viabilidad residencial</h3>
-                    <div class="insight-content">
-                        <p>El <strong>95% de los perfiles junior</strong> se sitúan en rangos de esfuerzo salarial elevados, 
-                        mientras que los perfiles senior muestran ratios claramente viables, especialmente en tecnología.</p>
-                    </div>
-                    <div class="insight-stats">
-                        <div class="insight-stat">
-                            <div class="stat-value">95%</div>
-                            <div class="stat-label">Juniors en rango limitado</div>
-                        </div>
-                        <div class="insight-stat">
-                            <div class="stat-value">&lt;20%</div>
-                            <div class="stat-label">Ratio Tech Senior (bruto)</div>
-                        </div>
-                    </div>
-                </article>
-                
-                <article class="insight-card">
-                    <div class="insight-header">
-                        <span class="insight-category">💼 Sector Más Vulnerable</span>
-                        <span class="insight-badge warning">Alerta</span>
-                    </div>
-                    <h3 class="insight-title">Diseño junior concentra los mayores niveles de tensión salarial</h3>
-                    <div class="insight-content">
-                        <p>Los perfiles junior de diseño presentan los <strong>ratios de esfuerzo salarial más elevados</strong>
-                        del análisis, situándose sistemáticamente en rangos de viabilidad limitada incluso sobre salario bruto.</p>
-                    </div>
-                    <div class="insight-stats">
-                        <div class="insight-stat">
-                            <div class="stat-value">~39%</div>
-                            <div class="stat-label">Ratio Design Jr (bruto)</div>
-                        </div>
-                        <div class="insight-stat">
-                            <div class="stat-value">1.708 €</div>
-                            <div class="stat-label">Mediana salarial mensual</div>
-                        </div>
-                    </div>
-                </article>
-                
-                <article class="insight-card">
-                    <div class="insight-header">
-                        <span class="insight-category">🏙️ Disparidad Geográfica</span>
-                        <span class="insight-badge info">Análisis</span>
-                    </div>
-                    <h3 class="insight-title">Gràcia exige más esfuerzo salarial que distritos tradicionalmente caros</h3>
-                    <div class="insight-content">
-                        <p>Aunque no es el distrito con los alquileres más altos, <strong>Gràcia presenta el mayor % de esfuerzo salarial mínimo</strong>
-                        del análisis, superando a distritos como Sarrià-Sant Gervasi y Les Corts.</p>
-                    </div>
-                    <div class="insight-stats">
-                        <div class="insight-stat">
-                            <div class="stat-value">+34%</div>
-                            <div class="stat-label">Esfuerzo salarial Gràcia</div>
-                        </div>
-                        <div class="insight-stat">
-                            <div class="stat-value">1.527 €</div>
-                            <div class="stat-label">Alquiler promedio Gràcia</div>
-                        </div>
-                    </div>
-                </article>
-            </div>
+      <div class="container">
+        <div class="section-header">
+          <h2><i class="fas fa-star"></i> Insights Destacados</h2>
+          <p>Hallazgos clave del análisis para lectura rápida</p>
         </div>
+
+        <div class="insights-grid">
+          <article class="insight-card">
+            <div class="insight-header">
+              <span class="insight-category">📊 Tendencia Principal</span>
+              <span class="insight-badge critical">Crítico</span>
+            </div>
+            <h3 class="insight-title">
+              La seniority marca la diferencia en la viabilidad residencial
+            </h3>
+            <div class="insight-content">
+              <p>
+                El <strong>95% de los perfiles junior</strong> se sitúan en
+                rangos de esfuerzo salarial elevados, mientras que los perfiles
+                senior muestran ratios claramente viables, especialmente en
+                tecnología.
+              </p>
+            </div>
+            <div class="insight-stats">
+              <div class="insight-stat">
+                <div class="stat-value">95%</div>
+                <div class="stat-label">Juniors en rango limitado</div>
+              </div>
+              <div class="insight-stat">
+                <div class="stat-value">&lt;20%</div>
+                <div class="stat-label">Ratio Tech Senior (bruto)</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="insight-card">
+            <div class="insight-header">
+              <span class="insight-category">💼 Sector Más Vulnerable</span>
+              <span class="insight-badge warning">Alerta</span>
+            </div>
+            <h3 class="insight-title">
+              Diseño junior concentra los mayores niveles de tensión salarial
+            </h3>
+            <div class="insight-content">
+              <p>
+                Los perfiles junior de diseño presentan los
+                <strong>ratios de esfuerzo salarial más elevados</strong> del
+                análisis, situándose sistemáticamente en rangos de viabilidad
+                limitada incluso sobre salario bruto.
+              </p>
+            </div>
+            <div class="insight-stats">
+              <div class="insight-stat">
+                <div class="stat-value">~39%</div>
+                <div class="stat-label">Ratio Design Jr (bruto)</div>
+              </div>
+              <div class="insight-stat">
+                <div class="stat-value">1.708 €</div>
+                <div class="stat-label">Mediana salarial mensual</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="insight-card">
+            <div class="insight-header">
+              <span class="insight-category">🏙️ Disparidad Geográfica</span>
+              <span class="insight-badge info">Análisis</span>
+            </div>
+            <h3 class="insight-title">
+              Gràcia exige más esfuerzo salarial que distritos tradicionalmente
+              caros
+            </h3>
+            <div class="insight-content">
+              <p>
+                Aunque no es el distrito con los alquileres más altos,
+                <strong
+                  >Gràcia presenta el mayor % de esfuerzo salarial
+                  mínimo</strong
+                >
+                del análisis, superando a distritos como Sarrià-Sant Gervasi y
+                Les Corts.
+              </p>
+            </div>
+            <div class="insight-stats">
+              <div class="insight-stat">
+                <div class="stat-value">+34%</div>
+                <div class="stat-label">Esfuerzo salarial Gràcia</div>
+              </div>
+              <div class="insight-stat">
+                <div class="stat-value">1.527 €</div>
+                <div class="stat-label">Alquiler promedio Gràcia</div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
     </section>
 
     <!-- ===== METODOLOGÍA (ACORDEÓN) ===== -->
     <section class="methodology" id="methodology-section">
-        <div class="container">
-            <div class="section-header">
-                <h2><i class="fas fa-clipboard-list"></i> Metodología</h2>
-                <p>Proceso de análisis, modelado y visualización de datos</p>
-            </div>
-            
-            <div class="accordion" id="methodologyAccordion">
-                <div class="accordion-item active">
-                    <button class="accordion-header">
-                        <span class="accordion-number">1</span>
-                        <h3>Preparación y Análisis</h3>
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="accordion-content">
-                        <div class="phase-content">
-                            <h4>Recolección de Datos</h4>
-                            <p><strong>Salarios:</strong> 153 ofertas reales de empleo del sector tecnológico y digital (InfoJobs y Domestika).
-                                <ul>
-                                    <li>Ofertas a jornada completa y con salario publicado (diciembre 2025).</li>
-                                    <li>Categorías: Informática, Marketing y Diseño.</li>
-                                </ul>
-                            </p>
-
-                            <p><strong>Alquileres:</strong> 140 anuncios reales de vivienda en alquiler (Idealista).
-                                <ul>
-                                    <li>Muestreo por orden de publicación. (enero 2026).</li>
-                                    <li>Tipologías: 10 estudios y 10 viviendas de 1 habitación por distrito.</li>
-                                </ul>
-                            </p>
-
-                            
-                            <h4>Procesamiento y Limpieza</h4>
-                            <ul>
-                                <li>Uso de <strong>salario bruto mensual</strong>, extraído del valor medio del rango salarial de las ofertas publicadas.</li>
-                                <li>Uso de <strong>medianas</strong> en lugar de promedios para el salario mensual por categoría y/o nivel, reduciendo el impacto de valores atípicos.</li>
-                                <li>Unificación de formatos de distritos y barrios.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="accordion-item">
-                    <button class="accordion-header">
-                        <span class="accordion-number">2</span>
-                        <h3>Desarrollo y Modelado</h3>
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="accordion-content">
-                        <div class="phase-content">
-                            <h4>Análisis Cruzado</h4>
-                            <ul>
-                                <li><strong>Esfuerzo salarial</strong>: (Alquiler mensual / Salario bruto mensual) × 100.</li>
-                                <li>Segmentación por categoría profesional, nivel de Seniority, tipo de vivienda y distrito.</li>
-                                <li>Identificación del esfuerzo salarial mínimo por combinación de filtros.</li>
-                            </ul>
-
-                            <h4>Clasificación de viabilidad</h4>
-                            <ul>
-                                <li>✅ Viable</span> (&lt;30%)</li>
-                                <li>⚠️ Limitado</span> (31-45%)</li>
-                                <li>❌ Inviable</span> (&gt;46%)</li>
-                            </ul>
-
-                            <h4>Modelado de Datos</h4>
-                            <ul>
-                                <li>Estructura de datos modular en JavaScript mediante tablas relacionadas.</li>
-                                <li>Cálculos dinámicos en tiempo real: mediana salarial, alquiler promedio, esfuerzo salarial mínimo y viabilidad.</li>
-                                <li>Sistema de filtros interconectados que actualiza múltiples visualizaciones simultáneamente.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="accordion-item">
-                    <button class="accordion-header">
-                        <span class="accordion-number">3</span>
-                        <h3>Visualización y Validación</h3>
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="accordion-content">
-                        <div class="phase-content">
-                            <h4>Diseño del Dashboard</h4>
-                            <ul>
-                                <li>Selección de visualizaciones adecuadas para cada métrica.</li>
-                                <li>Uso de iconografía y jerarquía visual para representar niveles de viabilidad.</li>
-                                <li>Implementación de tooltips informativos con contexto metodológico.</li>
-                                <li>Optimización responsive para distintos dispositivos.</li>
-                            </ul>
-                            
-                            <h4>Validación y Testing</h4>
-                            <ul>
-                                <li>Verificación cruzada con informes y referencias públicas del mercado.</li>
-                                <li>Testing de usabilidad con perfiles objetivo.</li>
-                                <li>Ajuste de umbrales de clasificación según feedback.</li>
-                                <li>Documentación completa del proceso analítico.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="methodology-footer">
-                <div class="limitations">
-                    <h4><i class="fas fa-exclamation-triangle"></i> Limitaciones del Estudio</h4>
-                    <div>
-                        <p>Este análisis representa una instantánea del mercado entre diciembre de 2025 y enero de 2026.<br>
-                        No incluye gastos adicionales asociados a la vivienda (suministros, comunidad u otros).<br>
-                        No incluye salarios negociados fuera de ofertas públicas.<br>
-                        Los precios de alquiler pueden variar según el estado y características del inmueble.</p>
-                    </div>
-                    <div class="data-source-note">
-                        <small><i class="fas fa-database"></i> Datos: InfoJobs, Domestika e Idealista (diciembre 2025 - enero 2026)</small>
-                    </div>
-                </div>
-            </div>
+      <div class="container">
+        <div class="section-header">
+          <h2><i class="fas fa-clipboard-list"></i> Metodología</h2>
+          <p>Proceso de análisis, modelado y visualización de datos</p>
         </div>
+
+        <div class="accordion" id="methodologyAccordion">
+          <div class="accordion-item active">
+            <button class="accordion-header">
+              <span class="accordion-number">1</span>
+              <h3>Preparación y Análisis</h3>
+              <i class="fas fa-chevron-down"></i>
+            </button>
+            <div class="accordion-content">
+              <div class="phase-content">
+                <h4>Recolección de Datos</h4>
+                <p>
+                  <strong>Salarios:</strong> 153 ofertas reales de empleo del
+                  sector tecnológico y digital (InfoJobs y Domestika).
+                </p>
+                <ul>
+                  <li>
+                    Ofertas a jornada completa y con salario publicado
+                    (diciembre 2025).
+                  </li>
+                  <li>Categorías: Informática, Marketing y Diseño.</li>
+                </ul>
+
+                <p>
+                  <strong>Alquileres:</strong> 140 anuncios reales de vivienda
+                  en alquiler (Idealista).
+                </p>
+                <ul>
+                  <li>Muestreo por orden de publicación. (enero 2026).</li>
+                  <li>
+                    Tipologías: 10 estudios y 10 viviendas de 1 habitación por
+                    distrito.
+                  </li>
+                </ul>
+
+                <h4>Procesamiento y Limpieza</h4>
+                <ul>
+                  <li>
+                    Uso de <strong>salario bruto mensual</strong>, extraído del
+                    valor medio del rango salarial de las ofertas publicadas.
+                  </li>
+                  <li>
+                    Uso de <strong>medianas</strong> en lugar de promedios para
+                    el salario mensual por categoría y/o nivel, reduciendo el
+                    impacto de valores atípicos.
+                  </li>
+                  <li>Unificación de formatos de distritos y barrios.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button class="accordion-header">
+              <span class="accordion-number">2</span>
+              <h3>Desarrollo y Modelado</h3>
+              <i class="fas fa-chevron-down"></i>
+            </button>
+            <div class="accordion-content">
+              <div class="phase-content">
+                <h4>Análisis Cruzado</h4>
+                <ul>
+                  <li>
+                    <strong>Esfuerzo salarial</strong>: (Alquiler mensual /
+                    Salario bruto mensual) × 100.
+                  </li>
+                  <li>
+                    Segmentación por categoría profesional, nivel de Seniority,
+                    tipo de vivienda y distrito.
+                  </li>
+                  <li>
+                    Identificación del esfuerzo salarial mínimo por combinación
+                    de filtros.
+                  </li>
+                </ul>
+
+                <h4>Clasificación de viabilidad</h4>
+                <ul>
+                  <li>✅ Viable (&lt;30%)</li>
+                  <li>⚠️ Limitado (31-45%)</li>
+                  <li>❌ Inviable (&gt;46%)</li>
+                </ul>
+
+                <h4>Modelado de Datos</h4>
+                <ul>
+                  <li>
+                    Estructura de datos modular en JavaScript mediante tablas
+                    relacionadas.
+                  </li>
+                  <li>
+                    Cálculos dinámicos en tiempo real: mediana salarial,
+                    alquiler promedio, esfuerzo salarial mínimo y viabilidad.
+                  </li>
+                  <li>
+                    Sistema de filtros interconectados que actualiza múltiples
+                    visualizaciones simultáneamente.
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button class="accordion-header">
+              <span class="accordion-number">3</span>
+              <h3>Visualización y Validación</h3>
+              <i class="fas fa-chevron-down"></i>
+            </button>
+            <div class="accordion-content">
+              <div class="phase-content">
+                <h4>Diseño del Dashboard</h4>
+                <ul>
+                  <li>
+                    Selección de visualizaciones adecuadas para cada métrica.
+                  </li>
+                  <li>
+                    Uso de iconografía y jerarquía visual para representar
+                    niveles de viabilidad.
+                  </li>
+                  <li>
+                    Implementación de tooltips informativos con contexto
+                    metodológico.
+                  </li>
+                  <li>Optimización responsive para distintos dispositivos.</li>
+                </ul>
+
+                <h4>Validación y Testing</h4>
+                <ul>
+                  <li>
+                    Verificación cruzada con informes y referencias públicas del
+                    mercado.
+                  </li>
+                  <li>Testing de usabilidad con perfiles objetivo.</li>
+                  <li>Ajuste de umbrales de clasificación según feedback.</li>
+                  <li>Documentación completa del proceso analítico.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="methodology-footer">
+          <div class="limitations">
+            <h4>
+              <i class="fas fa-exclamation-triangle"></i> Limitaciones del
+              Estudio
+            </h4>
+            <div>
+              <p>
+                Este análisis representa una instantánea del mercado entre
+                diciembre de 2025 y enero de 2026.<br />
+                No incluye gastos adicionales asociados a la vivienda
+                (suministros, comunidad u otros).<br />
+                No incluye salarios negociados fuera de ofertas públicas.<br />
+                Los precios de alquiler pueden variar según el estado y
+                características del inmueble.
+              </p>
+            </div>
+            <div class="data-source-note">
+              <small
+                ><i class="fas fa-database"></i> Datos: InfoJobs, Domestika e
+                Idealista (diciembre 2025 - enero 2026)</small
+              >
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- ===== ABOUT ===== -->
     <section class="about" id="about-section">
-        <div class="container">
-            <div class="section-header">
-                <h2><i class="fas fa-user-tie"></i> About</h2>
-                <p>Contexto profesional y stack tecnológico</p>
-            </div>
-            
-            <div class="about-content">
-                <div class="about-card">
-                    <div class="about-card-header">
-                        <div class="profile-avatar">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
-                        <div class="profile-info">
-                            <h3>Isabel Abad</h3>
-                            <p class="profile-title">Data Analyst & Data Storyteller</p>
-                            <div class="profile-tags">
-                                <span class="profile-tag">Data Analysis</span>
-                                <span class="profile-tag">Business Intelligence</span>
-                                <span class="profile-tag">Data Visualization</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="about-card-body">
-                        <p>Este proyecto forma parte de mi portfolio profesional y refleja mi capacidad para:</p>
-                        
-                        <div class="capabilities-grid">
-                            <div class="capability">
-                                <div class="capability-icon">
-                                    <i class="fas fa-database"></i>
-                                </div>
-                                <h4>Análisis cruzado de datos</h4>
-                                <p>Integración de múltiples fuentes de información en un análisis coherente</p>
-                            </div>
-                            
-                            <div class="capability">
-                                <div class="capability-icon">
-                                    <i class="fas fa-chart-bar"></i>
-                                </div>
-                                <h4>Visualización interactiva</h4>
-                                <p>Diseño de dashboards orientados a responder preguntas reales</p>
-                            </div>
-                            
-                            <div class="capability">
-                                <div class="capability-icon">
-                                    <i class="fas fa-comment-alt"></i>
-                                </div>
-                                <h4>Storytelling con datos</h4>
-                                <p>Comunicación clara de hallazgos complejos mediante narrativa visual</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="about-card-footer">
-                        <div class="tech-stack">
-                            <h4><i class="fas fa-tools"></i> Stack Tecnológico</h4>
-                            <div class="tech-tags">
-                                <span class="tech-tag"><i class="fa-solid fa-file-excel"></i> Excel</span>
-                                <span class="tech-tag"><i class="fa-solid fa-magnifying-glass-chart"></i> Power Query</span>
-                                <span class="tech-tag"><i class="fa-jelly-fill fa-regular fa-chart-bar"></i> Power BI</span>
-                                <span class="tech-tag"><i class="fa-brands fa-html5"></i> HTML</span>
-                                <span class="tech-tag"><i class="fa-brands fa-css3-alt"></i> CSS</span>
-                                <span class="tech-tag"><i class="fa-brands fa-js"></i> JavaScript</span>
-                                <span class="tech-tag"><i class="fa-brands fa-git-alt"></i> Git</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="profile-links">
-                        <div class="social-tags">
-                            <h4><i class="fa-solid fa-message"></i> Contacto</h4>
-                            <div>
-                                <a href="https://www.linkedin.com/in/abadisabel" target="_blank" class="profile-link">
-                                    <i class="fab fa-linkedin"></i> LinkedIn
-                                </a>
-                                <a href="https://github.com/Sisuca" target="_blank" class="profile-link">
-                                    <i class="fab fa-github"></i> GitHub
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      <div class="container">
+        <div class="section-header">
+          <h2><i class="fas fa-user-tie"></i> About</h2>
+          <p>Contexto profesional y stack tecnológico</p>
         </div>
+
+        <div class="about-content">
+          <div class="about-card">
+            <div class="about-card-header">
+              <div class="profile-avatar">
+                <i class="fas fa-chart-line"></i>
+              </div>
+              <div class="profile-info">
+                <h3>Isabel Abad</h3>
+                <p class="profile-title">Data Analyst & Data Storyteller</p>
+                <div class="profile-tags">
+                  <span class="profile-tag">Data Analysis</span>
+                  <span class="profile-tag">Business Intelligence</span>
+                  <span class="profile-tag">Data Visualization</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="about-card-body">
+              <p>
+                Este proyecto forma parte de mi portfolio profesional y refleja
+                mi capacidad para:
+              </p>
+
+              <div class="capabilities-grid">
+                <div class="capability">
+                  <div class="capability-icon">
+                    <i class="fas fa-database"></i>
+                  </div>
+                  <h4>Análisis cruzado de datos</h4>
+                  <p>
+                    Integración de múltiples fuentes de información en un
+                    análisis coherente
+                  </p>
+                </div>
+
+                <div class="capability">
+                  <div class="capability-icon">
+                    <i class="fas fa-chart-bar"></i>
+                  </div>
+                  <h4>Visualización interactiva</h4>
+                  <p>
+                    Diseño de dashboards orientados a responder preguntas reales
+                  </p>
+                </div>
+
+                <div class="capability">
+                  <div class="capability-icon">
+                    <i class="fas fa-comment-alt"></i>
+                  </div>
+                  <h4>Storytelling con datos</h4>
+                  <p>
+                    Comunicación clara de hallazgos complejos mediante narrativa
+                    visual
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="about-card-footer">
+              <div class="tech-stack">
+                <h4><i class="fas fa-tools"></i> Stack Tecnológico</h4>
+                <div class="tech-tags">
+                  <span class="tech-tag"
+                    ><i class="fa-solid fa-file-excel"></i> Excel</span
+                  >
+                  <span class="tech-tag"
+                    ><i class="fa-solid fa-magnifying-glass-chart"></i> Power
+                    Query</span
+                  >
+                  <span class="tech-tag"
+                    ><i class="fa-jelly-fill fa-regular fa-chart-bar"></i> Power
+                    BI</span
+                  >
+                  <span class="tech-tag"
+                    ><i class="fa-brands fa-html5"></i> HTML</span
+                  >
+                  <span class="tech-tag"
+                    ><i class="fa-brands fa-css3-alt"></i> CSS</span
+                  >
+                  <span class="tech-tag"
+                    ><i class="fa-brands fa-js"></i> JavaScript</span
+                  >
+                  <span class="tech-tag"
+                    ><i class="fa-brands fa-git-alt"></i> Git</span
+                  >
+                </div>
+              </div>
+            </div>
+
+            <div class="profile-links">
+              <div class="social-tags">
+                <h4><i class="fa-solid fa-message"></i> Contacto</h4>
+                <div>
+                  <a
+                    href="https://www.linkedin.com/in/abadisabel"
+                    target="_blank"
+                    class="profile-link"
+                  >
+                    <i class="fab fa-linkedin"></i> LinkedIn
+                  </a>
+                  <a
+                    href="https://github.com/Sisuca"
+                    target="_blank"
+                    class="profile-link"
+                  >
+                    <i class="fab fa-github"></i> GitHub
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- ===== FOOTER ===== -->
     <footer class="main-footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <div class="footer-logo">
-                        <i class="fas fa-chart-line"></i>
-                        <h3>Barcelona Viability Insights</h3>
-                    </div>
-                    <p class="footer-description">
-                        Data product interactivo</br>
-                        Análisis de salarios y alquiler</br>
-                        Barcelona 2026
-                    </p>
-                </div>
-                
-                <div class="footer-links">
-                    <div class="link-group">
-                        <h4>Explorar</h4>
-                        <a href="#dashboard-section">Dashboard</a>
-                        <a href="#insights-section">Insights</a>
-                        <a href="#methodology-section">Metodología</a>
-                    </div>
-                    
-                    <div class="link-group">
-                        <h4>Recursos</h4>
-                        <a href="#" data-modal="datasets">Descargar Datasets</a>
-                        <a href="#" data-modal="code">Ver Repositorio</a>
-                        <a href="#about-section">About</a>
-                    </div>
-                </div>
-                
-                <div class="footer-legal">
-                    <p>© 2026 Barcelona Viability Insights • Proyecto de portfolio profesional</p>
-                    <p class="legal-note">
-                        Los datos se presentan con fines analíticos y de portfolio.</br>
-                        Consulta la metodología para conocer el contexto y las limitaciones del estudio.
-                    </p>
-                </div>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-brand">
+            <div class="footer-logo">
+              <i class="fas fa-chart-line"></i>
+              <h3>Barcelona Viability Insights</h3>
             </div>
+            <p class="footer-description">
+              Data product interactivo<br />
+              Análisis de salarios y alquiler<br />
+              Barcelona 2026
+            </p>
+          </div>
+
+          <div class="footer-links">
+            <div class="link-group">
+              <h4>Explorar</h4>
+              <a href="#dashboard-section">Dashboard</a>
+              <a href="#insights-section">Insights</a>
+              <a href="#methodology-section">Metodología</a>
+            </div>
+
+            <div class="link-group">
+              <h4>Recursos</h4>
+              <a href="#" data-modal="datasets">Descargar Datasets</a>
+              <a href="#" data-modal="code">Ver Repositorio</a>
+              <a href="#about-section">About</a>
+            </div>
+          </div>
+
+          <div class="footer-legal">
+            <p>
+              © 2026 Barcelona Viability Insights • Proyecto de portfolio
+              profesional
+            </p>
+            <p class="legal-note">
+              Los datos se presentan con fines analíticos y de portfolio.<br />
+              Consulta la metodología para conocer el contexto y las
+              limitaciones del estudio.
+            </p>
+          </div>
         </div>
+      </div>
     </footer>
 
     <!-- ===== SCRIPTS ===== -->
@@ -743,6 +951,5 @@
 
     <!-- 8. Funcionalidades generales -->
     <script src="js/main.js"></script>
-
-</body>
+  </body>
 </html>
