@@ -1,0 +1,1259 @@
+/* css/table-chart.css - VERSIÓN V15.9 - CON EJES PARA SENIORITY */
+
+/* ===== TABLA DE DETALLE CON ALINEACIÓN CORREGIDA ===== */
+.table-container {
+    background: var(--white);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    margin: 16px 0;
+    border: 1px solid #E5E7EB;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.88rem;
+}
+
+.data-table th {
+    padding: 12px 14px;
+    text-align: left;
+    font-weight: 600;
+    color: var(--primary-color);
+    background: var(--background-color);
+    border-bottom: 2px solid var(--primary-color);
+    cursor: pointer;
+    user-select: none;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+}
+
+.data-table th:hover {
+    background: #E5E7EB;
+}
+
+/* ALINEACIÓN ESPECÍFICA DE ENCABEZADOS */
+.data-table th:nth-child(4) { /* Columna Alquiler */
+    text-align: right;
+    padding-right: 20px;
+}
+
+.data-table th:nth-child(5) { /* Columna % Esfuerzo */
+    text-align: center;
+}
+
+.data-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid #F3F4F6;
+    color: var(--text-color);
+    font-size: 0.88rem;
+    font-weight: 400;
+}
+
+/* ALINEACIÓN ESPECÍFICA DE CELDAS */
+.data-table td:nth-child(4) { /* Columna Alquiler */
+    text-align: right;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500;
+    padding-right: 20px;
+}
+
+.data-table td:nth-child(5) { /* Columna % Esfuerzo */
+    text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500;
+}
+
+/* Fondo intercalado */
+.data-table tr.even {
+    background: var(--white);
+}
+
+.data-table tr.odd {
+    background: #FAFAFA;
+}
+
+.data-table tr:hover {
+    background: rgba(31, 58, 95, 0.03);
+}
+
+/* Campos especiales */
+.currency {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500;
+    color: var(--text-color);
+    font-size: 0.88rem;
+}
+
+.percentage {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500;
+    color: var(--text-color);
+    font-size: 0.88rem;
+}
+
+/* Iconos de viabilidad */
+.viability-icon {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+    font-size: 0.85rem;
+}
+
+/* ===== FOOTER PARA TABLA (SIN MARGEN NEGATIVO) ===== */
+.table-footer, .table-container .table-footer {
+    padding: 10px 14px;
+    background: var(--background-color);
+    color: var(--text-color);
+    font-size: 0.85rem;
+    border-top: 1px solid #E5E7EB;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    margin: 0;
+    border-radius: 0 0 10px 10px;
+}
+
+.footer-info {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 400;
+    font-size: 0.85rem;
+    color: var(--text-color);
+    font-family: 'Inter', sans-serif;
+    flex-wrap: wrap;
+}
+
+.footer-info strong {
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+/* Leyenda específica para matriz */
+.table-container .table-footer .footer-info em {
+    font-style: italic;
+    color: var(--neutral-gray);
+    font-size: 0.85rem;
+    margin-left: 10px;
+}
+
+/* ===== GRÁFICO SIMPLE - ESTRUCTURA GRID 2-3-1 ===== */
+.html-chart {
+    background: var(--white);
+    border-radius: 10px;
+    padding: 20px 20px 0 20px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    margin: 16px 0;
+    border: 1px solid #E5E7EB;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Contenedor de barras */
+.bars-container {
+    margin-bottom: 20px;
+}
+
+/* ESTRUCTURA GRID 2-3-1 (2fr label, 3fr barra, 1fr viabilidad) */
+.bar-item {
+    display: grid;
+    grid-template-columns: 2fr 3fr 1fr;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 12px;
+    min-height: 40px;
+}
+
+/* MEJORA CRÍTICA: Bar-label más flexible para nombres largos */
+.bar-label {
+    font-family: 'Inter', sans-serif;
+}
+
+/* Asegurar que el nombre del barrio no se corte - PERMITE MÚLTIPLES LÍNEAS */
+.bar-label strong {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-color);
+    line-height: 1.3;
+    word-wrap: break-word; /* Permite cortar palabras largas */
+    overflow-wrap: break-word; /* Alternativa moderna */
+    white-space: normal; /* Permite múltiples líneas */
+}
+
+.bar-label small {
+    display: block;
+    font-size: 0.78rem;
+    color: var(--neutral-gray);
+    margin-top: 2px;
+    line-height: 1.2;
+    white-space: nowrap; /* Distrito y cantidad en una línea */
+}
+
+/* Bar-wrapper - Ocupa 3 columnas, centrado */
+.bar-wrapper {
+    position: relative;
+    height: 22px;
+    background: var(--background-color);
+    border-radius: 11px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+
+.bar {
+    height: 100%;
+    border-radius: 11px;
+    position: relative;
+    transition: width 0.5s ease-out;
+    min-width: 20px;
+    background-color: var(--secondary-blue);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* Valor a la derecha */
+}
+
+.bar-value {
+    color: var(--white);
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+    font-family: 'JetBrains Mono', monospace;
+    padding-right: 6px;
+    white-space: nowrap;
+}
+
+/* Viabilidad - Ocupa 1 columna, centrado */
+.bar-viability {
+    font-size: 0.82rem;
+    font-weight: 500;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    white-space: nowrap;
+    min-width: 100px;
+}
+
+/* ===== FOOTER PARA GRÁFICO (CON MARGEN NEGATIVO) ===== */
+.html-chart .chart-footer {
+    padding: 10px 14px;
+    background: var(--background-color);
+    color: var(--text-color);
+    font-size: 0.85rem;
+    border-top: 1px solid #E5E7EB;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    margin: 0 -20px 0 -20px;
+    border-radius: 0 0 10px 10px;
+}
+
+/* ===== NUEVOS ESTILOS PARA GRÁFICO DE SENIORITY CON EJE ===== */
+
+/* Contenedor principal para gráfico con eje */
+.chart-with-axis {
+    display: flex;
+    gap: 15px;
+    margin-bottom: -10px;
+    align-items: flex-start;
+}
+
+/* Eje vertical (Y-axis) */
+.y-axis {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 40px;
+    height: 250px; /* Altura fija para 6 marcas */
+    text-align: right;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--neutral-gray);
+    border-right: 1px solid var(--neutral-gray);
+    padding-right: 8px;
+    flex-shrink: 0;
+    margin-top: 0;
+}
+
+/* Marcas del eje Y */
+.y-tick {
+    position: relative;
+    padding-right: 10px;
+    line-height: 1;
+}
+
+.y-tick::after {
+    content: '';
+    position: absolute;
+    right: -8px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 1px;
+    background-color: var(--neutral-gray);
+}
+
+/* Contenedor de columnas */
+.columns-container {
+    flex: 1;
+    min-height: 250px;
+}
+
+/* ===== ESTILOS PARA GRÁFICOS DE SENIORITY (AJUSTES) ===== */
+
+/* Aumentar altura del contenedor de columnas */
+.column-chart-bar-container {
+    height: 250px !important; /* Aumentado de 120px para más espacio */
+    width: 100%;
+    display: flex;
+    align-items: flex-end; /* Las columnas crecen desde abajo */
+    justify-content: center;
+    position: relative;
+}
+
+/* Ajustar posición del valor en las columnas */
+.column-chart-value {
+    position: absolute;
+    top: -25px; /* Más arriba para no chocar con eje */
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500;
+    font-size: 0.8rem;
+    color: var(--text-color);
+    white-space: nowrap;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 2px 6px;
+    border-radius: 3px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    z-index: 2;
+}
+
+/* ===== ESTILOS PARA MATRIZ TRANSPUESTA (COMPACTA) ===== */
+
+/* Tabla transpuesta - COMPACTA */
+.data-table.transposed-matrix {
+    min-width: 915px; /* ANCHO CALCULADO: 150px + (85px × 9) */
+    width: 100%;
+    font-size: 0.88rem; /* MISMO QUE TABLA RESUMEN */
+}
+
+/* Quitar sombreado de filas alternas para matriz */
+.data-table.transposed-matrix tr.even,
+.data-table.transposed-matrix tr.odd {
+    background: var(--white) !important; /* MISMO COLOR PARA TODAS */
+}
+
+/* Oscurecer bordes entre filas */
+.data-table.transposed-matrix td {
+    border-bottom: 1px solid #E0E0E0 !important; /* BORDE MÁS OSCURO */
+}
+
+/* Encabezados de categoría */
+.data-table.transposed-matrix th.category-header {
+    text-align: center;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-blue) 100%);
+    color: white;
+    border-right: 2px solid rgba(255,255,255,0.3);
+    font-weight: 700;
+    font-size: 0.9rem; /* REDUCIDO */
+    padding: 10px 4px; /* REDUCIDO */
+    min-width: 255px; /* 85px × 3 */
+    height: 40px; /* ALTURA FIJA */
+    vertical-align: middle;
+}
+
+/* Encabezados de nivel - TEXTO EN MINÚSCULAS PARA COHERENCIA */
+.data-table.transposed-matrix th.level-header {
+    text-align: center;
+    background: var(--background-color);
+    color: var(--primary-color);
+    border-right: 1px solid #E5E7EB;
+    border-bottom: 2px solid var(--primary-color);
+    font-weight: 600;
+    font-size: 0.85rem; /* REDUCIDO */
+    padding: 8px 4px; /* REDUCIDO */
+    min-width: 85px;
+    max-width: 85px;
+    height: 36px; /* ALTURA FIJA */
+    vertical-align: middle;
+    text-transform: lowercase; /* AJUSTE SOLICITADO: minúsculas */
+}
+
+/* Esquina sticky */
+.data-table.transposed-matrix th.sticky-corner {
+    position: sticky;
+    left: 0;
+    z-index: 30;
+    background: var(--primary-color);
+    color: white;
+    font-weight: 700;
+    min-width: 150px;
+    max-width: 150px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 0.9rem;
+    padding: 10px 8px;
+    height: 76px; /* 40px + 36px (altura de las dos filas de encabezado) */
+    border-right: 2px solid rgba(255,255,255,0.3);
+}
+
+/* Celdas de distrito (primera columna) - COLOR AJUSTADO A --primary-color */
+.data-table.transposed-matrix td.district-cell.sticky-district {
+    position: sticky;
+    left: 0;
+    z-index: 20;
+    background: var(--background-color);
+    font-weight: 600;
+    min-width: 150px;
+    max-width: 150px;
+    border-right: 2px solid var(--primary-color);
+    font-size: 0.9rem;
+    padding: 8px 10px; /* MISMO QUE TABLA RESUMEN */
+    height: 40px; /* ALTURA FIJA */
+    vertical-align: middle;
+    color: var(--primary-color); /* AJUSTE SOLICITADO: texto en azul primario */
+}
+
+/* Celdas de matriz - COMPACTAS CON COLOR DE TEXTO AJUSTADO */
+.data-table.transposed-matrix td.matrix-cell {
+    text-align: center;
+    min-width: 85px;
+    max-width: 85px;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500; /* AJUSTE SOLICITADO: peso 500 */
+    font-size: 0.88rem; /* MISMO QUE TABLA RESUMEN */
+    padding: 8px 4px; /* COMPACTO */
+    transition: all 0.2s ease;
+    cursor: default;
+    border-right: 1px solid #F3F4F6;
+    height: 40px; /* ALTURA FIJA */
+    vertical-align: middle;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--primary-700) !important; /* AJUSTE SOLICITADO: color primary-700 */
+}
+
+/* 
+ * ⚠️ EXCEPCIÓN DOCUMENTADA: COLORES SEMÁNTICOS EN HEATMAP
+ * --------------------------------------------------------------
+ * JUSTIFICACIÓN: La matriz de calor (heatmap) en la página "Accesibilidad"
+ * requiere colores de fondo semánticos (verde/amarillo/rojo) para representar
+ * visualmente los rangos de viabilidad, siendo fiel al patrón de diseño
+ * de mapas de calor.
+ * 
+ * ALCANCE DE LA EXCEPCIÓN:
+ * - SÓLO estas 3 clases (.cell-viable, .cell-limitado, .cell-inviable)
+ * - SÓLO en la matriz transpuesta (.transposed-matrix)
+ * - SÓLO como color de fondo (el texto usa --primary-700)
+ * - NO aplica a otros componentes o páginas
+ * 
+ * Esta excepción está documentada en docs/styles.md sección "Excepción documentada"
+ */
+.data-table.transposed-matrix td.matrix-cell.cell-viable {
+    background-color: rgba(75, 192, 192, 0.12) !important; /* VERDE SUAVE */
+}
+
+.data-table.transposed-matrix td.matrix-cell.cell-limitado {
+    background-color: rgba(255, 206, 86, 0.12) !important; /* AMARILLO SUAVE */
+}
+
+.data-table.transposed-matrix td.matrix-cell.cell-inviable {
+    background-color: rgba(255, 99, 132, 0.12) !important; /* ROJO SUAVE */
+}
+
+.data-table.transposed-matrix td.matrix-cell.cell-nodata {
+    background-color: var(--background-color) !important;
+    color: var(--neutral-gray) !important;
+}
+
+/* Efecto hover en celdas de matriz - MÁS SUTIL */
+.data-table.transposed-matrix td.matrix-cell:hover {
+    transform: scale(1.02); /* MÁS SUTIL */
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    z-index: 10;
+    position: relative;
+}
+
+/* Tooltip para celdas de matriz */
+.data-table.transposed-matrix td.matrix-cell[title]:hover::after {
+    content: attr(title);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.95);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 0.82rem;
+    font-family: 'Inter', sans-serif;
+    white-space: pre-line;
+    z-index: 100;
+    min-width: 200px;
+    max-width: 280px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    line-height: 1.4;
+    pointer-events: none;
+}
+
+/* Bordes para separar categorías */
+.data-table.transposed-matrix th.category-header:not(:last-child),
+.data-table.transposed-matrix td.matrix-cell:nth-child(4),
+.data-table.transposed-matrix td.matrix-cell:nth-child(7) {
+    border-right: 2px solid var(--primary-color) !important;
+}
+
+/* Borde más oscuro para separación visual entre filas */
+.data-table.transposed-matrix tr {
+    border-bottom: 1px solid #E5E7EB;
+}
+
+/* Leyenda de colores en footer */
+.color-legend-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    margin: 0 6px;
+    font-weight: 500;
+}
+
+
+/* ===== ESTILOS PARA ESTADOS ===== */
+.data-message, .error-state {
+    text-align: center;
+    padding: 30px 16px;
+    color: var(--neutral-gray);
+}
+
+.message-icon, .error-icon {
+    font-size: 2rem;
+    margin-bottom: 12px;
+}
+
+.error-icon {
+    color: var(--primary-color);
+}
+
+.data-message h4, .error-state h4 {
+    color: var(--text-color);
+    margin-bottom: 6px;
+    font-size: 1rem;
+}
+
+.data-message p, .error-state p {
+    margin-bottom: 16px;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 0.85rem;
+}
+
+.retry-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background: var(--primary-color);
+    color: var(--white);
+    border: none;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+}
+
+.retry-btn:hover {
+    background: #2A4A7A;
+    transform: translateY(-1px);
+}
+
+/* ===== ESTILOS PARA SUBSECCIONES UNIFICADAS ===== */
+
+/* Subsecciones dentro del dashboard (Accesibilidad, Seniority) */
+.dashboard-subsection {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 2px solid #E5E7EB;
+}
+
+.subsection-header {
+    margin-bottom: 2rem;
+}
+
+.subsection-header h3 {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.subsection-header .page-description {
+    color: var(--neutral-gray);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 0;
+}
+
+/* Ajustes para el contenedor de visualización en subsecciones */
+#accessibility-heatmap-container {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#seniority-comparison-chart {
+    width: 100%;
+    padding: 20px 20px 0 20px;
+    margin: 16px 0;
+}
+
+/* Placeholder para gráficos futuros en subsecciones */
+.chart-placeholder .data-message {
+    text-align: center;
+    padding: 30px 16px;
+    color: var(--neutral-gray);
+}
+
+.chart-placeholder .message-icon {
+    font-size: 2rem;
+    margin-bottom: 12px;
+}
+
+.chart-placeholder .data-message h5 {
+    color: var(--text-color);
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.chart-placeholder .preview-items {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.chart-placeholder .preview-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    background-color: var(--background-color);
+    border-radius: 8px;
+    border-left: 4px solid var(--primary-color);
+}
+
+.chart-placeholder .preview-category {
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.chart-placeholder .preview-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500;
+    color: var(--primary-color);
+}
+
+
+/* ===== ESTILOS PARA GRÁFICOS DE SENIORITY ===== */
+
+/* Gráfico de columnas verticales */
+.column-chart-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+    width: calc(16.666% - 10px); /* 6 columnas */
+    min-width: 100px;
+}
+
+.column-chart-bar-container {
+    height: 250px; /* AUMENTADO para más espacio */
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    position: relative;
+}
+
+.column-chart-bar {
+    width: 40px;
+    border-radius: 6px 6px 0 0;
+    position: relative;
+    transition: height 0.5s ease-out;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.column-chart-value {
+    position: absolute;
+    top: -28px; /* Ajustado para no chocar con eje */
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500;
+    font-size: 0.8rem;
+    color: var(--text-color);
+    white-space: nowrap;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 2px 6px;
+    border-radius: 3px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    z-index: 2;
+}
+
+.column-chart-label {
+    font-size: 0.85rem;
+    text-align: center;
+    color: var(--text-color);
+    font-weight: 500;
+    line-height: 1.2;
+    height: 2.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.column-chart-viability {
+    font-size: 0.8rem;
+    color: var(--neutral-gray);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* Contenedor para gráfico de columnas (6 en fila) */
+.bars-container.column-layout {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+/* Leyenda de colores mejorada */
+.color-legend-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin: 0 8px;
+    padding: 4px 8px;
+    background: var(--background-color);
+    border-radius: 4px;
+    font-size: 0.85rem;
+}
+
+.color-box {
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+    display: inline-block;
+}
+
+/* ===== RESPONSIVE GENERAL ===== */
+
+@media (max-width: 1024px) {
+    /* Ajustes para tablet */
+    .bar-item {
+        grid-template-columns: 2fr 3fr 1fr;
+        gap: 10px;
+    }
+    
+    .bar-label {
+        min-width: 160px;
+        max-width: 250px;
+    }
+    
+    .bar-label strong {
+        font-size: 0.85rem;
+    }
+    
+    .bar-label small {
+        font-size: 0.75rem;
+    }
+    
+    .bar-wrapper {
+        min-width: 130px;
+    }
+    
+    .bar-viability {
+        min-width: 90px;
+        font-size: 0.78rem;
+    }
+    
+    /* Matriz transpuesta en tablet */
+    .data-table.transposed-matrix {
+        min-width: 800px;
+    }
+    
+    .data-table.transposed-matrix th.sticky-corner,
+    .data-table.transposed-matrix td.district-cell.sticky-district {
+        min-width: 140px;
+        max-width: 140px;
+        font-size: 0.88rem;
+    }
+    
+    .data-table.transposed-matrix td.matrix-cell {
+        min-width: 75px;
+        max-width: 75px;
+        font-size: 0.85rem;
+        padding: 8px 3px;
+    }
+    
+    .data-table.transposed-matrix th.level-header {
+        min-width: 75px;
+        max-width: 75px;
+        font-size: 0.82rem;
+    }
+    
+    .data-table.transposed-matrix th.category-header {
+        min-width: 225px; /* 75px × 3 */
+        font-size: 0.88rem;
+    }
+    
+    /* Ajustes para gráfico de Seniority en tablet */
+    .chart-with-axis {
+        gap: 12px;
+    }
+    
+    .y-axis {
+        width: 35px;
+        height: 220px;
+        font-size: 0.75rem;
+    }
+    
+    .column-chart-bar-container {
+        height: 220px !important;
+    }
+    
+    .column-chart-item {
+        width: calc(33.333% - 10px); /* 3 columnas por fila en tablet */
+        margin-bottom: 25px;
+    }
+    
+    .bars-container.column-layout {
+        justify-content: space-around;
+    }
+}
+
+@media (max-width: 768px) {
+    .table-container {
+        margin: 12px 0;
+        border-radius: 8px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .data-table {
+        font-size: 0.82rem;
+        min-width: 100%;
+    }
+    
+    .data-table th,
+    .data-table td {
+        padding: 8px 10px;
+        font-size: 0.82rem;
+    }
+    
+    /* Mantener alineación en móvil */
+    .data-table th:nth-child(4),
+    .data-table td:nth-child(4) {
+        text-align: right;
+        padding-right: 15px;
+    }
+    
+    .data-table th:nth-child(5),
+    .data-table td:nth-child(5) {
+        text-align: center;
+    }
+    
+    /* VIABILIDAD: SOLO ICONO EN MÓVIL */
+    .viability-icon {
+        font-size: 0.78rem;
+        gap: 4px;
+    }
+    
+    .viability-icon::after {
+        content: none; /* Oculta el texto "Viable/Limitado/Inviable" */
+    }
+    
+    /* FOOTERS UNIFICADOS EN MÓVIL */
+    .table-footer, .table-container .table-footer {
+        padding: 8px 12px;
+        font-size: 0.82rem;
+    }
+    
+    .html-chart .chart-footer {
+        padding: 8px 12px;
+        font-size: 0.82rem;
+        margin: 16px -16px 0 -16px;
+    }
+    
+    .footer-info {
+        font-size: 0.82rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    
+    .kpi-cards-container {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    .kpi-card {
+        flex-direction: row;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .kpi-card-icon {
+        width: 42px;
+        height: 42px;
+        margin-left: 12px;
+    }
+    
+    .kpi-card-content {
+        padding: 12px 12px 12px 0;
+    }
+    
+    .kpi-card-value {
+        font-size: 1.4rem;
+    }
+    
+    .html-chart {
+        padding: 16px 16px 0 16px;
+    }
+    
+    /* En móviles, cambiar a disposición vertical - UNA COLUMNA */
+    .bar-item {
+        grid-template-columns: 1fr !important;
+        gap: 8px;
+        margin-bottom: 20px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid #F3F4F6;
+    }
+    
+    .bar-label {
+        min-width: 100%;
+        max-width: 100%;
+        margin-bottom: 4px;
+    }
+    
+    .bar-wrapper {
+        width: 100%;
+        min-width: 100%;
+        max-width: 100%;
+        margin: 0;
+    }
+    
+    .bar-viability {
+        align-self: flex-end;
+        min-width: auto;
+        font-size: 0.78rem;
+        margin-top: 4px;
+        justify-content: flex-start;
+    }
+    
+    /* Ajustes para subsecciones en móvil */
+    .dashboard-subsection {
+        margin-top: 2rem;
+        padding-top: 1.5rem;
+    }
+    
+    .subsection-header h3 {
+        font-size: 1.3rem;
+    }
+    
+    .subsection-header .page-description {
+        font-size: 0.9rem;
+    }
+    
+    .color-legend-item {
+        width: 100%;
+        justify-content: center;
+        margin: 2px 0;
+    }
+    
+    .table-container .table-footer .footer-info em {
+        margin-left: 0;
+        margin-top: 8px;
+        text-align: center;
+        width: 100%;
+    }
+    
+    /* Matriz transpuesta en móvil */
+    .data-table.transposed-matrix {
+        min-width: 700px;
+    }
+    
+    .data-table.transposed-matrix th.sticky-corner,
+    .data-table.transposed-matrix td.district-cell.sticky-district {
+        min-width: 130px;
+        max-width: 130px;
+        font-size: 0.85rem;
+        padding: 8px 6px;
+    }
+    
+    .data-table.transposed-matrix td.matrix-cell {
+        min-width: 70px;
+        max-width: 70px;
+        font-size: 0.82rem;
+        padding: 8px 3px;
+    }
+    
+    .data-table.transposed-matrix th.level-header {
+        min-width: 70px;
+        max-width: 70px;
+        font-size: 0.8rem;
+        padding: 8px 3px;
+    }
+    
+    .data-table.transposed-matrix th.category-header {
+        min-width: 210px; /* 70px × 3 */
+        font-size: 0.85rem;
+        padding: 10px 3px;
+    }
+    
+    .data-table.transposed-matrix td.matrix-cell[title]:hover::after {
+        font-size: 0.8rem;
+        min-width: 180px;
+        max-width: 250px;
+        padding: 8px 10px;
+    }
+    
+    /* Ajustes para gráfico de Seniority en móvil */
+    .chart-with-axis {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .y-axis {
+        width: 100%;
+        height: 30px;
+        flex-direction: row;
+        justify-content: space-between;
+        border-right: none;
+        border-bottom: 1px solid var(--neutral-gray);
+        padding-right: 0;
+        padding-bottom: 8px;
+        text-align: center;
+    }
+    
+    .y-tick {
+        padding-right: 0;
+        padding-bottom: 10px;
+    }
+    
+    .y-tick::after {
+        right: 50%;
+        top: auto;
+        bottom: -8px;
+        transform: translateX(50%);
+        width: 1px;
+        height: 6px;
+    }
+    
+    .columns-container {
+        min-height: auto;
+        width: 100%;
+    }
+    
+    .column-chart-item {
+        width: calc(50% - 10px); /* 2 columnas por fila en móvil */
+        margin-bottom: 30px;
+    }
+    
+    .column-chart-bar-container {
+        height: 180px !important;
+    }
+    
+    .column-chart-value {
+        top: -22px;
+        font-size: 0.75rem;
+        padding: 1px 4px;
+    }
+}
+
+@media (max-width: 480px) {
+    .viability-icon {
+        font-size: 0.75rem;
+        justify-content: center;
+    }
+    
+    .kpi-card {
+        flex-direction: row;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .kpi-card-icon {
+        margin-left: 12px;
+        margin-bottom: 0;
+    }
+    
+    .kpi-card-content {
+        padding: 12px 12px 12px 0;
+        width: calc(100% - 54px);
+    }
+    
+    .kpi-card-value {
+        font-size: 1.3rem;
+    }
+    
+    /* Ajustes para móviles muy pequeños */
+    .data-table th,
+    .data-table td {
+        padding: 6px 8px;
+        font-size: 0.78rem;
+    }
+    
+    /* Mantener alineación en móviles pequeños */
+    .data-table th:nth-child(4),
+    .data-table td:nth-child(4) {
+        padding-right: 10px;
+    }
+    
+    .bar-label strong {
+        font-size: 0.85rem;
+    }
+    
+    .bar-label small {
+        font-size: 0.72rem;
+    }
+    
+    /* Ajustes para subsecciones en móvil pequeño */
+    .dashboard-subsection {
+        margin-top: 1.5rem;
+        padding-top: 1.25rem;
+    }
+    
+    .chart-placeholder .preview-items {
+        max-width: 100%;
+    }
+    
+    /* Matriz transpuesta en móvil pequeño */
+    .data-table.transposed-matrix {
+        min-width: 600px;
+    }
+    
+    .data-table.transposed-matrix th.sticky-corner,
+    .data-table.transposed-matrix td.district-cell.sticky-district {
+        min-width: 120px;
+        max-width: 120px;
+        font-size: 0.82rem;
+        padding: 6px 4px;
+    }
+    
+    .data-table.transposed-matrix td.matrix-cell {
+        min-width: 60px;
+        max-width: 60px;
+        font-size: 0.78rem;
+        padding: 6px 2px;
+    }
+    
+    .data-table.transposed-matrix th.level-header {
+        min-width: 60px;
+        max-width: 60px;
+        font-size: 0.75rem;
+        padding: 6px 2px;
+    }
+    
+    .data-table.transposed-matrix th.category-header {
+        min-width: 180px; /* 60px × 3 */
+        font-size: 0.8rem;
+        padding: 8px 2px;
+    }
+    
+    /* Ajustes para gráfico de Seniority en móvil pequeño */
+    .column-chart-item {
+        width: calc(50% - 5px);
+    }
+    
+    .column-chart-bar {
+        width: 30px;
+    }
+    
+    .column-chart-label {
+        font-size: 0.8rem;
+        height: 3em;
+    }
+}
+
+/* Ajustes específicos para orientación landscape en móvil */
+@media (max-width: 768px) and (orientation: landscape) {
+    .kpi-cards-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .bar-item {
+        grid-template-columns: 2fr 3fr 1fr !important; /* Volver a grid en landscape */
+        align-items: center;
+        border-bottom: none;
+        margin-bottom: 12px;
+        padding-bottom: 0;
+    }
+    
+    .bar-label {
+        min-width: 150px;
+        max-width: 200px;
+        margin-bottom: 0;
+    }
+    
+    .bar-wrapper {
+        width: auto;
+        min-width: 120px;
+        max-width: 250px;
+    }
+    
+    .bar-viability {
+        align-self: center;
+        margin-top: 0;
+    }
+    
+    .data-table.transposed-matrix {
+        min-width: 800px;
+    }
+    
+    /* Ajustes para gráfico de Seniority en landscape */
+    .chart-with-axis {
+        flex-direction: row;
+    }
+    
+    .y-axis {
+        width: 35px;
+        height: 200px;
+        flex-direction: column;
+        border-right: 1px solid var(--neutral-gray);
+        border-bottom: none;
+        padding-right: 8px;
+        padding-bottom: 0;
+        text-align: right;
+    }
+    
+    .column-chart-item {
+        width: calc(33.333% - 10px);
+    }
+}
