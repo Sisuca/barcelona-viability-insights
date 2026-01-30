@@ -1,5 +1,5 @@
 ﻿// ===== MAIN.JS - VERSIÃ“N COMPLETA CON SCROLL SPY =====
-// Excluye completamente el menÃº del dashboard (manejado por dashboard-manager.js)
+// Excluye completamente el menÃº del dashboard - manejado por dashboard-manager.js
 
 document.addEventListener('DOMContentLoaded', function () {
   console.log('âœ… DOM cargado - Inicializando funcionalidades...');
@@ -159,4 +159,4 @@ document.addEventListener('DOMContentLoaded', function () {
     console.warn('âš ï¸ No se encontraron elementos del acordeÃ³n');
   }
 
-
+})
