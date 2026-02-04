@@ -132,7 +132,7 @@ td,
 
 /* ===== CORRECCIONES INTEGRADAS DE COMPONENTS.CSS ===== */
 
-/* 2. HEADER STICKY MEJORADO */
+/* 2. HEADER STICKY MEJORADO - CORREGIDO PARA MÓVIL */
 .main-header {
   position: fixed;
   top: 0;
@@ -147,6 +147,23 @@ td,
   box-sizing: border-box;
   /* ALTURA MÁS COMPACTA */
   height: 60px !important; /* ← NUEVO: altura fija compacta */
+}
+
+/* CORRECCIÓN ESPECÍFICA PARA MÓVIL: ASEGURAR QUE EL HEADER SEA FIXED */
+@media (max-width: 768px) {
+  .main-header {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 1000 !important;
+    height: 60px !important;
+  }
+
+  /* Asegurar que el body tenga padding-top correcto para móvil */
+  body {
+    padding-top: 60px !important;
+  }
 }
 
 .main-header.scrolled {
@@ -1029,155 +1046,155 @@ td,
   background: var(--white);
   border: 1px solid #cbd5e1;
   padding: 0.5rem 1rem;
-    border-radius: 0.5rem;
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: #475569;
-    max-width: 100%;
-    overflow-wrap: break-word;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #475569;
+  max-width: 100%;
+  overflow-wrap: break-word;
 }
 
 .social-tags h4 {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
-    color: #334155;
-    font-size: 1.1rem;
-    max-width: 100%;
-    overflow-wrap: break-word;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  color: #334155;
+  font-size: 1.1rem;
+  max-width: 100%;
+  overflow-wrap: break-word;
 }
 
 .profile-links {
-    display: flex;
-    gap: 1rem;
-    margin-top: 2.5rem;
-    flex-wrap: wrap;
-    max-width: 100%;
+  display: flex;
+  gap: 1rem;
+  margin-top: 2.5rem;
+  flex-wrap: wrap;
+  max-width: 100%;
 }
 
 .profile-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.75rem 1.5rem;
-    background: var(--primary-500);
-    color: white;
-    border-radius: 0.5rem;
-    font-weight: 500;
-    text-decoration: none;
-    transition: background-color 0.3s ease;
-    max-width: 100%;
-    box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: var(--primary-500);
+  color: white;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .profile-link:hover {
-    background: var(--primary-600);
-    transform: translateY(-2px);
+  background: var(--primary-600);
+  transform: translateY(-2px);
 }
 
 /* 9. FOOTER */
 .main-footer {
-    padding: 3rem 0;
-    background-color: var(--gray-900);
-    color: var(--gray-300);
-    max-width: 100%;
+  padding: 3rem 0;
+  background-color: var(--gray-900);
+  color: var(--gray-300);
+  max-width: 100%;
 }
 
 .footer-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-    max-width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  max-width: 100%;
 }
 
 .footer-brand {
-    max-width: 400px;
-    max-width: 100%;
+  max-width: 400px;
+  max-width: 100%;
 }
 
 .footer-logo {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    margin-bottom: 1rem;
-    max-width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  max-width: 100%;
 }
 
 .footer-logo i {
-    font-size: 1.5rem;
-    color: var(--primary-400);
+  font-size: 1.5rem;
+  color: var(--primary-400);
 }
 
 .footer-logo h3 {
-    color: var(--white);
-    margin: 0;
-    font-size: 1.125rem;
-    max-width: 100%;
-    overflow-wrap: break-word;
+  color: var(--white);
+  margin: 0;
+  font-size: 1.125rem;
+  max-width: 100%;
+  overflow-wrap: break-word;
 }
 
 .footer-description {
-    color: var(--gray-400);
-    margin: 0;
-    line-height: 1.5;
-    max-width: 100%;
-    overflow-wrap: break-word;
+  color: var(--gray-400);
+  margin: 0;
+  line-height: 1.5;
+  max-width: 100%;
+  overflow-wrap: break-word;
 }
 
 .footer-links {
-    display: flex;
-    gap: 3rem;
-    max-width: 100%;
-    flex-wrap: wrap;
+  display: flex;
+  gap: 3rem;
+  max-width: 100%;
+  flex-wrap: wrap;
 }
 
 .link-group h4 {
-    color: var(--white);
-    margin-bottom: 1rem;
-    font-size: 1.125rem;
-    max-width: 100%;
-    overflow-wrap: break-word;
+  color: var(--white);
+  margin-bottom: 1rem;
+  font-size: 1.125rem;
+  max-width: 100%;
+  overflow-wrap: break-word;
 }
 
 .link-group a {
-    display: block;
-    color: var(--gray-400);
-    margin-bottom: 0.5rem;
-    text-decoration: none;
-    transition: color 0.2s ease;
-    max-width: 100%;
-    overflow-wrap: break-word;
+  display: block;
+  color: var(--gray-400);
+  margin-bottom: 0.5rem;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  max-width: 100%;
+  overflow-wrap: break-word;
 }
 
 .link-group a:hover {
-    color: var(--white);
+  color: var(--white);
 }
 
 .footer-legal {
-    grid-column: 1 / -1;
-    padding-top: 2rem;
-    border-top: 1px solid var(--gray-800);
-    text-align: center;
-    max-width: 100%;
+  grid-column: 1 / -1;
+  padding-top: 2rem;
+  border-top: 1px solid var(--gray-800);
+  text-align: center;
+  max-width: 100%;
 }
 
 .footer-legal p {
-    margin-bottom: 0.5rem;
-    color: var(--gray-500);
-    max-width: 100%;
-    overflow-wrap: break-word;
+  margin-bottom: 0.5rem;
+  color: var(--gray-500);
+  max-width: 100%;
+  overflow-wrap: break-word;
 }
 
 .legal-note {
-    font-size: 0.875rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    max-width: 800px;
-    margin: 1rem auto 0;
-    line-height: 1.5;
-    max-width: 100%;
-    overflow-wrap: break-word;
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  max-width: 800px;
+  margin: 1rem auto 0;
+  line-height: 1.5;
+  max-width: 100%;
+  overflow-wrap: break-word;
 }
