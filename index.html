@@ -138,7 +138,7 @@
         <div class="section-header">
           <h2><i class="fas fa-chart-bar"></i> Dashboard Interactivo</h2>
           <p class="dashboard-intro">
-            Explora los 3 Análisis cruzados entre salarios y alquileres y
+            Explora los 3 análisis cruzados entre salarios y alquileres y
             descubre el mejor distrito para vivir en Barcelona según tu perfil
             profesional. Incluye datos de interés como salarios medios del
             sector tecnológico/digital, precio de alquiler promedio por distrito
@@ -167,7 +167,7 @@
 
           <!-- COLUMNA DERECHA: CONTENIDO PRINCIPAL -->
           <main class="dashboard-main" id="dashboardMain">
-            <!-- PÁGINA ÚNICA: Resumen con 3 subsecciones -->
+            <!-- Página ÚNICA: Resumen con 3 subsecciones -->
             <article class="dashboard-page active" id="vision-general">
               <h3>Resumen</h3>
               <p class="page-description">
@@ -283,7 +283,7 @@
               <div class="dashboard-visuals-container">
                 <div class="visuals-section">
                   <h4>
-                    Tabla de Análisis de viabilidad según los filtros aplicados
+                    Tabla de análisis de viabilidad según los filtros aplicados
                   </h4>
                   <div class="table-placeholder" id="detail-table">
                     <p>
@@ -324,7 +324,7 @@
                     <p class="section-description">
                       Matriz de calor que muestra el menor porcentaje de
                       esfuerzo salarial para cada combinación de perfil
-                      profesional (Technology/Marketing/Design –
+                      profesional (Technology/Marketing/Design ×
                       Junior/Mid/Senior) y distrito de Barcelona.
                       <br /><small
                         ><i class="fas fa-info-circle"></i> Datos estáticos -
@@ -352,7 +352,7 @@
 
                     <div class="chart-placeholder" id="district-ranking-chart">
                       <div class="data-message">
-                        <div class="message-icon">📊</div>
+                        <div class="message-icon">📈</div>
                         <h5>Gráfico de Ranking (Próximamente)</h5>
                         <p>
                           Clasificación de los 7 distritos de Barcelona según el
@@ -481,13 +481,13 @@
       <div class="container">
         <div class="section-header">
           <h2><i class="fas fa-star"></i> Insights Destacados</h2>
-          <p>Hallazgos clave del Análisis para lectura rápida</p>
+          <p>Hallazgos clave del análisis para lectura rápida</p>
         </div>
 
         <div class="insights-grid">
           <article class="insight-card">
             <div class="insight-header">
-              <span class="insight-category">📈 Tendencia Principal</span>
+              <span class="insight-category">📊 Tendencia Principal</span>
               <span class="insight-badge critical">Crítico</span>
             </div>
             <h3 class="insight-title">
@@ -515,7 +515,7 @@
 
           <article class="insight-card">
             <div class="insight-header">
-              <span class="insight-category">⚠️ Sector Más Vulnerable</span>
+              <span class="insight-category">💼 Sector Más Vulnerable</span>
               <span class="insight-badge warning">Alerta</span>
             </div>
             <h3 class="insight-title">
@@ -525,7 +525,7 @@
               <p>
                 Los perfiles junior de diseño presentan los
                 <strong>ratios de esfuerzo salarial más elevados</strong> del
-                Análisis, situándose sistemáticamente en rangos de viabilidad
+                análisis, situándose sistemáticamente en rangos de viabilidad
                 limitada incluso sobre salario bruto.
               </p>
             </div>
@@ -543,7 +543,7 @@
 
           <article class="insight-card">
             <div class="insight-header">
-              <span class="insight-category">🌍 Disparidad Geográfica</span>
+              <span class="insight-category">🏙️ Disparidad Geográfica</span>
               <span class="insight-badge info">Análisis</span>
             </div>
             <h3 class="insight-title">
@@ -557,7 +557,7 @@
                   >Gràcia presenta el mayor % de esfuerzo salarial
                   mínimo</strong
                 >
-                del Análisis, superando a distritos como Sarrià-Sant Gervasi y
+                del análisis, superando a distritos como Sarrià-Sant Gervasi y
                 Les Corts.
               </p>
             </div>
@@ -581,7 +581,7 @@
       <div class="container">
         <div class="section-header">
           <h2><i class="fas fa-clipboard-list"></i> Metodología</h2>
-          <p>Proceso de Análisis, modelado y visualización de datos</p>
+          <p>Proceso de análisis, modelado y visualización de datos</p>
         </div>
 
         <div class="accordion" id="methodologyAccordion">
@@ -732,7 +732,7 @@
             </h4>
             <div>
               <p>
-                Este Análisis representa una instantánea del mercado entre
+                Este análisis representa una instantánea del mercado entre
                 diciembre de 2025 y enero de 2026.<br />
                 No incluye gastos adicionales asociados a la vivienda
                 (suministros, comunidad u otros).<br />
@@ -791,7 +791,7 @@
                   <h4>Análisis cruzado de datos</h4>
                   <p>
                     Integración de múltiples fuentes de información en un
-                    Análisis coherente
+                    análisis coherente
                   </p>
                 </div>
 
@@ -951,99 +951,69 @@
     <!-- 8. Funcionalidades generales -->
     <script src="js/main.js"></script>
 
-    <!-- 9. SIDEBAR STICKY FIXED - VERSIÓN SIMPLIFICADA Y FUNCIONAL -->
+    <!-- 9. SIDEBAR STICKY FIXED - VERSIÓN COMPLETA -->
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         const sidebar = document.querySelector(".dashboard-sidebar");
         const header = document.querySelector(".main-header");
         const dashboardSection = document.querySelector("#dashboard-section");
 
-        if (!sidebar || !dashboardSection || !header) {
-          console.log("❌ Elementos necesarios no encontrados");
-          return;
-        }
+        if (!sidebar || !dashboardSection) return;
 
-        console.log(
-          "✅ Elementos encontrados, inicializando sticky sidebar...",
-        );
-
-        // 1. DETECTAR SI ES MÓVIL UNA SOLA VEZ AL INICIO
-        const isMobile = window.innerWidth <= 768;
-
-        if (isMobile) {
-          // 2. EN MÓVIL: CSS SE ENCARGA DE TODO - DESACTIVAR JS
-          console.log("📱 Modo móvil: CSS sticky activado, JS desactivado");
-
-          // Limpiar cualquier estilo que el JS pudiera haber puesto antes
-          sidebar.style.position = "";
-          sidebar.style.top = "";
-          sidebar.style.left = "";
-          sidebar.style.width = "";
-          sidebar.style.zIndex = "";
-          sidebar.style.boxShadow = "";
-          sidebar.classList.remove("fixed-sidebar");
-
-          // Ocultar placeholder si existe
-          const placeholder = document.querySelector(".sidebar-placeholder");
-          if (placeholder) {
-            placeholder.style.display = "none";
-          }
-
-          // SALIR - NO hacer nada más en móvil
-          return;
-        }
-
-        // 3. SOLO PARA DESKTOP: Lógica JS mínima
-        console.log("🖥️ Modo desktop: JS fixed activado");
-
-        // Crear placeholder para mantener el espacio
+        // 1. Crear placeholder para mantener el espacio
         const placeholder = document.createElement("div");
         placeholder.className = "sidebar-placeholder";
         sidebar.parentNode.insertBefore(placeholder, sidebar);
 
+        // 2. Configurar medidas
+        let isMobile = window.innerWidth <= 768;
         let isFixed = false;
-        const headerHeight = header.offsetHeight;
+        let originalSidebarRect = null;
+
+        function saveOriginalPosition() {
+          if (!originalSidebarRect) {
+            originalSidebarRect = sidebar.getBoundingClientRect();
+          }
+        }
 
         function updateSidebar() {
+          if (!sidebar || !dashboardSection) return;
+
+          const headerHeight = header ? header.offsetHeight : 72;
           const scrollY = window.scrollY;
-          const sectionTop = dashboardSection.offsetTop;
+
+          // Actualizar estado móvil
+          isMobile = window.innerWidth <= 768;
+
+          // Guardar posición original si no está guardada
+          saveOriginalPosition();
+
+          // Obtener posiciones de la sección
+          const sectionTop = dashboardSection.offsetTop - headerHeight - 20;
           const sectionBottom = sectionTop + dashboardSection.offsetHeight;
 
-          // Margen para activar/desactivar
-          const activationMargin = 100;
+          // ¿Estamos dentro de la sección dashboard?
+          const isInDashboardSection =
+            scrollY >= sectionTop && scrollY <= sectionBottom;
 
-          // ¿Debería estar fixed?
-          const shouldBeFixed =
-            scrollY >= sectionTop - headerHeight - activationMargin &&
-            scrollY <= sectionBottom - activationMargin;
-
-          if (shouldBeFixed && !isFixed) {
-            // ACTIVAR FIXED
-            const container = document.querySelector(
-              ".dashboard-section .container",
+          if (isMobile) {
+            // MÓVIL: sticky simple con CSS
+            handleMobile();
+          } else {
+            // DESKTOP: comportamiento controlado
+            handleDesktop(
+              isInDashboardSection,
+              scrollY,
+              sectionTop,
+              sectionBottom,
+              headerHeight,
             );
-            if (!container) return;
+          }
+        }
 
-            const containerRect = container.getBoundingClientRect();
-            const leftPosition = containerRect.left + window.scrollX;
-            const sidebarWidth = sidebar.offsetWidth;
-
-            sidebar.style.position = "fixed";
-            sidebar.style.top = `${headerHeight + 20}px`; // 20px de margen
-            sidebar.style.left = `${leftPosition}px`;
-            sidebar.style.width = `${sidebarWidth}px`;
-            sidebar.style.zIndex = "90";
-            sidebar.style.boxShadow = "0 4px 20px rgba(0,0,0,0.1)";
-            sidebar.classList.add("fixed-sidebar");
-
-            placeholder.style.display = "block";
-            placeholder.style.width = `${sidebarWidth}px`;
-            placeholder.style.height = `${sidebar.offsetHeight}px`;
-
-            isFixed = true;
-            console.log("📌 Sidebar FIXED activado");
-          } else if (!shouldBeFixed && isFixed) {
-            // DESACTIVAR FIXED
+        function handleMobile() {
+          // Solo asegurar que no esté fijo en móvil
+          if (isFixed) {
             sidebar.style.position = "";
             sidebar.style.top = "";
             sidebar.style.left = "";
@@ -1051,60 +1021,257 @@
             sidebar.style.zIndex = "";
             sidebar.style.boxShadow = "";
             sidebar.classList.remove("fixed-sidebar");
-
-            placeholder.style.display = "none";
             isFixed = false;
-            console.log("📌 Sidebar FIXED desactivado");
+          }
+
+          placeholder.style.display = "none";
+
+          // CSS se encarga del sticky en móvil
+          sidebar.style.position = "sticky";
+          sidebar.style.top = "72px";
+        }
+
+        function handleDesktop(
+          isInDashboardSection,
+          scrollY,
+          sectionTop,
+          sectionBottom,
+          headerHeight,
+        ) {
+          const container = document.querySelector(
+            ".dashboard-section .container",
+          );
+          if (!container) return;
+
+          const containerRect = container.getBoundingClientRect();
+          const sidebarRect = sidebar.getBoundingClientRect();
+          const viewportHeight = window.innerHeight;
+
+          if (isInDashboardSection) {
+            // DENTRO de la sección: aplicar fixed
+            if (!isFixed) {
+              // Calcular posición izquierda basada en el contenedor
+              const leftPosition = containerRect.left + window.scrollX;
+
+              // Aplicar fixed
+              sidebar.style.position = "fixed";
+              sidebar.style.top = "100px";
+              sidebar.style.left = `${leftPosition}px`;
+              sidebar.style.width = `${sidebarRect.width}px`;
+              sidebar.style.zIndex = "90";
+              sidebar.style.boxShadow = "0 4px 20px rgba(0,0,0,0.1)";
+              sidebar.classList.add("fixed-sidebar");
+
+              // Mostrar placeholder
+              placeholder.style.display = "block";
+              placeholder.style.width = `${sidebarRect.width}px`;
+              placeholder.style.height = `${sidebarRect.height}px`;
+              placeholder.style.flexShrink = "0";
+
+              isFixed = true;
+            }
+
+            // Ajustar posición vertical si está cerca del final
+            const distanceFromBottom = sectionBottom - scrollY;
+            const sidebarHeight = sidebar.offsetHeight;
+
+            if (distanceFromBottom < sidebarHeight + 100) {
+              // Cerca del final: subir el sidebar
+              const newTop = Math.max(
+                20, // Mínimo 20px desde top
+                distanceFromBottom - sidebarHeight - 20,
+              );
+              sidebar.style.top = `${newTop}px`;
+            } else {
+              // Posición normal
+              sidebar.style.top = "100px";
+            }
+          } else {
+            // FUERA de la sección: restaurar posición normal
+            if (isFixed) {
+              sidebar.style.position = "";
+              sidebar.style.top = "";
+              sidebar.style.left = "";
+              sidebar.style.width = "";
+              sidebar.style.zIndex = "";
+              sidebar.style.boxShadow = "";
+              sidebar.classList.remove("fixed-sidebar");
+
+              placeholder.style.display = "none";
+              isFixed = false;
+            }
           }
         }
 
-        // 4. EVENT LISTENERS SIMPLIFICADOS
-        let scrollTimeout;
+        // 3. Event listeners
         function handleScroll() {
-          if (scrollTimeout) {
-            window.cancelAnimationFrame(scrollTimeout);
-          }
-          scrollTimeout = window.requestAnimationFrame(updateSidebar);
+          requestAnimationFrame(updateSidebar);
         }
 
-        // Escuchar scroll (solo desktop)
         window.addEventListener("scroll", handleScroll);
 
-        // Inicializar una vez
-        setTimeout(updateSidebar, 100);
-
-        // 5. MANEJAR RESIZE (solo desktop)
         window.addEventListener("resize", function () {
-          // Si cambia a móvil, limpiar
-          if (window.innerWidth <= 768) {
-            window.removeEventListener("scroll", handleScroll);
+          // Resetear en resize
+          if (isFixed) {
             sidebar.style.position = "";
             sidebar.style.top = "";
             sidebar.style.left = "";
             sidebar.style.width = "";
             sidebar.classList.remove("fixed-sidebar");
-
-            if (placeholder) {
-              placeholder.style.display = "none";
-            }
             isFixed = false;
           }
-          // Si es desktop y estaba fixed, recalcular
-          else if (isFixed) {
-            const container = document.querySelector(
-              ".dashboard-section .container",
+
+          placeholder.style.display = "none";
+          originalSidebarRect = null; // Forzar recalcular
+
+          // Pequeño delay para que termine el resize
+          setTimeout(updateSidebar, 150);
+        });
+
+        // 4. Navegación activa por scroll (MOBILE + DESKTOP)
+        const subsectionIds = [
+          "vision-general",
+          "accessibility-section",
+          "seniority-section",
+        ];
+        const subsectionElements = {};
+        const navItems = {};
+
+        // Inicializar elementos
+        subsectionIds.forEach((id) => {
+          const element = document.getElementById(id);
+          if (element) {
+            subsectionElements[id] = element;
+
+            const navItem = document.querySelector(
+              `.dashboard-nav-item[href="#${id}"]`,
             );
-            if (container) {
-              const containerRect = container.getBoundingClientRect();
-              const leftPosition = containerRect.left + window.scrollX;
-              sidebar.style.left = `${leftPosition}px`;
-              sidebar.style.width = `${sidebar.offsetWidth}px`;
-              placeholder.style.width = `${sidebar.offsetWidth}px`;
+            if (navItem) {
+              navItems[id] = navItem;
             }
           }
         });
 
-        console.log("✅ Sidebar sticky inicializado correctamente");
+        function updateActiveNav() {
+          // Offset diferente para móvil vs desktop
+          const headerHeight = header ? header.offsetHeight : 72;
+          const isMobileView = window.innerWidth <= 768;
+
+          // En móvil, el sidebar sticky ocupa espacio, necesitamos más offset
+          const scrollOffset = isMobileView
+            ? headerHeight + 100 // Móvil: header + sidebar
+            : headerHeight + 50; // Desktop: solo header + margen
+
+          const scrollY = window.scrollY + scrollOffset;
+          let activeId = null;
+          let closestDistance = Infinity;
+
+          Object.entries(subsectionElements).forEach(([id, element]) => {
+            if (!element) return;
+
+            const rect = element.getBoundingClientRect();
+            const elementTop = window.scrollY + rect.top;
+            const elementBottom = elementTop + rect.height;
+
+            // Verificar si el elemento está en el viewport
+            const isInViewport =
+              scrollY >= elementTop && scrollY <= elementBottom;
+            const distanceToTop = Math.abs(scrollY - elementTop);
+
+            // Priorizar: primero elementos en viewport, luego el más cercano
+            if (isInViewport) {
+              closestDistance = 0;
+              activeId = id;
+            } else if (distanceToTop < closestDistance && closestDistance > 0) {
+              closestDistance = distanceToTop;
+              activeId = id;
+            }
+          });
+
+          // Si encontramos una sección activa, actualizar menú
+          if (activeId) {
+            Object.entries(navItems).forEach(([id, navItem]) => {
+              if (navItem) {
+                if (id === activeId) {
+                  navItem.classList.add("active");
+                } else {
+                  navItem.classList.remove("active");
+                }
+              }
+            });
+          }
+
+          // Si no hay ninguna activa y estamos en la parte superior, activar "Resumen"
+          if (!activeId && scrollY < 300 && navItems["vision-general"]) {
+            Object.entries(navItems).forEach(([id, navItem]) => {
+              if (navItem) {
+                navItem.classList.remove("active");
+              }
+            });
+            navItems["vision-general"].classList.add("active");
+          }
+        }
+
+        // 5. Scroll suave al hacer click en menú (MOBILE + DESKTOP)
+        document.querySelectorAll(".dashboard-nav-item").forEach((item) => {
+          item.addEventListener("click", function (e) {
+            if (this.getAttribute("href").startsWith("#")) {
+              e.preventDefault();
+              const targetId = this.getAttribute("href").substring(1);
+              const targetElement = document.getElementById(targetId);
+
+              if (targetElement) {
+                const headerHeight = header ? header.offsetHeight : 72;
+                const isMobileView = window.innerWidth <= 768;
+
+                // Offset diferente para móvil (sidebar sticky ocupa espacio)
+                const sidebarOffset = isMobileView ? 140 : 130;
+                const offset = headerHeight + sidebarOffset;
+
+                const targetPosition = targetElement.offsetTop - offset;
+
+                window.scrollTo({
+                  top: targetPosition,
+                  behavior: "smooth",
+                });
+
+                // Actualizar activo inmediatamente
+                document
+                  .querySelectorAll(".dashboard-nav-item")
+                  .forEach((nav) => {
+                    nav.classList.remove("active");
+                  });
+                this.classList.add("active");
+              }
+            }
+          });
+        });
+
+        // 6. Inicializar
+        updateSidebar();
+
+        // Actualizar navegación activa en scroll (para móvil y desktop)
+        let navUpdateTimeout;
+        const activeNavScrollHandler = function () {
+          if (navUpdateTimeout) {
+            cancelAnimationFrame(navUpdateTimeout);
+          }
+          navUpdateTimeout = requestAnimationFrame(updateActiveNav);
+        };
+
+        // Escuchar scroll para navegación activa (siempre, en móvil y desktop)
+        window.addEventListener("scroll", activeNavScrollHandler);
+
+        // También actualizar en resize (por si cambia de móvil a desktop)
+        window.addEventListener("resize", function () {
+          setTimeout(updateActiveNav, 100);
+        });
+
+        updateActiveNav();
+
+        console.log(
+          "✅ Sidebar sticky inicializado (completo: sticky + navegación activa móvil/desktop)",
+        );
       });
     </script>
   </body>

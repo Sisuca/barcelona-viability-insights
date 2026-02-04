@@ -462,14 +462,14 @@
 }
 
 /* =============================================== */
-/* MÓVIL: DISEÑO OPTIMIZADO (≤768px) - STICKY CSS PURO CORREGIDO */
+/* MÓVIL: DISEÑO OPTIMIZADO (≤768px) - STICKY CSS PURO */
 /* =============================================== */
 @media (max-width: 768px) {
   /* A. LAYOUT GENERAL - ASEGURAR CONTENEDOR PARA STICKY */
 
   .dashboard-section {
     position: relative;
-    overflow: visible !important;
+    overflow: visible !important; /* IMPORTANTE: no hidden */
   }
 
   .dashboard-layout {
@@ -502,10 +502,10 @@
     font-size: 0.95rem;
   }
 
-  /* C. SIDEBAR COMO MENÚ HORIZONTAL STICKY (CSS ONLY) - CORREGIDO */
+  /* C. SIDEBAR COMO MENÚ HORIZONTAL STICKY (CSS ONLY) */
   .dashboard-sidebar {
     position: sticky !important;
-    top: 72px !important; /* Debajo del header - CORREGIDO: 72px */
+    top: 72px !important; /* Debajo del header */
     z-index: 90 !important;
     margin-bottom: 0.5rem;
     padding: 0.8rem;
@@ -516,17 +516,15 @@
     width: 100% !important;
     left: 0 !important;
     right: 0 !important;
+    /* Forzar sticky */
     align-self: auto !important;
-    transform: translateZ(0);
+    transform: translateZ(0); /* Acelerar hardware */
   }
 
-  /* REGLA INTENCIONAL: Header scrolled más compacto */
+  /* Header scrolled (más compacto) */
   .main-header.scrolled ~ .dashboard-section .dashboard-sidebar {
-    top: 60px !important; /* Header scrolled más compacto - MANTENER */
+    top: 60px !important;
   }
-
-  /* ⚠️ CORRECCIÓN CRÍTICA: Eliminada la regla conflictiva .dashboard-sidebar.fixed-sidebar */
-  /* Que tenía top: 60px !important y causaba el corte del sidebar */
 
   /* ASEGURAR QUE EL CONTENEDOR PADRE PERMITA STICKY */
   .dashboard-section .container,
@@ -686,7 +684,7 @@
 /* =============================================== */
 @media (max-width: 480px) {
   .dashboard-sidebar {
-    top: 60px !important; /* Header más compacto en móviles pequeños - MANTENER */
+    top: 60px !important; /* Header más compacto */
     padding: 0.6rem;
   }
 

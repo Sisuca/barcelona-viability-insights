@@ -5,310 +5,323 @@
 
 /* 1. HEADER MOBILE */
 @media (max-width: 768px) {
-    .main-nav {
-        position: fixed;
-        top: 70px;
-        left: 0;
-        width: 100%;
-        background: white;
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        padding: 1rem;
-        transform: translateY(-100%);
-        opacity: 0;
-        visibility: hidden;
-        transition: all 0.3s ease;
-        z-index: 999;
-    }
-    
-    .main-nav.active {
-        transform: translateY(0);
-        opacity: 1;
-        visibility: visible;
-    }
-    
-    .main-nav .nav-list {
-        flex-direction: column;
-        gap: 0;
-    }
-    
-    .nav-link {
-        display: block;
-        padding: 1rem;
-        border-bottom: 1px solid var(--gray-200);
-    }
-    
-    .mobile-menu-toggle {
-        display: block;
-    }
+  .main-nav {
+    position: fixed;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    background: white;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    transform: translateY(-100%);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 999;
+  }
+
+  .main-nav.active {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .main-nav .nav-list {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .nav-link {
+    display: block;
+    padding: 1rem;
+    border-bottom: 1px solid var(--gray-200);
+  }
+
+  .mobile-menu-toggle {
+    display: block;
+  }
 }
 
 /* 2. HERO MOBILE */
 @media (max-width: 768px) {
-    .hero {
-        padding-top: 6rem;
-        padding-bottom: 2rem;
-    }
-    
-    .hero-title {
-        font-size: 2rem;
-        line-height: 1.2;
-    }
-    
-    .hero-subtitle {
-        font-size: 1.125rem;
-    }
-    
-    .hero-stats {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .stat-card {
-        width: 100%;
-        max-width: 300px;
-    }
-    
-    .hero-cta {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .cta-button {
-        width: 100%;
-        max-width: 300px;
-        justify-content: center;
-    }
+  .hero {
+    padding-top: 6rem;
+    padding-bottom: 2rem;
+  }
+
+  .hero-title {
+    font-size: 2rem;
+    line-height: 1.2;
+  }
+
+  .hero-subtitle {
+    font-size: 1.125rem;
+  }
+
+  .hero-stats {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .stat-card {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .hero-cta {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cta-button {
+    width: 100%;
+    max-width: 300px;
+    justify-content: center;
+  }
 }
 
 /* 3. DASHBOARD MOBILE - STICKY FUNCIONANDO */
 @media (max-width: 768px) {
-    /* El sidebar sticky ya está configurado en dashboard.css */
-    /* Solo asegurar que no haya overflow que lo rompa */
-    .dashboard-section,
-    .dashboard-layout,
-    .dashboard-main {
-        overflow-x: visible !important;
-    }
-    
-    /* Filtros en columna única */
-    .filters-container {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-        padding: 1rem;
-    }
-    
-    /* KPIs en columna única */
-    .kpi-cards-container {
-        grid-template-columns: 1fr;
-    }
+  /* El sidebar sticky ya está configurado en dashboard.css */
+  /* Solo asegurar que no haya overflow que lo rompa */
+  .dashboard-section,
+  .dashboard-layout,
+  .dashboard-main {
+    overflow-x: visible !important;
+  }
+
+  /* Filtros en columna única */
+  .filters-container {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  /* KPIs en columna única */
+  .kpi-cards-container {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* 4. INSIGHTS MOBILE */
 @media (max-width: 768px) {
-    .insights-grid {
-        grid-template-columns: 1fr;
-    }
+  .insights-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* 5. REPORT BANNER MOBILE */
 @media (max-width: 768px) {
-    .report-banner-content {
-        flex-direction: column;
-        text-align: center;
-        gap: 2rem;
-    }
-    
-    .banner-features {
-        grid-template-columns: 1fr;
-    }
-    
-    .btn-download-pdf {
-        width: 100%;
-        justify-content: center;
-    }
+  .report-banner-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 2rem;
+  }
+
+  .banner-features {
+    grid-template-columns: 1fr;
+  }
+
+  .btn-download-pdf {
+    width: 100%;
+    justify-content: center;
+  }
 }
 
 /* 6. METHODOLOGY MOBILE */
 @media (max-width: 768px) {
-    .accordion-item {
-        width: 100%;
-        box-sizing: border-box;
-    }
-    
-    .accordion-header {
-        padding: 1.25rem 1rem;
-    }
-    
-    .phase-content {
-        padding: 1rem;
-    }
+  .accordion-item {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .accordion-header {
+    padding: 1.25rem 1rem;
+  }
+
+  .phase-content {
+    padding: 1rem;
+  }
 }
 
 /* 7. ABOUT MOBILE */
 @media (max-width: 768px) {
-    .about-card-header {
-        flex-direction: column;
-        text-align: center;
-        gap: 1rem;
-    }
-    
-    .profile-info {
-        text-align: center;
-    }
-    
-    .profile-tags {
-        justify-content: center;
-    }
-    
-    .capabilities-grid {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-    }
-    
-    .profile-links {
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-    
-    .profile-link {
-        width: 100%;
-        max-width: 250px;
-        justify-content: center;
-    }
+  .about-card-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .profile-info {
+    text-align: center;
+  }
+
+  .profile-tags {
+    justify-content: center;
+  }
+
+  .capabilities-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .profile-links {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .profile-link {
+    width: 100%;
+    max-width: 250px;
+    justify-content: center;
+  }
 }
 
 /* 8. FOOTER MOBILE */
 @media (max-width: 768px) {
-    .footer-content {
-        grid-template-columns: 1fr;
-        text-align: center;
-        gap: 2rem;
-    }
-    
-    .footer-links {
-        flex-direction: column;
-        gap: 2rem;
-    }
-    
-    .footer-logo {
-        justify-content: center;
-    }
+  .footer-content {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 2rem;
+  }
+
+  .footer-links {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .footer-logo {
+    justify-content: center;
+  }
 }
 
 /* 9. AJUSTES PARA MÓVILES MUY PEQUEÑOS */
 @media (max-width: 480px) {
-    .hero-title {
-        font-size: 1.75rem;
-    }
-    
-    .hero-subtitle {
-        font-size: 1rem;
-    }
-    
-    .hero-description {
-        font-size: 0.95rem;
-    }
-    
-    .cta-button {
-        padding: 0.875rem 1.5rem;
-        font-size: 0.95rem;
-    }
-    
-    .btn-download-pdf {
-        padding: 0.875rem;
-        font-size: 1rem;
-    }
+  .hero-title {
+    font-size: 1.75rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+
+  .hero-description {
+    font-size: 0.95rem;
+  }
+
+  .cta-button {
+    padding: 0.875rem 1.5rem;
+    font-size: 0.95rem;
+  }
+
+  .btn-download-pdf {
+    padding: 0.875rem;
+    font-size: 1rem;
+  }
 }
 
 /* 10. CORRECCIÓN ESPECÍFICA PARA TABLAS ANCHAS (sin romper sticky) */
 @media (max-width: 1024px) {
-    /* Contenedor para cualquier tabla que pueda desbordar */
-    .table-scroll-wrapper {
-        width: 100%;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        margin: 1rem 0;
-        border-radius: 0.5rem;
-        border: 1px solid var(--gray-200);
-    }
-    
-    /* Aplicar a tus tablas existentes (YA ESTÁ EN table-chart.css) */
-    .data-table,
-    .accessibility-table,
-    .insights-table {
-        min-width: 700px;
-    }
+  /* Contenedor para cualquier tabla que pueda desbordar */
+  .table-scroll-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin: 1rem 0;
+    border-radius: 0.5rem;
+    border: 1px solid var(--gray-200);
+  }
+
+  /* Aplicar a tus tablas existentes (YA ESTÁ EN table-chart.css) */
+  .data-table,
+  .accessibility-table,
+  .insights-table {
+    min-width: 700px;
+  }
 }
 
 /* 11. CORRECCIÓN EXTRA PARA ELEMENTOS ANCHOS EN MÓVIL */
 @media (max-width: 768px) {
-    /* Asegurar que las imágenes no desborden */
-    img, svg, canvas {
-        max-width: 100%;
-        height: auto;
-    }
-    
-    /* Prevenir desbordamiento en contenedores específicos */
-    .powerbi-container,
-    .chart-container,
-    .table-container {
-        max-width: 100%;
-        overflow-x: auto; /* Scroll horizontal solo donde sea necesario */
-    }
+  /* Asegurar que las imágenes no desborden */
+  img,
+  svg,
+  canvas {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Prevenir desbordamiento en contenedores específicos */
+  .powerbi-container,
+  .chart-container,
+  .table-container {
+    max-width: 100%;
+    overflow-x: auto; /* Scroll horizontal solo donde sea necesario */
+  }
 }
+
+/* 12. REGLA ESPECÍFICA PARA ASEGURAR STICKY EN MÓVIL */
+@media (max-width: 768px) {
+  .dashboard-sidebar {
+    position: sticky !important;
+    top: 72px !important;
+    z-index: 90 !important;
+    background-color: var(--white) !important;
+  }
+}
+
 /* ===== AJUSTES ESPECÍFICOS PARA METODOLOGÍA Y ABOUT EN MÓVIL ===== */
 @media (max-width: 768px) {
-    /* METODOLOGÍA EN MÓVIL */
-    .methodology .container,
-    .about .container {
-        padding-left: 1rem !important;
-        padding-right: 1rem !important;
-    }
-    
-    .accordion {
-        max-width: 100% !important; /* Forzar ancho completo en móvil */
-        width: 100%;
-    }
-    
-    .methodology-footer {
-        max-width: 100% !important; /* Forzar ancho completo en móvil */
-        width: 100%;
-    }
-    
-    /* ABOUT EN MÓVIL */
-    .about-card {
-        max-width: 100% !important; /* Forzar ancho completo en móvil */
-        width: 100%;
-        padding: 1.5rem; /* Un poco menos de padding en móvil */
-    }
-    
-    .about-card-header {
-        flex-direction: column;
-        text-align: center;
-        gap: 1rem;
-    }
-    
-    .profile-info {
-        text-align: center;
-    }
-    
-    .profile-tags {
-        justify-content: center;
-    }
-    
-    .capabilities-grid {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-    }
-    
-    .profile-links {
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-    
-    .profile-link {
-        width: 100%;
-        max-width: 250px;
-        justify-content: center;
-    }
+  /* METODOLOGÍA EN MÓVIL */
+  .methodology .container,
+  .about .container {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  .accordion {
+    max-width: 100% !important; /* Forzar ancho completo en móvil */
+    width: 100%;
+  }
+
+  .methodology-footer {
+    max-width: 100% !important; /* Forzar ancho completo en móvil */
+    width: 100%;
+  }
+
+  /* ABOUT EN MÓVIL */
+  .about-card {
+    max-width: 100% !important; /* Forzar ancho completo en móvil */
+    width: 100%;
+    padding: 1.5rem; /* Un poco menos de padding en móvil */
+  }
+
+  .about-card-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .profile-info {
+    text-align: center;
+  }
+
+  .profile-tags {
+    justify-content: center;
+  }
+
+  .capabilities-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .profile-links {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .profile-link {
+    width: 100%;
+    max-width: 250px;
+    justify-content: center;
+  }
 }

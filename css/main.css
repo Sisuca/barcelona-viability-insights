@@ -58,7 +58,7 @@ body {
   color: var(--text-color); /* Usando variable oficial */
   background-color: var(--white);
   line-height: 1.6;
-  padding-top: 72px !important;
+  padding-top: 72px; /* Para header fixed */
   max-width: 100%;
   position: relative;
   /* IMPORTANTE: No usar overflow-x: hidden aquí si afecta sticky */
@@ -132,7 +132,7 @@ td,
 
 /* ===== CORRECCIONES INTEGRADAS DE COMPONENTS.CSS ===== */
 
-/* 2. HEADER STICKY MEJORADO - CORREGIDO PARA MÓVIL */
+/* 2. HEADER STICKY MEJORADO */
 .main-header {
   position: fixed;
   top: 0;
@@ -147,15 +147,6 @@ td,
   box-sizing: border-box;
 }
 
-/* CORRECCIÓN ESPECÍFICA PARA MÓVIL: ASEGURAR QUE EL HEADER SEA FIXED */
-@media (max-width: 768px) {
-
-  /* Asegurar que el body tenga padding-top correcto para móvil */
-  body {
-    padding-top: 72px !important;
-  }
-}
-
 .main-header.scrolled {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
@@ -164,8 +155,8 @@ td,
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 1.5rem !important;
-  height: 72px !important;
+  padding: 1rem 1.5rem;
+  height: 72px;
   max-width: 100%;
   box-sizing: border-box;
 }
