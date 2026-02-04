@@ -160,8 +160,6 @@
     border: 1px solid #E5E7EB;
     display: flex;
     flex-direction: column;
-    max-width: 100%;
-    overflow: visible;
 }
 
 /* Contenedor de barras */
@@ -287,7 +285,6 @@
     gap: 15px;
     margin-bottom: -10px;
     align-items: flex-start;
-    max-width: 100%;
 }
 
 /* Eje vertical (Y-axis) */
@@ -312,6 +309,8 @@
     position: relative;
     padding-right: 10px;
     line-height: 1;
+    white-space: nowrap;
+    overflow: visible;
 }
 
 .y-tick::after {
@@ -329,7 +328,6 @@
 .columns-container {
     flex: 1;
     min-height: 250px;
-    max-width: calc(100% - 55px);
 }
 
 /* ===== ESTILOS PARA GRÁFICOS DE SENIORITY (AJUSTES) ===== */
@@ -347,7 +345,7 @@
 /* Ajustar posición del valor en las columnas */
 .column-chart-value {
     position: absolute;
-    top: -25px;
+    top: -28px;
     left: 50%;
     transform: translateX(-50%);
     font-family: 'JetBrains Mono', monospace;
@@ -360,9 +358,6 @@
     border-radius: 3px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.1);
     z-index: 2;
-    max-width: 90%;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
 
 /* ===== ESTILOS PARA MATRIZ TRANSPUESTA (COMPACTA) ===== */
@@ -543,20 +538,6 @@
     border-bottom: 1px solid #E5E7EB;
 }
 
-/* Leyenda de colores en footer */
-.color-legend-item {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 4px 12px;
-    border-radius: 4px;
-    font-size: 0.85rem;
-    margin: 0 6px;
-    font-weight: 500;
-    max-width: 100%;
-    box-sizing: border-box;
-}
-
 /* ===== ESTILOS PARA ESTADOS ===== */
 .data-message, .error-state {
     text-align: center;
@@ -658,7 +639,6 @@
     width: 100%;
     padding: 20px 20px 0 20px;
     margin: 16px 0;
-    max-width: 100%;
 }
 
 /* Placeholder para gráficos futuros en subsecciones */
@@ -727,15 +707,6 @@
     max-width: 120px;
 }
 
-.column-chart-bar-container {
-    height: 250px;
-    width: 100%;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    position: relative;
-}
-
 .column-chart-bar {
     width: 40px;
     border-radius: 6px 6px 0 0;
@@ -744,26 +715,6 @@
     display: flex;
     align-items: flex-start;
     justify-content: center;
-}
-
-.column-chart-value {
-    position: absolute;
-    top: -28px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-family: 'JetBrains Mono', monospace;
-    font-weight: 500;
-    font-size: 0.8rem;
-    color: var(--text-color);
-    white-space: nowrap;
-    background: rgba(255, 255, 255, 0.9);
-    padding: 2px 6px;
-    border-radius: 3px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    z-index: 2;
-    max-width: 90%;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
 
 .column-chart-label {
@@ -776,8 +727,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    max-width: 100%;
-    overflow-wrap: break-word;
+    width: 100%;
 }
 
 .column-chart-viability {
@@ -786,7 +736,6 @@
     display: flex;
     align-items: center;
     gap: 4px;
-    max-width: 100%;
 }
 
 /* Contenedor para gráfico de columnas (6 en fila) */
@@ -961,8 +910,6 @@
     
     .html-chart {
         padding: 16px 16px 0 16px;
-        max-width: 100vw;
-        overflow-x: hidden;
     }
     
     /* En móviles, cambiar a disposición vertical - UNA COLUMNA */
