@@ -951,69 +951,99 @@
     <!-- 8. Funcionalidades generales -->
     <script src="js/main.js"></script>
 
-    <!-- 9. SIDEBAR STICKY FIXED - VERSIÓN ORIGINAL FUNCIONAL -->
+    <!-- 9. SIDEBAR STICKY FIXED - VERSIÓN SIMPLIFICADA Y FUNCIONAL -->
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         const sidebar = document.querySelector(".dashboard-sidebar");
         const header = document.querySelector(".main-header");
         const dashboardSection = document.querySelector("#dashboard-section");
 
-        if (!sidebar || !dashboardSection) return;
+        if (!sidebar || !dashboardSection || !header) {
+          console.log("❌ Elementos necesarios no encontrados");
+          return;
+        }
 
-        // 1. Crear placeholder para mantener el espacio
+        console.log(
+          "✅ Elementos encontrados, inicializando sticky sidebar...",
+        );
+
+        // 1. DETECTAR SI ES MÓVIL UNA SOLA VEZ AL INICIO
+        const isMobile = window.innerWidth <= 768;
+
+        if (isMobile) {
+          // 2. EN MÓVIL: CSS SE ENCARGA DE TODO - DESACTIVAR JS
+          console.log("📱 Modo móvil: CSS sticky activado, JS desactivado");
+
+          // Limpiar cualquier estilo que el JS pudiera haber puesto antes
+          sidebar.style.position = "";
+          sidebar.style.top = "";
+          sidebar.style.left = "";
+          sidebar.style.width = "";
+          sidebar.style.zIndex = "";
+          sidebar.style.boxShadow = "";
+          sidebar.classList.remove("fixed-sidebar");
+
+          // Ocultar placeholder si existe
+          const placeholder = document.querySelector(".sidebar-placeholder");
+          if (placeholder) {
+            placeholder.style.display = "none";
+          }
+
+          // SALIR - NO hacer nada más en móvil
+          return;
+        }
+
+        // 3. SOLO PARA DESKTOP: Lógica JS mínima
+        console.log("🖥️ Modo desktop: JS fixed activado");
+
+        // Crear placeholder para mantener el espacio
         const placeholder = document.createElement("div");
         placeholder.className = "sidebar-placeholder";
         sidebar.parentNode.insertBefore(placeholder, sidebar);
 
-        // 2. Configurar medidas
-        let isMobile = window.innerWidth <= 768;
         let isFixed = false;
-        let originalSidebarRect = null;
-
-        function saveOriginalPosition() {
-          if (!originalSidebarRect) {
-            originalSidebarRect = sidebar.getBoundingClientRect();
-          }
-        }
+        const headerHeight = header.offsetHeight;
 
         function updateSidebar() {
-          if (!sidebar || !dashboardSection) return;
-
-          const headerHeight = header ? header.offsetHeight : 72;
           const scrollY = window.scrollY;
-
-          // Actualizar estado móvil
-          isMobile = window.innerWidth <= 768;
-
-          // Guardar posición original si no está guardada
-          saveOriginalPosition();
-
-          // Obtener posiciones de la sección
-          const sectionTop = dashboardSection.offsetTop - headerHeight - 20;
+          const sectionTop = dashboardSection.offsetTop;
           const sectionBottom = sectionTop + dashboardSection.offsetHeight;
 
-          // ¿Estamos dentro de la sección dashboard?
-          const isInDashboardSection =
-            scrollY >= sectionTop && scrollY <= sectionBottom;
+          // Margen para activar/desactivar
+          const activationMargin = 100;
 
-          if (isMobile) {
-            // MÓVIL: sticky simple con CSS + JS que aplica posición
-            handleMobile();
-          } else {
-            // DESKTOP: comportamiento controlado
-            handleDesktop(
-              isInDashboardSection,
-              scrollY,
-              sectionTop,
-              sectionBottom,
-              headerHeight,
+          // ¿Debería estar fixed?
+          const shouldBeFixed =
+            scrollY >= sectionTop - headerHeight - activationMargin &&
+            scrollY <= sectionBottom - activationMargin;
+
+          if (shouldBeFixed && !isFixed) {
+            // ACTIVAR FIXED
+            const container = document.querySelector(
+              ".dashboard-section .container",
             );
-          }
-        }
+            if (!container) return;
 
-        function handleMobile() {
-          // Solo asegurar que no esté fijo en móvil
-          if (isFixed) {
+            const containerRect = container.getBoundingClientRect();
+            const leftPosition = containerRect.left + window.scrollX;
+            const sidebarWidth = sidebar.offsetWidth;
+
+            sidebar.style.position = "fixed";
+            sidebar.style.top = `${headerHeight + 20}px`; // 20px de margen
+            sidebar.style.left = `${leftPosition}px`;
+            sidebar.style.width = `${sidebarWidth}px`;
+            sidebar.style.zIndex = "90";
+            sidebar.style.boxShadow = "0 4px 20px rgba(0,0,0,0.1)";
+            sidebar.classList.add("fixed-sidebar");
+
+            placeholder.style.display = "block";
+            placeholder.style.width = `${sidebarWidth}px`;
+            placeholder.style.height = `${sidebar.offsetHeight}px`;
+
+            isFixed = true;
+            console.log("📌 Sidebar FIXED activado");
+          } else if (!shouldBeFixed && isFixed) {
+            // DESACTIVAR FIXED
             sidebar.style.position = "";
             sidebar.style.top = "";
             sidebar.style.left = "";
@@ -1021,119 +1051,60 @@
             sidebar.style.zIndex = "";
             sidebar.style.boxShadow = "";
             sidebar.classList.remove("fixed-sidebar");
+
+            placeholder.style.display = "none";
             isFixed = false;
-          }
-
-          placeholder.style.display = "none";
-
-          // IMPORTANTE: JS aplica sticky en móvil (esto faltaba en versión actual)
-          sidebar.style.position = "sticky";
-          sidebar.style.top = "72px"; // ← CONSISTENTE con CSS: 72px
-        }
-
-        function handleDesktop(
-          isInDashboardSection,
-          scrollY,
-          sectionTop,
-          sectionBottom,
-          headerHeight,
-        ) {
-          const container = document.querySelector(
-            ".dashboard-section .container",
-          );
-          if (!container) return;
-
-          const containerRect = container.getBoundingClientRect();
-          const sidebarRect = sidebar.getBoundingClientRect();
-          const viewportHeight = window.innerHeight;
-
-          if (isInDashboardSection) {
-            // DENTRO de la sección: aplicar fixed
-            if (!isFixed) {
-              // Calcular posición izquierda basada en el contenedor
-              const leftPosition = containerRect.left + window.scrollX;
-
-              // Aplicar fixed
-              sidebar.style.position = "fixed";
-              sidebar.style.top = "100px";
-              sidebar.style.left = `${leftPosition}px`;
-              sidebar.style.width = `${sidebarRect.width}px`;
-              sidebar.style.zIndex = "90";
-              sidebar.style.boxShadow = "0 4px 20px rgba(0,0,0,0.1)";
-              sidebar.classList.add("fixed-sidebar");
-
-              // Mostrar placeholder
-              placeholder.style.display = "block";
-              placeholder.style.width = `${sidebarRect.width}px`;
-              placeholder.style.height = `${sidebarRect.height}px`;
-              placeholder.style.flexShrink = "0";
-
-              isFixed = true;
-            }
-
-            // Ajustar posición vertical si está cerca del final
-            const distanceFromBottom = sectionBottom - scrollY;
-            const sidebarHeight = sidebar.offsetHeight;
-
-            if (distanceFromBottom < sidebarHeight + 100) {
-              // Cerca del final: subir el sidebar
-              const newTop = Math.max(
-                20,
-                distanceFromBottom - sidebarHeight - 20,
-              );
-              sidebar.style.top = `${newTop}px`;
-            } else {
-              // Posición normal
-              sidebar.style.top = "100px";
-            }
-          } else {
-            // FUERA de la sección: restaurar posición normal
-            if (isFixed) {
-              sidebar.style.position = "";
-              sidebar.style.top = "";
-              sidebar.style.left = "";
-              sidebar.style.width = "";
-              sidebar.style.zIndex = "";
-              sidebar.style.boxShadow = "";
-              sidebar.classList.remove("fixed-sidebar");
-
-              placeholder.style.display = "none";
-              isFixed = false;
-            }
+            console.log("📌 Sidebar FIXED desactivado");
           }
         }
 
-        // 3. Event listeners
+        // 4. EVENT LISTENERS SIMPLIFICADOS
+        let scrollTimeout;
         function handleScroll() {
-          requestAnimationFrame(updateSidebar);
+          if (scrollTimeout) {
+            window.cancelAnimationFrame(scrollTimeout);
+          }
+          scrollTimeout = window.requestAnimationFrame(updateSidebar);
         }
 
+        // Escuchar scroll (solo desktop)
         window.addEventListener("scroll", handleScroll);
 
+        // Inicializar una vez
+        setTimeout(updateSidebar, 100);
+
+        // 5. MANEJAR RESIZE (solo desktop)
         window.addEventListener("resize", function () {
-          // Resetear en resize
-          if (isFixed) {
+          // Si cambia a móvil, limpiar
+          if (window.innerWidth <= 768) {
+            window.removeEventListener("scroll", handleScroll);
             sidebar.style.position = "";
             sidebar.style.top = "";
             sidebar.style.left = "";
             sidebar.style.width = "";
             sidebar.classList.remove("fixed-sidebar");
+
+            if (placeholder) {
+              placeholder.style.display = "none";
+            }
             isFixed = false;
           }
-
-          placeholder.style.display = "none";
-          originalSidebarRect = null;
-
-          setTimeout(updateSidebar, 150);
+          // Si es desktop y estaba fixed, recalcular
+          else if (isFixed) {
+            const container = document.querySelector(
+              ".dashboard-section .container",
+            );
+            if (container) {
+              const containerRect = container.getBoundingClientRect();
+              const leftPosition = containerRect.left + window.scrollX;
+              sidebar.style.left = `${leftPosition}px`;
+              sidebar.style.width = `${sidebar.offsetWidth}px`;
+              placeholder.style.width = `${sidebar.offsetWidth}px`;
+            }
+          }
         });
 
-        // [Mantener el resto del código igual...]
-        // (navegación activa, scroll suave, etc.)
-
-        // 6. Inicializar
-        updateSidebar();
-
-        console.log("✅ Sidebar sticky inicializado (versión funcional)");
+        console.log("✅ Sidebar sticky inicializado correctamente");
       });
     </script>
   </body>
