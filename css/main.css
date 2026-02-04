@@ -117,7 +117,7 @@ td,
 .data-table td:nth-child(4),
 .data-table td:nth-child(5) {
   font-family: var(--font-mono);
-  font-weight: 400;
+  font-weight: 500;
   max-width: 100%;
   overflow-wrap: break-word;
 }
@@ -677,12 +677,11 @@ td,
   overflow-wrap: break-word;
 }
 
-/* 7. METODOLOGÍA (ACORDEÓN) - MODIFICADO */
+/* 7. METODOLOGÍA (ACORDEÓN) */
 .methodology {
   padding: 4rem 0;
   background-color: var(--white);
-  /* max-width: 100%; ELIMINADO */
-  /* overflow: hidden; ELIMINADO */
+  max-width: 100%;
 }
 
 .methodology h2 {
@@ -695,7 +694,7 @@ td,
 .accordion {
   max-width: 800px;
   margin: 0 auto 2rem;
-  /* max-width: 100%; ELIMINADO */
+  max-width: 100%;
 }
 
 .accordion-item {
@@ -835,7 +834,7 @@ td,
 .methodology-footer {
   max-width: 800px;
   margin: 0 auto;
-  /* max-width: 100%; ELIMINADO */
+  max-width: 100%;
 }
 
 .limitations {
@@ -865,12 +864,11 @@ td,
   overflow-wrap: break-word;
 }
 
-/* 8. SOBRE MÍ - MODIFICADO */
+/* 8. SOBRE MÍ */
 .about {
   padding: 4rem 0;
   background-color: var(--background-color);
-  /* max-width: 100%; ELIMINADO */
-  /* overflow: hidden; ELIMINADO */
+  max-width: 100%;
 }
 
 .about h2 {
@@ -887,8 +885,8 @@ td,
   padding: 2rem;
   max-width: 900px;
   margin: 0 auto;
+  max-width: 100%;
   box-sizing: border-box;
-  /* max-width: 100%; ELIMINADO */
 }
 
 .about-card-header {
