@@ -505,7 +505,7 @@
   /* C. SIDEBAR COMO MENÚ HORIZONTAL STICKY (CSS ONLY) */
   .dashboard-sidebar {
     position: sticky !important;
-    top: 73px !important; /* Debajo del header */
+    top: 60px !important; /* Debajo del header */
     z-index: 90 !important;
     margin-bottom: 0.5rem;
     padding: 0.8rem;
@@ -678,10 +678,6 @@
 /* MÓVILES MUY PEQUEÑOS (≤480px) */
 /* =============================================== */
 @media (max-width: 480px) {
-  .dashboard-sidebar {
-    top: 73px !important; /* Header más compacto */
-    padding: 0.6rem;
-  }
 
   .dashboard-nav {
     grid-template-columns: repeat(3, 1fr);

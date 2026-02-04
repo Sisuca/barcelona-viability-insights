@@ -256,17 +256,6 @@
         overflow-x: auto; /* Scroll horizontal solo donde sea necesario */
     }
 }
-
-/* 12. REGLA ESPECÍFICA PARA ASEGURAR STICKY EN MÓVIL */
-@media (max-width: 768px) {
-    .dashboard-sidebar {
-        position: sticky !important;
-        top: 72px !important;
-        z-index: 90 !important;
-        background-color: var(--white) !important;
-    }
-}
-
 /* ===== AJUSTES ESPECÍFICOS PARA METODOLOGÍA Y ABOUT EN MÓVIL ===== */
 @media (max-width: 768px) {
     /* METODOLOGÍA EN MÓVIL */
