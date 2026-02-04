@@ -145,13 +145,11 @@ td,
   transition: all 0.3s ease;
   max-width: 100vw;
   box-sizing: border-box;
-  height: 73px; /* Altura explícita */
   padding: 1rem 0; /* Ajustar según necesites */
 }
 
 .main-header.scrolled {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-
 }
 
 .header-container {

@@ -679,7 +679,7 @@
 /* =============================================== */
 @media (max-width: 480px) {
   .dashboard-sidebar {
-    top: 60px !important; /* Header más compacto */
+    top: 73px !important; /* Header más compacto */
     padding: 0.6rem;
   }
 
