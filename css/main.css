@@ -58,7 +58,7 @@ body {
   color: var(--text-color); /* Usando variable oficial */
   background-color: var(--white);
   line-height: 1.6;
-  padding-top: 72px; /* Para header fixed */
+  padding-top: 73px !important; /* Para header fixed */
   max-width: 100%;
   position: relative;
   /* IMPORTANTE: No usar overflow-x: hidden aquí si afecta sticky */
@@ -145,10 +145,13 @@ td,
   transition: all 0.3s ease;
   max-width: 100vw;
   box-sizing: border-box;
+  height: 73px; /* Altura explícita */
+  padding: 1rem 0; /* Ajustar según necesites */
 }
 
 .main-header.scrolled {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+
 }
 
 .header-container {

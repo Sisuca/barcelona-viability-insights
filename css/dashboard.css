@@ -505,7 +505,7 @@
   /* C. SIDEBAR COMO MENÚ HORIZONTAL STICKY (CSS ONLY) */
   .dashboard-sidebar {
     position: sticky !important;
-    top: 72px !important; /* Debajo del header */
+    top: 73px !important; /* Debajo del header */
     z-index: 90 !important;
     margin-bottom: 0.5rem;
     padding: 0.8rem;
@@ -519,11 +519,6 @@
     /* Forzar sticky */
     align-self: auto !important;
     transform: translateZ(0); /* Acelerar hardware */
-  }
-
-  /* Header scrolled (más compacto) */
-  .main-header.scrolled ~ .dashboard-section .dashboard-sidebar {
-    top: 60px !important;
   }
 
   /* ASEGURAR QUE EL CONTENEDOR PADRE PERMITA STICKY */

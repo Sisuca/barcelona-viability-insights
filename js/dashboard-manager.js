@@ -187,7 +187,7 @@ class DashboardManager {
         
         // Método más confiable: Usar getBoundingClientRect
         const header = document.getElementById('mainHeader');
-        const headerHeight = header ? header.offsetHeight : 72;
+        const headerHeight = header ? header.offsetHeight : 73;
         
         // Calcular posición absoluta de la sección
         const sectionRect = section.getBoundingClientRect();
