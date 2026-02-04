@@ -1028,7 +1028,7 @@
 
           // CSS se encarga del sticky en móvil
           sidebar.style.position = "sticky";
-          sidebar.style.top = "73px";
+          sidebar.style.top = "60px";
         }
 
         function handleDesktop(
@@ -1055,7 +1055,7 @@
 
               // Aplicar fixed
               sidebar.style.position = "fixed";
-              sidebar.style.top = "100px";
+              sidebar.style.top = "60px"; // ← CAMBIADO: 100px → 60px
               sidebar.style.left = `${leftPosition}px`;
               sidebar.style.width = `${sidebarRect.width}px`;
               sidebar.style.zIndex = "90";
@@ -1084,7 +1084,7 @@
               sidebar.style.top = `${newTop}px`;
             } else {
               // Posición normal
-              sidebar.style.top = "100px";
+              sidebar.style.top = "60px"; // ← CAMBIADO: 100px → 60px
             }
           } else {
             // FUERA de la sección: restaurar posición normal
