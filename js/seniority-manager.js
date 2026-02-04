@@ -137,7 +137,7 @@ class SeniorityManager {
                             <span class="color-box" style="background-color: var(--secondary-blue)"></span>
                             Senior
                         </span>
-                        • Porcentaje: % esfuerzo salarial mínimo por categoría y nivel (sobre salario bruto).
+                        Porcentaje de esfuerzo salarial mínimo por cada categoría de los niveles Junior y Senior (sobre el salario bruto).
                     </p>
                 </div>
             `;
@@ -231,7 +231,7 @@ class SeniorityManager {
                             <span class="color-box" style="background-color: var(--secondary-blue)"></span>
                             Senior
                         </span>
-                        • Porcentaje: % esfuerzo salarial mínimo para todas las categorías (sobre salario bruto).
+                         Porcentaje de esfuerzo salarial mínimo, calculado con la mediana salarial de todas las categorías de los niveles Junior y Senior (sobre el salario bruto).
                     </p>
                 </div>
             `;

@@ -160,9 +160,8 @@ class AccessibilityHeatmapManager {
                     </div>
                     <div class="chart-footer">
                         <p class="footer-info">
-                            <strong>Leyenda:</strong> 
-                            ✅ Viable (≤30%) • ⚠️ Limitado (31-45%) • ❌ Inviable (≥46%)
-                            • Porcentaje: menor esfuerzo salarial posible en el distrito.
+                            <strong>Leyenda:</strong> ✅ Viable (≤30%) • ⚠️ Limitado (31-45%) • ❌ Inviable (≥46%)<br>
+                            Porcentaje del menor esfuerzo salarial posible por distrito, calculado con la mediana salarial de todos los perfiles profesionales (sobre el salario bruto).
                         </p>
                     </div>
                 </div>
@@ -335,16 +334,15 @@ class AccessibilityHeatmapManager {
         table.appendChild(tbody);
         tableContainer.appendChild(table);
         
-        // ===== FOOTER (MISMO QUE TABLA DE RESUMEN) =====
+        // ===== FOOTER MATRIZ DE CALOR DE ACCESIBILIDAD (MISMO QUE TABLA DE RESUMEN) =====
         const footer = document.createElement('div');
         footer.className = 'table-footer';
         
         const footerInfo = document.createElement('p');
         footerInfo.className = 'footer-info';
         footerInfo.innerHTML = `
-            <strong>Leyenda:</strong> 
-            ✅ Viable (≤30%) • ⚠️ Limitado (31-45%) • ❌ Inviable (≥46%)
-            • Porcentaje: menor esfuerzo salarial posible por distrito (sobre salario bruto).
+            <strong>Leyenda:</strong> ✅ Viable (≤30%) • ⚠️ Limitado (31-45%) • ❌ Inviable (≥46%)<br>
+            Porcentaje del menor esfuerzo salarial posible por distrito, calculado para cada categoría y nivel profesional (sobre salario bruto).
         `;
         
         footer.appendChild(footerInfo);
