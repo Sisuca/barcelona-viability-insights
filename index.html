@@ -951,7 +951,7 @@
     <!-- 8. Funcionalidades generales -->
     <script src="js/main.js"></script>
 
-    <!-- 9. SIDEBAR STICKY FIXED - VERSIÓN COMPLETA -->
+    <!-- 9. SIDEBAR STICKY FIXED - VERSIÓN COMPLETA CORREGIDA PARA MÓVIL -->
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         const sidebar = document.querySelector(".dashboard-sidebar");
@@ -960,13 +960,43 @@
 
         if (!sidebar || !dashboardSection) return;
 
-        // 1. Crear placeholder para mantener el espacio
+        // 1. Detectar si es móvil inmediatamente
+        let isMobile = window.innerWidth <= 768;
+
+        // 2. Si es móvil, NO hacer nada del JS de sticky (dejamos que el CSS se encargue)
+        if (isMobile) {
+          console.log(
+            "📱 Modo móvil detectado: sticky CSS activado, JS desactivado",
+          );
+
+          // Asegurar que no hay estilos conflictivos del JS
+          sidebar.style.position = "";
+          sidebar.style.top = "";
+          sidebar.style.left = "";
+          sidebar.style.width = "";
+          sidebar.style.zIndex = "";
+          sidebar.style.boxShadow = "";
+          sidebar.classList.remove("fixed-sidebar");
+
+          // Ocultar placeholder si existe
+          const placeholder = document.querySelector(".sidebar-placeholder");
+          if (placeholder) {
+            placeholder.style.display = "none";
+          }
+
+          // SALIR: No ejecutar más lógica de JS en móvil
+          return;
+        }
+
+        // 3. SOLO PARA DESKTOP: lógica JS original
+        console.log("🖥️ Modo desktop detectado: sticky JS activado");
+
+        // Crear placeholder para mantener el espacio
         const placeholder = document.createElement("div");
         placeholder.className = "sidebar-placeholder";
         sidebar.parentNode.insertBefore(placeholder, sidebar);
 
-        // 2. Configurar medidas
-        let isMobile = window.innerWidth <= 768;
+        // Configurar medidas
         let isFixed = false;
         let originalSidebarRect = null;
 
@@ -982,9 +1012,6 @@
           const headerHeight = header ? header.offsetHeight : 72;
           const scrollY = window.scrollY;
 
-          // Actualizar estado móvil
-          isMobile = window.innerWidth <= 768;
-
           // Guardar posición original si no está guardada
           saveOriginalPosition();
 
@@ -996,48 +1023,7 @@
           const isInDashboardSection =
             scrollY >= sectionTop && scrollY <= sectionBottom;
 
-          if (isMobile) {
-            // MÓVIL: sticky simple con CSS
-            handleMobile();
-          } else {
-            // DESKTOP: comportamiento controlado
-            handleDesktop(
-              isInDashboardSection,
-              scrollY,
-              sectionTop,
-              sectionBottom,
-              headerHeight,
-            );
-          }
-        }
-
-        function handleMobile() {
-          // Solo asegurar que no esté fijo en móvil
-          if (isFixed) {
-            sidebar.style.position = "";
-            sidebar.style.top = "";
-            sidebar.style.left = "";
-            sidebar.style.width = "";
-            sidebar.style.zIndex = "";
-            sidebar.style.boxShadow = "";
-            sidebar.classList.remove("fixed-sidebar");
-            isFixed = false;
-          }
-
-          placeholder.style.display = "none";
-
-          // CSS se encarga del sticky en móvil
-          sidebar.style.position = "sticky";
-          sidebar.style.top = "60px";
-        }
-
-        function handleDesktop(
-          isInDashboardSection,
-          scrollY,
-          sectionTop,
-          sectionBottom,
-          headerHeight,
-        ) {
+          // DESKTOP: comportamiento controlado
           const container = document.querySelector(
             ".dashboard-section .container",
           );
@@ -1045,7 +1031,6 @@
 
           const containerRect = container.getBoundingClientRect();
           const sidebarRect = sidebar.getBoundingClientRect();
-          const viewportHeight = window.innerHeight;
 
           if (isInDashboardSection) {
             // DENTRO de la sección: aplicar fixed
@@ -1055,7 +1040,7 @@
 
               // Aplicar fixed
               sidebar.style.position = "fixed";
-              sidebar.style.top = "60px"; // ← CAMBIADO: 100px → 60px
+              sidebar.style.top = "60px";
               sidebar.style.left = `${leftPosition}px`;
               sidebar.style.width = `${sidebarRect.width}px`;
               sidebar.style.zIndex = "90";
@@ -1084,7 +1069,7 @@
               sidebar.style.top = `${newTop}px`;
             } else {
               // Posición normal
-              sidebar.style.top = "60px"; // ← CAMBIADO: 100px → 60px
+              sidebar.style.top = "60px";
             }
           } else {
             // FUERA de la sección: restaurar posición normal
@@ -1103,7 +1088,7 @@
           }
         }
 
-        // 3. Event listeners
+        // 4. Event listeners SOLO PARA DESKTOP
         function handleScroll() {
           requestAnimationFrame(updateSidebar);
         }
@@ -1111,24 +1096,32 @@
         window.addEventListener("scroll", handleScroll);
 
         window.addEventListener("resize", function () {
-          // Resetear en resize
-          if (isFixed) {
+          // Actualizar estado móvil/desktop
+          isMobile = window.innerWidth <= 768;
+
+          if (isMobile) {
+            // Si cambia a móvil, limpiar todo
+            window.removeEventListener("scroll", handleScroll);
+
             sidebar.style.position = "";
             sidebar.style.top = "";
             sidebar.style.left = "";
             sidebar.style.width = "";
             sidebar.classList.remove("fixed-sidebar");
+
+            if (placeholder) {
+              placeholder.style.display = "none";
+            }
             isFixed = false;
+          } else {
+            // Si cambia a desktop, reiniciar
+            originalSidebarRect = null;
+            setTimeout(updateSidebar, 150);
+            window.addEventListener("scroll", handleScroll);
           }
-
-          placeholder.style.display = "none";
-          originalSidebarRect = null; // Forzar recalcular
-
-          // Pequeño delay para que termine el resize
-          setTimeout(updateSidebar, 150);
         });
 
-        // 4. Navegación activa por scroll (MOBILE + DESKTOP)
+        // 5. Navegación activa por scroll (MOBILE + DESKTOP)
         const subsectionIds = [
           "vision-general",
           "accessibility-section",
@@ -1212,7 +1205,7 @@
           }
         }
 
-        // 5. Scroll suave al hacer click en menú (MOBILE + DESKTOP)
+        // 6. Scroll suave al hacer click en menú (MOBILE + DESKTOP)
         document.querySelectorAll(".dashboard-nav-item").forEach((item) => {
           item.addEventListener("click", function (e) {
             if (this.getAttribute("href").startsWith("#")) {
@@ -1247,10 +1240,12 @@
           });
         });
 
-        // 6. Inicializar
-        updateSidebar();
+        // 7. Inicializar (solo desktop ejecuta updateSidebar)
+        if (!isMobile) {
+          updateSidebar();
+        }
 
-        // Actualizar navegación activa en scroll (para móvil y desktop)
+        // 8. Actualizar navegación activa en scroll (para móvil y desktop)
         let navUpdateTimeout;
         const activeNavScrollHandler = function () {
           if (navUpdateTimeout) {
@@ -1270,7 +1265,7 @@
         updateActiveNav();
 
         console.log(
-          "✅ Sidebar sticky inicializado (completo: sticky + navegación activa móvil/desktop)",
+          "✅ Sidebar sticky inicializado (CSS en móvil, JS en desktop)",
         );
       });
     </script>
