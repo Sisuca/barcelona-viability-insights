@@ -462,7 +462,7 @@
 }
 
 /* =============================================== */
-/* MÓVIL: DISEÑO OPTIMIZADO (≤768px) - STICKY CSS PURO - CORREGIDO */
+/* MÓVIL: DISEÑO OPTIMIZADO (≤768px) - STICKY CSS PURO CORREGIDO */
 /* =============================================== */
 @media (max-width: 768px) {
   /* A. LAYOUT GENERAL - ASEGURAR CONTENEDOR PARA STICKY */
@@ -505,7 +505,7 @@
   /* C. SIDEBAR COMO MENÚ HORIZONTAL STICKY (CSS ONLY) - CORREGIDO */
   .dashboard-sidebar {
     position: sticky !important;
-    top: 60px !important; /* Debajo del header */
+    top: 72px !important; /* Debajo del header - CORREGIDO: 72px */
     z-index: 90 !important;
     margin-bottom: 0.5rem;
     padding: 0.8rem;
@@ -514,26 +514,19 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     border: 1px solid #e5e7eb;
     width: 100% !important;
-    /* Forzar sticky - CORRECCIÓN: Eliminar left/right si causa problemas */
+    left: 0 !important;
+    right: 0 !important;
     align-self: auto !important;
-    transform: translateZ(0); /* Acelerar hardware */
-
-    /* NUEVO: Asegurar que no haya estilos conflictivos del JS */
-    left: auto !important;
-    right: auto !important;
-    transform: none !important;
+    transform: translateZ(0);
   }
 
-  /* IMPORTANTE: Deshabilitar cualquier estilo de JS que interfiera */
-  .dashboard-sidebar.fixed-sidebar {
-    position: sticky !important;
-    top: 60px !important;
-    left: auto !important;
-    right: auto !important;
-    width: 100% !important;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    transform: none !important;
+  /* REGLA INTENCIONAL: Header scrolled más compacto */
+  .main-header.scrolled ~ .dashboard-section .dashboard-sidebar {
+    top: 60px !important; /* Header scrolled más compacto - MANTENER */
   }
+
+  /* ⚠️ CORRECCIÓN CRÍTICA: Eliminada la regla conflictiva .dashboard-sidebar.fixed-sidebar */
+  /* Que tenía top: 60px !important y causaba el corte del sidebar */
 
   /* ASEGURAR QUE EL CONTENEDOR PADRE PERMITA STICKY */
   .dashboard-section .container,
@@ -692,6 +685,11 @@
 /* MÓVILES MUY PEQUEÑOS (≤480px) */
 /* =============================================== */
 @media (max-width: 480px) {
+  .dashboard-sidebar {
+    top: 60px !important; /* Header más compacto en móviles pequeños - MANTENER */
+    padding: 0.6rem;
+  }
+
   .dashboard-nav {
     grid-template-columns: repeat(3, 1fr);
     gap: 0.4rem;
