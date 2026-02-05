@@ -1,4 +1,4 @@
-/* ===== DASHBOARD.CSS - VERSIÓN CON STICKY HÍBRIDO ===== */
+/* ===== DASHBOARD.CSS - STICKY CSS ONLY ===== */
 
 /* 1. DASHBOARD SECTION */
 .dashboard-section {
@@ -37,14 +37,7 @@
   gap: 1.2rem;
   margin-top: 1.2rem;
   position: relative;
-}
-
-/* Placeholder para sidebar fijo (controlado por JS) */
-.sidebar-placeholder {
-  display: none;
-  visibility: hidden;
-  pointer-events: none;
-  flex-shrink: 0;
+  align-items: start; /* asegura que el sidebar sticky no se desplace verticalmente */
 }
 
 /* 3. MENÚ LATERAL - ESTILOS BASE */
@@ -56,13 +49,6 @@
   height: fit-content;
   align-self: start;
   transition: all 0.3s ease;
-}
-
-/* Estado cuando JS lo hace fixed */
-.dashboard-sidebar.fixed-sidebar {
-  border-radius: 10px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  background-color: var(--white);
 }
 
 .dashboard-nav {
@@ -367,6 +353,13 @@
   font-size: 0.9rem;
 }
 
+@media (min-width: 769px) {
+  .dashboard-sidebar {
+    position: sticky;
+    top: 95px;
+  }
+}
+
 /* 8. TABLET (769px - 1024px) */
 @media (min-width: 769px) and (max-width: 1024px) {
   .dashboard-layout {
@@ -472,6 +465,13 @@
     overflow: visible !important; /* IMPORTANTE: no hidden */
   }
 
+  .dashboard-layout,
+  .dashboard-main,
+  .dashboard-section .container {
+    overflow: visible !important;
+    position: relative;
+  }
+
   .dashboard-layout {
     display: flex;
     flex-direction: column;
@@ -526,14 +526,6 @@
     top: 60px !important;
   }
 
-  /* ASEGURAR QUE EL CONTENEDOR PADRE PERMITA STICKY */
-  .dashboard-section .container,
-  .dashboard-layout,
-  .dashboard-main {
-    overflow: visible !important;
-    position: relative;
-  }
-
   /* D. MENÚ HORIZONTAL - GRID RESPONSIVE (3 elementos) */
   .dashboard-nav {
     display: grid;
@@ -568,11 +560,6 @@
   .nav-text {
     text-align: center;
     white-space: normal;
-  }
-
-  /* E. OCULTAR PLACEHOLDER EN MÓVIL */
-  .sidebar-placeholder {
-    display: none !important;
   }
 
   /* F. FILTROS EN 2 FILAS (GRID 2×2) */

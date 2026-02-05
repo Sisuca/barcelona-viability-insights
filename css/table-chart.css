@@ -1,1150 +1,1196 @@
 /* css/table-chart.css - VERSIÓN FINAL OPTIMIZADA PARA MÓVIL */
 /* ===== TABLA DE DETALLE CON ALINEACIÓN CORREGIDA ===== */
 .table-container {
-    background: var(--white);
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-    margin: 16px 0;
-    border: 1px solid #E5E7EB;
-    max-width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
+  background: var(--white);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  margin: 16px 0;
+  border: 1px solid #e5e7eb;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .data-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-family: 'Inter', sans-serif;
-    font-size: 0.88rem;
-    min-width: 600px;
-    max-width: 100%;
+  width: 100%;
+  border-collapse: collapse;
+  font-family: "Inter", sans-serif;
+  font-size: 0.88rem;
+  min-width: 600px;
+  max-width: 100%;
 }
 
 .data-table th {
-    padding: 12px 14px;
-    text-align: left;
-    font-weight: 600;
-    color: var(--primary-color);
-    background: var(--background-color);
-    border-bottom: 2px solid var(--primary-color);
-    cursor: pointer;
-    user-select: none;
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    letter-spacing: 0.3px;
-    white-space: nowrap;
+  padding: 12px 14px;
+  text-align: left;
+  font-weight: 600;
+  color: var(--primary-color);
+  background: var(--background-color);
+  border-bottom: 2px solid var(--primary-color);
+  cursor: pointer;
+  user-select: none;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
 }
 
 .data-table th:hover {
-    background: #E5E7EB;
+  background: #e5e7eb;
 }
 
 /* ALINEACIÓN ESPECÍFICA DE ENCABEZADOS */
-.data-table th:nth-child(4) { /* Columna Alquiler */
-    text-align: right;
-    padding-right: 20px;
+.data-table th:nth-child(4) {
+  /* Columna Alquiler */
+  text-align: right;
+  padding-right: 20px;
 }
 
-.data-table th:nth-child(5) { /* Columna % Esfuerzo */
-    text-align: center;
+.data-table th:nth-child(5) {
+  /* Columna % Esfuerzo */
+  text-align: center;
 }
 
 .data-table td {
-    padding: 10px 14px;
-    border-bottom: 1px solid #F3F4F6;
-    color: var(--text-color);
-    font-size: 0.88rem;
-    font-weight: 400;
+  padding: 10px 14px;
+  border-bottom: 1px solid #f3f4f6;
+  color: var(--text-color);
+  font-size: 0.88rem;
+  font-weight: 400;
 }
 
 /* ALINEACIÓN ESPECÍFICA DE CELDAS */
-.data-table td:nth-child(4) { /* Columna Alquiler */
-    text-align: right;
-    font-family: 'JetBrains Mono', monospace;
-    font-weight: 500;
-    padding-right: 20px;
+.data-table td:nth-child(4) {
+  /* Columna Alquiler */
+  text-align: right;
+  font-family: "JetBrains Mono", monospace;
+  font-weight: 500;
+  padding-right: 20px;
 }
 
-.data-table td:nth-child(5) { /* Columna % Esfuerzo */
-    text-align: center;
-    font-family: 'JetBrains Mono', monospace;
-    font-weight: 500;
+.data-table td:nth-child(5) {
+  /* Columna % Esfuerzo */
+  text-align: center;
+  font-family: "JetBrains Mono", monospace;
+  font-weight: 500;
 }
 
 /* Fondo intercalado */
 .data-table tr.even {
-    background: var(--white);
+  background: var(--white);
 }
 
 .data-table tr.odd {
-    background: #FAFAFA;
+  background: #fafafa;
 }
 
 .data-table tr:hover {
-    background: rgba(31, 58, 95, 0.03);
+  background: rgba(31, 58, 95, 0.03);
 }
 
 /* Campos especiales */
 .currency {
-    font-family: 'JetBrains Mono', monospace;
-    font-weight: 500;
-    color: var(--text-color);
-    font-size: 0.88rem;
+  font-family: "JetBrains Mono", monospace;
+  font-weight: 500;
+  color: var(--text-color);
+  font-size: 0.88rem;
 }
 
 .percentage {
-    font-family: 'JetBrains Mono', monospace;
-    font-weight: 500;
-    color: var(--text-color);
-    font-size: 0.88rem;
+  font-family: "JetBrains Mono", monospace;
+  font-weight: 500;
+  color: var(--text-color);
+  font-size: 0.88rem;
 }
 
 /* Iconos de viabilidad */
 .viability-icon {
-    font-family: 'Inter', sans-serif;
-    font-weight: 500;
-    align-items: center;
-    gap: 6px;
-    white-space: nowrap;
-    font-size: 0.85rem;
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  font-size: 0.85rem;
 }
 
 /* ===== FOOTER PARA TABLA (SIN MARGEN NEGATIVO) ===== */
-.table-footer, .table-container .table-footer {
-    padding: 10px 14px;
-    background: var(--background-color);
-    color: var(--text-color);
-    font-size: 0.85rem;
-    border-top: 1px solid #E5E7EB;
-    font-family: 'Inter', sans-serif;
-    font-weight: 400;
-    margin: 0;
-    border-radius: 0 0 10px 10px;
-    max-width: 100%;
+.table-footer,
+.table-container .table-footer {
+  padding: 10px 14px;
+  background: var(--background-color);
+  color: var(--text-color);
+  font-size: 0.85rem;
+  border-top: 1px solid #e5e7eb;
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  margin: 0;
+  border-radius: 0 0 10px 10px;
+  max-width: 100%;
 }
 
 .footer-info {
-    margin: 0;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-weight: 400;
-    font-size: 0.85rem;
-    color: var(--text-color);
-    font-family: 'Inter', sans-serif;
-    flex-wrap: wrap;
-    max-width: 100%;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 400;
+  font-size: 0.85rem;
+  color: var(--text-color);
+  font-family: "Inter", sans-serif;
+  flex-wrap: wrap;
+  max-width: 100%;
 }
 
 .footer-info strong {
-    font-weight: 600;
-    color: var(--primary-color);
+  font-weight: 600;
+  color: var(--primary-color);
 }
 
 /* Leyenda específica para matriz */
 .table-container .table-footer .footer-info em {
-    font-style: italic;
-    color: var(--neutral-gray);
-    font-size: 0.85rem;
-    margin-left: 10px;
+  font-style: italic;
+  color: var(--neutral-gray);
+  font-size: 0.85rem;
+  margin-left: 10px;
 }
 
 /* ===== GRÁFICO SIMPLE - ESTRUCTURA GRID 2-3-1 ===== */
 .html-chart {
-    background: var(--white);
-    border-radius: 10px;
-    padding: 20px 20px 0 20px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-    margin: 16px 0;
-    border: 1px solid #E5E7EB;
-    display: flex;
-    flex-direction: column;
+  background: var(--white);
+  border-radius: 10px;
+  padding: 20px 20px 0 20px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  margin: 16px 0;
+  border: 1px solid #e5e7eb;
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  overflow: visible;
 }
 
 /* Contenedor de barras */
 .bars-container {
-    margin-bottom: 20px;
-    max-width: 100%;
+  margin-bottom: 20px;
+  max-width: 100%;
 }
 
 /* ESTRUCTURA GRID 2-3-1 (2fr label, 3fr barra, 1fr viabilidad) */
 .bar-item {
-    display: grid;
-    grid-template-columns: 2fr 3fr 1fr;
-    gap: 12px;
-    align-items: center;
-    margin-bottom: 12px;
-    min-height: 40px;
-    max-width: 100%;
+  display: grid;
+  grid-template-columns: 2fr 3fr 1fr;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 12px;
+  min-height: 40px;
+  max-width: 100%;
 }
 
 /* MEJORA CRÍTICA: Bar-label más flexible para nombres largos */
 .bar-label {
-    font-family: 'Inter', sans-serif;
-    min-width: 0;
-    overflow-wrap: break-word;
+  font-family: "Inter", sans-serif;
+  min-width: 0;
+  overflow-wrap: break-word;
 }
 
 /* Asegurar que el nombre del barrio no se corte - PERMITE MÚLTIPLES LÍNEAS */
 .bar-label strong {
-    display: block;
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: var(--text-color);
-    line-height: 1.3;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    white-space: normal;
-    max-width: 100%;
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-color);
+  line-height: 1.3;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  max-width: 100%;
 }
 
 .bar-label small {
-    display: block;
-    font-size: 0.78rem;
-    color: var(--neutral-gray);
-    margin-top: 2px;
-    line-height: 1.2;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 100%;
+  display: block;
+  font-size: 0.78rem;
+  color: var(--neutral-gray);
+  margin-top: 2px;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
 }
 
 /* Bar-wrapper - Ocupa 3 columnas, centrado */
 .bar-wrapper {
-    position: relative;
-    height: 22px;
-    background: var(--background-color);
-    border-radius: 11px;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    min-width: 50px;
-    max-width: 100%;
+  position: relative;
+  height: 22px;
+  background: var(--background-color);
+  border-radius: 11px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  min-width: 50px;
+  max-width: 100%;
 }
 
 .bar {
-    height: 100%;
-    border-radius: 11px;
-    position: relative;
-    transition: width 0.5s ease-out;
-    min-width: 20px;
-    background-color: var(--secondary-blue);
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
+  height: 100%;
+  border-radius: 11px;
+  position: relative;
+  transition: width 0.5s ease-out;
+  min-width: 20px;
+  background-color: var(--secondary-blue);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 .bar-value {
-    color: var(--white);
-    font-size: 0.72rem;
-    font-weight: 600;
-    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
-    font-family: 'JetBrains Mono', monospace;
-    padding-right: 6px;
-    white-space: nowrap;
+  color: var(--white);
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  font-family: "JetBrains Mono", monospace;
+  padding-right: 6px;
+  white-space: nowrap;
 }
 
 /* Viabilidad - Ocupa 1 columna, centrado */
 .bar-viability {
-    font-size: 0.82rem;
-    font-weight: 500;
-    text-align: center;
-    font-family: 'Inter', sans-serif;
-    color: var(--text-color);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-    white-space: nowrap;
-    min-width: 80px;
-    max-width: 120px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  text-align: center;
+  font-family: "Inter", sans-serif;
+  color: var(--text-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  white-space: nowrap;
+  min-width: 80px;
+  max-width: 120px;
 }
 
 /* ===== FOOTER PARA GRÁFICO (CON MARGEN NEGATIVO) ===== */
 .html-chart .chart-footer {
-    padding: 10px 14px;
-    background: var(--background-color);
-    color: var(--text-color);
-    font-size: 0.85rem;
-    border-top: 1px solid #E5E7EB;
-    font-family: 'Inter', sans-serif;
-    font-weight: 400;
-    margin: 0 -20px 0 -20px;
-    border-radius: 0 0 10px 10px;
-    max-width: calc(100% + 40px);
-    box-sizing: border-box;
+  padding: 10px 14px;
+  background: var(--background-color);
+  color: var(--text-color);
+  font-size: 0.85rem;
+  border-top: 1px solid #e5e7eb;
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  margin: 0 -20px 0 -20px;
+  border-radius: 0 0 10px 10px;
+  max-width: calc(100% + 40px);
+  box-sizing: border-box;
 }
 
 /* ===== NUEVOS ESTILOS PARA GRÁFICO DE SENIORITY CON EJE ===== */
 
 /* Contenedor principal para gráfico con eje */
 .chart-with-axis {
-    display: flex;
-    gap: 15px;
-    margin-bottom: -10px;
-    align-items: flex-start;
+  display: flex;
+  gap: 15px;
+  margin-bottom: -10px;
+  align-items: flex-start;
+  max-width: 100%;
 }
 
 /* Eje vertical (Y-axis) */
 .y-axis {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 40px;
-    height: 250px;
-    text-align: right;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.8rem;
-    color: var(--neutral-gray);
-    border-right: 1px solid var(--neutral-gray);
-    padding-right: 8px;
-    flex-shrink: 0;
-    margin-top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 250px;
+  text-align: right;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.8rem;
+  color: var(--neutral-gray);
+  border-right: 1px solid var(--neutral-gray);
+  padding-right: 8px;
+  flex-shrink: 0;
+  margin-top: 0;
 }
 
 /* Marcas del eje Y */
 .y-tick {
-    position: relative;
-    padding-right: 10px;
-    line-height: 1;
-    white-space: nowrap;
-    overflow: visible;
+  position: relative;
+  padding-right: 10px;
+  line-height: 1;
 }
 
 .y-tick::after {
-    content: '';
-    position: absolute;
-    right: -8px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 6px;
-    height: 1px;
-    background-color: var(--neutral-gray);
+  content: "";
+  position: absolute;
+  right: -8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 1px;
+  background-color: var(--neutral-gray);
 }
 
 /* Contenedor de columnas */
 .columns-container {
-    flex: 1;
-    min-height: 250px;
+  flex: 1;
+  min-height: 250px;
+  max-width: calc(100% - 55px);
 }
 
 /* ===== ESTILOS PARA GRÁFICOS DE SENIORITY (AJUSTES) ===== */
 
 /* Aumentar altura del contenedor de columnas */
 .column-chart-bar-container {
-    height: 250px !important;
-    width: 100%;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    position: relative;
+  height: 250px !important;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  position: relative;
 }
 
 /* Ajustar posición del valor en las columnas */
 .column-chart-value {
-    position: absolute;
-    top: -28px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-family: 'JetBrains Mono', monospace;
-    font-weight: 500;
-    font-size: 0.8rem;
-    color: var(--text-color);
-    white-space: nowrap;
-    background: rgba(255, 255, 255, 0.9);
-    padding: 2px 6px;
-    border-radius: 3px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    z-index: 2;
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: "JetBrains Mono", monospace;
+  font-weight: 500;
+  font-size: 0.7rem;
+  color: var(--text-color);
+  white-space: nowrap;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 2px 6px;
+  border-radius: 3px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* ===== ESTILOS PARA MATRIZ TRANSPUESTA (COMPACTA) ===== */
 
 /* Tabla transpuesta - COMPACTA - MODIFICADO */
 .data-table.transposed-matrix {
-    min-width: 0;
-    width: 100%;
-    font-size: 0.88rem;
+  min-width: 0;
+  width: 100%;
+  font-size: 0.88rem;
 }
 
 /* Quitar sombreado de filas alternas para matriz */
 .data-table.transposed-matrix tr.even,
 .data-table.transposed-matrix tr.odd {
-    background: var(--white) !important;
+  background: var(--white) !important;
 }
 
 /* Oscurecer bordes entre filas */
 .data-table.transposed-matrix td {
-    border-bottom: 1px solid #E0E0E0 !important;
+  border-bottom: 1px solid #e0e0e0 !important;
 }
 
 /* Encabezados de categoría */
 .data-table.transposed-matrix th.category-header {
-    text-align: center;
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-blue) 100%);
-    color: white;
-    border-right: 2px solid rgba(255,255,255,0.3);
-    font-weight: 700;
-    font-size: 0.9rem;
-    padding: 10px 4px;
-    min-width: 0;
-    max-width: 255px;
-    height: 40px;
-    vertical-align: middle;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  text-align: center;
+  background: linear-gradient(
+    135deg,
+    var(--primary-color) 0%,
+    var(--secondary-blue) 100%
+  );
+  color: white;
+  border-right: 2px solid rgba(255, 255, 255, 0.3);
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 10px 4px;
+  min-width: 0;
+  max-width: 255px;
+  height: 40px;
+  vertical-align: middle;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* Encabezados de nivel - TEXTO EN MINÚSCULAS PARA COHERENCIA */
 .data-table.transposed-matrix th.level-header {
-    text-align: center;
-    background: var(--background-color);
-    color: var(--primary-color);
-    border-right: 1px solid #E5E7EB;
-    border-bottom: 2px solid var(--primary-color);
-    font-weight: 600;
-    font-size: 0.85rem;
-    padding: 8px 4px;
-    min-width: 0;
-    max-width: 85px;
-    height: 36px;
-    vertical-align: middle;
-    text-transform: lowercase;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  text-align: center;
+  background: var(--background-color);
+  color: var(--primary-color);
+  border-right: 1px solid #e5e7eb;
+  border-bottom: 2px solid var(--primary-color);
+  font-weight: 600;
+  font-size: 0.85rem;
+  padding: 8px 4px;
+  min-width: 0;
+  max-width: 85px;
+  height: 36px;
+  vertical-align: middle;
+  text-transform: lowercase;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* Esquina sticky */
 .data-table.transposed-matrix th.sticky-corner {
-    position: sticky;
-    left: 0;
-    z-index: 30;
-    background: var(--primary-color);
-    color: white;
-    font-weight: 700;
-    min-width: 0;
-    max-width: 150px;
-    text-align: center;
-    vertical-align: middle;
-    font-size: 0.9rem;
-    padding: 10px 8px;
-    height: 76px;
-    border-right: 2px solid rgba(255,255,255,0.3);
-    overflow: hidden;
-    text-overflow: ellipsis;
+  position: sticky;
+  left: 0;
+  z-index: 30;
+  background: var(--primary-color);
+  color: white;
+  font-weight: 700;
+  min-width: 0;
+  max-width: 150px;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 0.9rem;
+  padding: 10px 8px;
+  height: 76px;
+  border-right: 2px solid rgba(255, 255, 255, 0.3);
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* Celdas de distrito (primera columna) - COLOR AJUSTADO A --primary-color */
 .data-table.transposed-matrix td.district-cell.sticky-district {
-    position: sticky;
-    left: 0;
-    z-index: 20;
-    background: var(--background-color);
-    font-weight: 600;
-    min-width: 0;
-    max-width: 150px;
-    border-right: 2px solid var(--primary-color);
-    font-size: 0.9rem;
-    padding: 8px 10px;
-    height: 40px;
-    vertical-align: middle;
-    color: var(--primary-color);
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: normal;
+  position: sticky;
+  left: 0;
+  z-index: 20;
+  background: var(--background-color);
+  font-weight: 600;
+  min-width: 0;
+  max-width: 150px;
+  border-right: 2px solid var(--primary-color);
+  font-size: 0.9rem;
+  padding: 8px 10px;
+  height: 40px;
+  vertical-align: middle;
+  color: var(--primary-color);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
 }
 
 /* Celdas de matriz - COMPACTAS CON COLOR DE TEXTO AJUSTADO */
 .data-table.transposed-matrix td.matrix-cell {
-    text-align: center;
-    min-width: 0;
-    max-width: 85px;
-    font-family: 'JetBrains Mono', monospace;
-    font-weight: 500;
-    font-size: 0.88rem;
-    padding: 8px 4px;
-    transition: all 0.2s ease;
-    cursor: default;
-    border-right: 1px solid #F3F4F6;
-    height: 40px;
-    vertical-align: middle;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    color: var(--primary-700) !important;
+  text-align: center;
+  min-width: 0;
+  max-width: 85px;
+  font-family: "JetBrains Mono", monospace;
+  font-weight: 500;
+  font-size: 0.88rem;
+  padding: 8px 4px;
+  transition: all 0.2s ease;
+  cursor: default;
+  border-right: 1px solid #f3f4f6;
+  height: 40px;
+  vertical-align: middle;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--primary-700) !important;
 }
 
 /* 
  * ⚠️ EXCEPCIÓN DOCUMENTADA: COLORES SEMÁNTICOS EN HEATMAP
  */
 .data-table.transposed-matrix td.matrix-cell.cell-viable {
-    background-color: rgba(75, 192, 192, 0.12) !important;
+  background-color: rgba(75, 192, 192, 0.12) !important;
 }
 
 .data-table.transposed-matrix td.matrix-cell.cell-limitado {
-    background-color: rgba(255, 206, 86, 0.12) !important;
+  background-color: rgba(255, 206, 86, 0.12) !important;
 }
 
 .data-table.transposed-matrix td.matrix-cell.cell-inviable {
-    background-color: rgba(255, 99, 132, 0.12) !important;
+  background-color: rgba(255, 99, 132, 0.12) !important;
 }
 
 .data-table.transposed-matrix td.matrix-cell.cell-nodata {
-    background-color: var(--background-color) !important;
-    color: var(--neutral-gray) !important;
+  background-color: var(--background-color) !important;
+  color: var(--neutral-gray) !important;
 }
 
 /* Efecto hover en celdas de matriz - MÁS SUTIL */
 .data-table.transposed-matrix td.matrix-cell:hover {
-    transform: scale(1.02);
-    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
-    z-index: 10;
-    position: relative;
+  transform: scale(1.02);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  z-index: 10;
+  position: relative;
 }
 
 /* Tooltip para celdas de matriz */
 .data-table.transposed-matrix td.matrix-cell[title]:hover::after {
-    content: attr(title);
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(0, 0, 0, 0.95);
-    color: white;
-    padding: 8px 12px;
-    border-radius: 6px;
-    font-size: 0.82rem;
-    font-family: 'Inter', sans-serif;
-    white-space: pre-line;
-    z-index: 100;
-    min-width: 200px;
-    max-width: 280px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    line-height: 1.4;
-    pointer-events: none;
+  content: attr(title);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.95);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  font-family: "Inter", sans-serif;
+  white-space: pre-line;
+  z-index: 100;
+  min-width: 200px;
+  max-width: 280px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  line-height: 1.4;
+  pointer-events: none;
 }
 
 /* Bordes para separar categorías */
 .data-table.transposed-matrix th.category-header:not(:last-child),
 .data-table.transposed-matrix td.matrix-cell:nth-child(4),
 .data-table.transposed-matrix td.matrix-cell:nth-child(7) {
-    border-right: 2px solid var(--primary-color) !important;
+  border-right: 2px solid var(--primary-color) !important;
 }
 
 /* Borde más oscuro para separación visual entre filas */
 .data-table.transposed-matrix tr {
-    border-bottom: 1px solid #E5E7EB;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* Leyenda de colores en footer */
+.color-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  margin: 0 6px;
+  font-weight: 500;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 /* ===== ESTILOS PARA ESTADOS ===== */
-.data-message, .error-state {
-    text-align: center;
-    padding: 30px 16px;
-    color: var(--neutral-gray);
-    max-width: 100%;
+.data-message,
+.error-state {
+  text-align: center;
+  padding: 30px 16px;
+  color: var(--neutral-gray);
+  max-width: 100%;
 }
 
-.message-icon, .error-icon {
-    font-size: 2rem;
-    margin-bottom: 12px;
+.message-icon,
+.error-icon {
+  font-size: 2rem;
+  margin-bottom: 12px;
 }
 
 .error-icon {
-    color: var(--primary-color);
+  color: var(--primary-color);
 }
 
-.data-message h4, .error-state h4 {
-    color: var(--text-color);
-    margin-bottom: 6px;
-    font-size: 1rem;
-    max-width: 100%;
+.data-message h4,
+.error-state h4 {
+  color: var(--text-color);
+  margin-bottom: 6px;
+  font-size: 1rem;
+  max-width: 100%;
 }
 
-.data-message p, .error-state p {
-    margin-bottom: 16px;
-    max-width: 400px;
-    margin-left: auto;
-    margin-right: auto;
-    font-size: 0.85rem;
+.data-message p,
+.error-state p {
+  margin-bottom: 16px;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 0.85rem;
 }
 
 .retry-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 8px 16px;
-    background: var(--primary-color);
-    color: var(--white);
-    border: none;
-    border-radius: 6px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    font-family: 'Inter', sans-serif;
-    font-size: 0.85rem;
-    max-width: 100%;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: var(--primary-color);
+  color: var(--white);
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: "Inter", sans-serif;
+  font-size: 0.85rem;
+  max-width: 100%;
 }
 
 .retry-btn:hover {
-    background: #2A4A7A;
-    transform: translateY(-1px);
+  background: #2a4a7a;
+  transform: translateY(-1px);
 }
 
 /* ===== ESTILOS PARA SUBSECCIONES UNIFICADAS ===== */
 
 /* Subsecciones dentro del dashboard (Accesibilidad, Seniority) */
 .dashboard-subsection {
-    margin-top: 3rem;
-    padding-top: 2rem;
-    border-top: 2px solid #E5E7EB;
-    max-width: 100%;
-    overflow: visible;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 2px solid #e5e7eb;
+  max-width: 100%;
+  overflow: visible;
 }
 
 .subsection-header {
-    margin-bottom: 2rem;
-    max-width: 100%;
+  margin-bottom: 2rem;
+  max-width: 100%;
 }
 
 .subsection-header h3 {
-    font-size: 1.5rem;
-    color: var(--primary-color);
-    margin-bottom: 0.5rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    max-width: 100%;
+  font-size: 1.5rem;
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  max-width: 100%;
 }
 
 .subsection-header .page-description {
-    color: var(--neutral-gray);
-    font-size: 0.95rem;
-    line-height: 1.5;
-    margin-bottom: 0;
-    max-width: 100%;
+  color: var(--neutral-gray);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 0;
+  max-width: 100%;
 }
 
 /* Ajustes para el contenedor de visualización en subsecciones */
 #accessibility-heatmap-container {
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    max-width: 100%;
-    overflow-x: auto;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  max-width: 100%;
+  overflow-x: auto;
 }
 
 #seniority-comparison-chart {
-    width: 100%;
-    padding: 20px 20px 0 20px;
-    margin: 16px 0;
+  width: 100%;
+  padding: 20px 20px 0 20px;
+  margin: 16px 0;
+  max-width: 100%;
 }
 
 /* Placeholder para gráficos futuros en subsecciones */
 .chart-placeholder .data-message {
-    text-align: center;
-    padding: 30px 16px;
-    color: var(--neutral-gray);
-    max-width: 100%;
+  text-align: center;
+  padding: 30px 16px;
+  color: var(--neutral-gray);
+  max-width: 100%;
 }
 
 .chart-placeholder .message-icon {
-    font-size: 2rem;
-    margin-bottom: 12px;
+  font-size: 2rem;
+  margin-bottom: 12px;
 }
 
 .chart-placeholder .data-message h5 {
-    color: var(--text-color);
-    margin-bottom: 1rem;
-    font-size: 1.2rem;
-    max-width: 100%;
+  color: var(--text-color);
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  max-width: 100%;
 }
 
 .chart-placeholder .preview-items {
-    margin-top: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    max-width: 300px;
-    margin-left: auto;
-    margin-right: auto;
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-width: 300px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .chart-placeholder .preview-item {
-    display: flex;
-    justify-content: space-between;
-    padding: 0.75rem 1rem;
-    background-color: var(--background-color);
-    border-radius: 8px;
-    border-left: 4px solid var(--primary-color);
-    max-width: 100%;
-    box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  background-color: var(--background-color);
+  border-radius: 8px;
+  border-left: 4px solid var(--primary-color);
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .chart-placeholder .preview-category {
-    font-weight: 600;
-    color: var(--text-color);
+  font-weight: 600;
+  color: var(--text-color);
 }
 
 .chart-placeholder .preview-value {
-    font-family: 'JetBrains Mono', monospace;
-    font-weight: 500;
-    color: var(--primary-color);
+  font-family: "JetBrains Mono", monospace;
+  font-weight: 500;
+  color: var(--primary-color);
 }
 
 /* ===== ESTILOS PARA GRÁFICOS DE SENIORITY ===== */
 
 /* Gráfico de columnas verticales */
 .column-chart-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 20px;
-    width: calc(16.666% - 10px);
-    min-width: 80px;
-    max-width: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+  width: calc(16.666% - 10px);
+  min-width: 80px;
+  max-width: 120px;
+}
+
+.column-chart-bar-container {
+  height: 250px;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  position: relative;
 }
 
 .column-chart-bar {
-    width: 40px;
-    border-radius: 6px 6px 0 0;
-    position: relative;
-    transition: height 0.5s ease-out;
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
+  width: 40px;
+  border-radius: 6px 6px 0 0;
+  position: relative;
+  transition: height 0.5s ease-out;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
 }
 
 .column-chart-label {
-    font-size: 0.85rem;
-    text-align: center;
-    color: var(--text-color);
-    font-weight: 500;
-    line-height: 1.2;
-    height: 2.5em;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
+  font-size: 0.85rem;
+  text-align: center;
+  color: var(--text-color);
+  font-weight: 500;
+  line-height: 1.2;
+  height: 2.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+  overflow-wrap: break-word;
 }
 
 .column-chart-viability {
-    font-size: 0.8rem;
-    color: var(--neutral-gray);
-    display: flex;
-    align-items: center;
-    gap: 4px;
+  font-size: 0.8rem;
+  color: var(--neutral-gray);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  max-width: 100%;
 }
 
 /* Contenedor para gráfico de columnas (6 en fila) */
 .bars-container.column-layout {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 10px;
-    max-width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  max-width: 100%;
 }
 
 /* Leyenda de colores mejorada */
 .color-legend-item {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    margin: 0 8px;
-    padding: 4px 8px;
-    background: var(--background-color);
-    border-radius: 4px;
-    font-size: 0.85rem;
-    max-width: 100%;
-    box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0 8px;
+  padding: 4px 8px;
+  background: var(--background-color);
+  border-radius: 4px;
+  font-size: 0.85rem;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .color-box {
-    width: 12px;
-    height: 12px;
-    border-radius: 2px;
-    display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  display: inline-block;
 }
 
 /* ===== OPTIMIZACIONES PARA MÓVIL (≤768px) ===== */
 @media (max-width: 768px) {
-    /* 1. OCULTAR COLUMNA "TIPO" EN MÓVIL */
-    .data-table th:nth-child(3),
-    .data-table td:nth-child(3) {
-        display: none;
-    }
-    
-    /* 2. REDUCIR BARRIO (Columna 1) */
-    .data-table th:nth-child(1),
-    .data-table td:nth-child(1) {
-        min-width: 80px !important;
-        max-width: 100px !important;
-        padding: 8px 6px !important;
-    }
-    
-    /* 3. REDUCIR % ESFUERZO (Columna 5) */
-    .data-table th:nth-child(5),
-    .data-table td:nth-child(5) {
-        min-width: 60px !important;
-        max-width: 70px !important;
-        padding: 8px 4px !important;
-        font-size: 0.7rem !important;
-    }
-    
-    /* 4. REDUCIR VIABILIDAD (Columna 6) */
-    .data-table th:nth-child(6),
-    .data-table td:nth-child(6) {
-        min-width: 50px !important;
-        max-width: 60px !important;
-        padding: 8px 3px !important;
-    }
-    
-    .data-table td.viability-icon {
-        font-size: 0.7rem !important;
-    }
-    
-    /* 5. REDUCIR TABLA COMPLETA */
-    .data-table {
-        min-width: 400px !important;
-        font-size: 0.7rem !important;
-    }
-    
-    /* 6. ENCABEZADOS MÁS COMPACTOS */
-    .data-table th {
-        font-size: 0.7rem !important;
-        padding: 8px 5px !important;
-        white-space: normal !important;
-        line-height: 1.1 !important;
-    }
-    
-    /* 7. MATRIZ DE CALOR MÁS COMPACTA */
-    .data-table.transposed-matrix {
-        min-width: 400px !important;
-        font-size: 0.75rem !important;
-    }
-    
-    /* 8. CONTENEDORES DE TABLA */
-    .table-container {
-        margin: 12px 0;
-        border-radius: 8px;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        max-width: 100vw;
-    }
-    
-    .data-table {
-        font-size: 0.7rem;
-        min-width: 400px;
-        max-width: none;
-    }
-    
-    .data-table th,
-    .data-table td {
-        padding: 8px 10px;
-        font-size: 0.7rem !important;
-    }
-    
-    /* Mantener alineación en móvil */
-    .data-table th:nth-child(4),
-    .data-table td:nth-child(4) {
-        text-align: right;
-        padding-right: 15px;
-    }
-    
-    .data-table th:nth-child(5),
-    .data-table td:nth-child(5) {
-        text-align: center;
-    }
-    
-    /* FOOTERS UNIFICADOS EN MÓVIL */
-    .table-footer, .table-container .table-footer {
-        padding: 8px 12px;
-        font-size: 0.82rem;
-        max-width: 100%;
-    }
-    
-    .html-chart .chart-footer {
-        padding: 8px 12px;
-        font-size: 0.82rem;
-        margin: 16px -16px 0 -16px;
-        max-width: calc(100% + 32px);
-        box-sizing: border-box;
-    }
-    
-    .footer-info {
-        font-size: 0.82rem;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 8px;
-        max-width: 100%;
-    }
-    
-    .kpi-cards-container {
-        grid-template-columns: 1fr;
-        gap: 10px;
-        max-width: 100%;
-    }
-    
-    .kpi-card {
-        flex-direction: row;
-        align-items: center;
-        gap: 10px;
-        max-width: 100%;
-    }
-    
-    .kpi-card-icon {
-        width: 42px;
-        height: 42px;
-        margin-left: 12px;
-    }
-    
-    .kpi-card-content {
-        padding: 12px 12px 12px 0;
-    }
-    
-    .kpi-card-value {
-        font-size: 1.4rem;
-    }
-    
-    .html-chart {
-        padding: 16px 16px 0 16px;
-    }
-    
-    /* En móviles, cambiar a disposición vertical - UNA COLUMNA */
-    .bar-item {
-        grid-template-columns: 1fr !important;
-        gap: 8px;
-        margin-bottom: 20px;
-        padding-bottom: 12px;
-        border-bottom: 1px solid #F3F4F6;
-        max-width: 100%;
-    }
-    
-    .bar-label {
-        min-width: 100%;
-        max-width: 100%;
-        margin-bottom: 4px;
-    }
-    
-    .bar-wrapper {
-        width: 100%;
-        min-width: 100%;
-        max-width: 100%;
-        margin: 0;
-    }
-    
-    .bar-viability {
-        align-self: flex-end;
-        min-width: auto;
-        font-size: 0.78rem;
-        margin-top: 4px;
-        justify-content: flex-start;
-        max-width: 100%;
-    }
-    
-    /* Ajustes para subsecciones en móvil */
-    .dashboard-subsection {
-        margin-top: 2rem;
-        padding-top: 1.5rem;
-        max-width: 100vw;
-        overflow-x: hidden;
-    }
-    
-    .subsection-header h3 {
-        font-size: 1.3rem;
-    }
-    
-    .subsection-header .page-description {
-        font-size: 0.9rem;
-    }
-    
-    .color-legend-item {
-        width: 100%;
-        justify-content: center;
-        margin: 2px 0;
-        box-sizing: border-box;
-    }
-    
-    .table-container .table-footer .footer-info em {
-        margin-left: 0;
-        margin-top: 8px;
-        text-align: center;
-        width: 100%;
-    }
-    
-    /* Matriz transpuesta en móvil */
-    .data-table.transposed-matrix {
-        min-width: 400px;
-    }
-    
-    .data-table.transposed-matrix th.sticky-corner,
-    .data-table.transposed-matrix td.district-cell.sticky-district {
-        min-width: 0;
-        max-width: 130px;
-        font-size: 0.85rem;
-        padding: 8px 6px;
-    }
-    
-    .data-table.transposed-matrix td.matrix-cell {
-        min-width: 0;
-        max-width: 70px;
-        font-size: 0.82rem;
-        padding: 8px 3px;
-    }
-    
-    .data-table.transposed-matrix th.level-header {
-        min-width: 0;
-        max-width: 70px;
-        font-size: 0.8rem;
-        padding: 8px 3px;
-    }
-    
-    .data-table.transposed-matrix th.category-header {
-        min-width: 0;
-        max-width: 210px;
-        font-size: 0.85rem;
-        padding: 10px 3px;
-    }
-    
-    .data-table.transposed-matrix td.matrix-cell[title]:hover::after {
-        font-size: 0.8rem;
-        min-width: 180px;
-        max-width: 250px;
-        padding: 8px 10px;
-    }
+  /* 1. OCULTAR COLUMNA "TIPO" EN MÓVIL */
+  .data-table th:nth-child(3),
+  .data-table td:nth-child(3) {
+    display: none;
+  }
+
+  /* 2. REDUCIR BARRIO (Columna 1) */
+  .data-table th:nth-child(1),
+  .data-table td:nth-child(1) {
+    min-width: 80px !important;
+    max-width: 100px !important;
+    padding: 8px 6px !important;
+  }
+
+  /* 3. REDUCIR % ESFUERZO (Columna 5) */
+  .data-table th:nth-child(5),
+  .data-table td:nth-child(5) {
+    min-width: 60px !important;
+    max-width: 70px !important;
+    padding: 8px 4px !important;
+    font-size: 0.8rem !important;
+  }
+
+  /* 4. REDUCIR VIABILIDAD (Columna 6) */
+  .data-table th:nth-child(6),
+  .data-table td:nth-child(6) {
+    min-width: 50px !important;
+    max-width: 60px !important;
+    padding: 8px 3px !important;
+  }
+
+  .data-table td.viability-icon {
+    font-size: 0.75rem !important;
+  }
+
+  /* 5. REDUCIR TABLA COMPLETA */
+  .data-table {
+    min-width: 400px !important;
+    font-size: 0.8rem !important;
+  }
+
+  /* 6. ENCABEZADOS MÁS COMPACTOS */
+  .data-table th {
+    font-size: 0.7rem !important;
+    padding: 8px 5px !important;
+    white-space: normal !important;
+    line-height: 1.1 !important;
+  }
+
+  /* 7. MATRIZ DE CALOR MÁS COMPACTA */
+  .data-table.transposed-matrix {
+    min-width: 400px !important;
+    font-size: 0.75rem !important;
+  }
+
+  /* 8. CONTENEDORES DE TABLA */
+  .table-container {
+    margin: 12px 0;
+    border-radius: 8px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    max-width: 100vw;
+  }
+
+  .data-table {
+    font-size: 0.82rem;
+    min-width: 400px;
+    max-width: none;
+  }
+
+  .data-table th,
+  .data-table td {
+    padding: 8px 10px;
+    font-size: 0.82rem;
+  }
+
+  /* Mantener alineación en móvil */
+  .data-table th:nth-child(4),
+  .data-table td:nth-child(4) {
+    text-align: right;
+    padding-right: 15px;
+  }
+
+  .data-table th:nth-child(5),
+  .data-table td:nth-child(5) {
+    text-align: center;
+  }
+
+  /* FOOTERS UNIFICADOS EN MÓVIL */
+  .table-footer,
+  .table-container .table-footer {
+    padding: 8px 12px;
+    font-size: 0.82rem;
+    max-width: 100%;
+  }
+
+  .html-chart .chart-footer {
+    padding: 8px 12px;
+    font-size: 0.82rem;
+    margin: 16px -16px 0 -16px;
+    max-width: calc(100% + 32px);
+    box-sizing: border-box;
+  }
+
+  .footer-info {
+    font-size: 0.82rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    max-width: 100%;
+  }
+
+  .kpi-cards-container {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    max-width: 100%;
+  }
+
+  .kpi-card {
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    max-width: 100%;
+  }
+
+  .kpi-card-icon {
+    width: 42px;
+    height: 42px;
+    margin-left: 12px;
+  }
+
+  .kpi-card-content {
+    padding: 12px 12px 12px 0;
+  }
+
+  .kpi-card-value {
+    font-size: 1.4rem;
+  }
+
+  .html-chart {
+    padding: 16px 16px 0 16px;
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+
+  /* En móviles, cambiar a disposición vertical - UNA COLUMNA */
+  .bar-item {
+    grid-template-columns: 1fr !important;
+    gap: 8px;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #f3f4f6;
+    max-width: 100%;
+  }
+
+  .bar-label {
+    min-width: 100%;
+    max-width: 100%;
+    margin-bottom: 4px;
+  }
+
+  .bar-wrapper {
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+    margin: 0;
+  }
+
+  .bar-viability {
+    align-self: flex-end;
+    min-width: auto;
+    font-size: 0.78rem;
+    margin-top: 4px;
+    justify-content: flex-start;
+    max-width: 100%;
+  }
+
+  /* Ajustes para subsecciones en móvil */
+  .dashboard-subsection {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+
+  .subsection-header h3 {
+    font-size: 1.3rem;
+  }
+
+  .subsection-header .page-description {
+    font-size: 0.9rem;
+  }
+
+  .color-legend-item {
+    width: 100%;
+    justify-content: center;
+    margin: 2px 0;
+    box-sizing: border-box;
+  }
+
+  .table-container .table-footer .footer-info em {
+    margin-left: 0;
+    margin-top: 8px;
+    text-align: center;
+    width: 100%;
+  }
+
+  /* Matriz transpuesta en móvil */
+  .data-table.transposed-matrix {
+    min-width: 400px;
+  }
+
+  .data-table.transposed-matrix th.sticky-corner,
+  .data-table.transposed-matrix td.district-cell.sticky-district {
+    min-width: 0;
+    max-width: 130px;
+    font-size: 0.85rem;
+    padding: 8px 6px;
+  }
+
+  .data-table.transposed-matrix td.matrix-cell {
+    min-width: 0;
+    max-width: 70px;
+    font-size: 0.82rem;
+    padding: 8px 3px;
+  }
+
+  .data-table.transposed-matrix th.level-header {
+    min-width: 0;
+    max-width: 70px;
+    font-size: 0.8rem;
+    padding: 8px 3px;
+  }
+
+  .data-table.transposed-matrix th.category-header {
+    min-width: 0;
+    max-width: 210px;
+    font-size: 0.85rem;
+    padding: 10px 3px;
+  }
+
+  .data-table.transposed-matrix td.matrix-cell[title]:hover::after {
+    font-size: 0.8rem;
+    min-width: 180px;
+    max-width: 250px;
+    padding: 8px 10px;
+  }
 }
 
 /* ===== RESPONSIVE PARA PANTALLAS MÁS PEQUEÑAS ===== */
 @media (max-width: 480px) {
-    .viability-icon {
-        font-size: 0.75rem;
-        justify-content: center;
-    }
-    
-    .kpi-card {
-        flex-direction: row;
-        align-items: center;
-        gap: 10px;
-        max-width: 100%;
-    }
-    
-    .kpi-card-icon {
-        margin-left: 12px;
-        margin-bottom: 0;
-    }
-    
-    .kpi-card-content {
-        padding: 12px 12px 12px 0;
-        width: calc(100% - 54px);
-    }
-    
-    .kpi-card-value {
-        font-size: 1.3rem;
-    }
-    
-    /* Ajustes para móviles muy pequeños */
-    .data-table th,
-    .data-table td {
-        padding: 6px 8px;
-        font-size: 0.78rem;
-    }
-    
-    /* Mantener alineación en móviles pequeños */
-    .data-table th:nth-child(4),
-    .data-table td:nth-child(4) {
-        padding-right: 10px;
-    }
-    
-    .bar-label strong {
-        font-size: 0.85rem;
-    }
-    
-    .bar-label small {
-        font-size: 0.72rem;
-    }
-    
-    /* Ajustes para subsecciones en móvil pequeño */
-    .dashboard-subsection {
-        margin-top: 1.5rem;
-        padding-top: 1.25rem;
-        max-width: 100vw;
-    }
-    
-    .chart-placeholder .preview-items {
-        max-width: 100%;
-    }
-    
-    /* Matriz transpuesta en móvil pequeño */
-    .data-table.transposed-matrix {
-        min-width: 400px;
-    }
-    
-    .data-table.transposed-matrix th.sticky-corner,
-    .data-table.transposed-matrix td.district-cell.sticky-district {
-        min-width: 0;
-        max-width: 120px;
-        font-size: 0.82rem;
-        padding: 6px 4px;
-    }
-    
-    .data-table.transposed-matrix td.matrix-cell {
-        min-width: 0;
-        max-width: 60px;
-        font-size: 0.78rem;
-        padding: 6px 2px;
-    }
-    
-    .data-table.transposed-matrix th.level-header {
-        min-width: 0;
-        max-width: 60px;
-        font-size: 0.75rem;
-        padding: 6px 2px;
-    }
-    
-    .data-table.transposed-matrix th.category-header {
-        min-width: 0;
-        max-width: 180px;
-        font-size: 0.8rem;
-        padding: 8px 2px;
-    }
+  .viability-icon {
+    font-size: 0.75rem;
+    justify-content: center;
+  }
+
+  .kpi-card {
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    max-width: 100%;
+  }
+
+  .kpi-card-icon {
+    margin-left: 12px;
+    margin-bottom: 0;
+  }
+
+  .kpi-card-content {
+    padding: 12px 12px 12px 0;
+    width: calc(100% - 54px);
+  }
+
+  .kpi-card-value {
+    font-size: 1.3rem;
+  }
+
+  /* Ajustes para móviles muy pequeños */
+  .data-table th,
+  .data-table td {
+    padding: 6px 8px;
+    font-size: 0.78rem;
+  }
+
+  /* Mantener alineación en móviles pequeños */
+  .data-table th:nth-child(4),
+  .data-table td:nth-child(4) {
+    padding-right: 10px;
+  }
+
+  .bar-label strong {
+    font-size: 0.85rem;
+  }
+
+  .bar-label small {
+    font-size: 0.72rem;
+  }
+
+  /* Ajustes para subsecciones en móvil pequeño */
+  .dashboard-subsection {
+    margin-top: 1.5rem;
+    padding-top: 1.25rem;
+    max-width: 100vw;
+  }
+
+  .chart-placeholder .preview-items {
+    max-width: 100%;
+  }
+
+  /* Matriz transpuesta en móvil pequeño */
+  .data-table.transposed-matrix {
+    min-width: 400px;
+  }
+
+  .data-table.transposed-matrix th.sticky-corner,
+  .data-table.transposed-matrix td.district-cell.sticky-district {
+    min-width: 0;
+    max-width: 120px;
+    font-size: 0.82rem;
+    padding: 6px 4px;
+  }
+
+  .data-table.transposed-matrix td.matrix-cell {
+    min-width: 0;
+    max-width: 60px;
+    font-size: 0.78rem;
+    padding: 6px 2px;
+  }
+
+  .data-table.transposed-matrix th.level-header {
+    min-width: 0;
+    max-width: 60px;
+    font-size: 0.75rem;
+    padding: 6px 2px;
+  }
+
+  .data-table.transposed-matrix th.category-header {
+    min-width: 0;
+    max-width: 180px;
+    font-size: 0.8rem;
+    padding: 8px 2px;
+  }
 }
 
 /* Ajustes específicos para orientación landscape en móvil */
 @media (max-width: 768px) and (orientation: landscape) {
-    .kpi-cards-container {
-        grid-template-columns: repeat(2, 1fr);
-        max-width: 100%;
-    }
-    
-    .bar-item {
-        grid-template-columns: 2fr 3fr 1fr !important;
-        align-items: center;
-        border-bottom: none;
-        margin-bottom: 12px;
-        padding-bottom: 0;
-        max-width: 100%;
-    }
-    
-    .bar-label {
-        min-width: 150px;
-        max-width: 200px;
-        margin-bottom: 0;
-    }
-    
-    .bar-wrapper {
-        width: auto;
-        min-width: 120px;
-        max-width: 250px;
-    }
-    
-    .bar-viability {
-        align-self: center;
-        margin-top: 0;
-    }
-    
-    .data-table.transposed-matrix {
-        min-width: 400px;
-    }
+  .kpi-cards-container {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 100%;
+  }
+
+  .bar-item {
+    grid-template-columns: 2fr 3fr 1fr !important;
+    align-items: center;
+    border-bottom: none;
+    margin-bottom: 12px;
+    padding-bottom: 0;
+    max-width: 100%;
+  }
+
+  .bar-label {
+    min-width: 150px;
+    max-width: 200px;
+    margin-bottom: 0;
+  }
+
+  .bar-wrapper {
+    width: auto;
+    min-width: 120px;
+    max-width: 250px;
+  }
+
+  .bar-viability {
+    align-self: center;
+    margin-top: 0;
+  }
+
+  .data-table.transposed-matrix {
+    min-width: 400px;
+  }
 }
