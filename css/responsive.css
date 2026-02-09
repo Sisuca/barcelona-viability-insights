@@ -133,13 +133,14 @@
 /* 5. REPORT BANNER MOBILE */
 @media (max-width: 768px) {
   .report-banner-content {
-    flex-direction: column;
+    grid-template-columns: 1fr;
     text-align: center;
-    gap: 2rem;
   }
 
   .banner-features {
+    display: grid;
     grid-template-columns: 1fr;
+    justify-items: center;
   }
 
   .btn-download-pdf {

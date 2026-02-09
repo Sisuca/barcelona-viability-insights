@@ -449,7 +449,6 @@ td,
   background-color: var(--primary-color);
   color: white;
   margin: 3rem 0;
-  max-width: 100%;
 }
 
 .report-banner-content {
@@ -457,7 +456,6 @@ td,
   grid-template-columns: 2fr 1fr;
   gap: 3rem;
   align-items: center;
-  max-width: 100%;
 }
 
 .banner-text h3 {
@@ -466,8 +464,6 @@ td,
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  max-width: 100%;
-  overflow-wrap: break-word;
 }
 
 .banner-text p {
@@ -475,8 +471,6 @@ td,
   color: rgba(255, 255, 255, 0.9);
   margin-bottom: 1.5rem;
   line-height: 1.6;
-  max-width: 100%;
-  overflow-wrap: break-word;
 }
 
 .banner-features {
@@ -484,7 +478,6 @@ td,
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 0.75rem;
-  max-width: 100%;
 }
 
 .banner-features li {
@@ -492,8 +485,6 @@ td,
   align-items: center;
   gap: 0.5rem;
   color: rgba(255, 255, 255, 0.9);
-  max-width: 100%;
-  overflow-wrap: break-word;
 }
 
 .banner-features i {
@@ -513,9 +504,6 @@ td,
   transition: all 0.3s ease;
   text-decoration: none;
   text-align: center;
-  font-family: var(--font-family);
-  max-width: 100%;
-  box-sizing: border-box;
 }
 
 .btn-download-pdf:hover {
@@ -529,8 +517,6 @@ td,
   margin-top: 0.75rem;
   color: rgba(255, 255, 255, 0.6);
   font-size: 0.875rem;
-  max-width: 100%;
-  overflow-wrap: break-word;
 }
 
 /* 6. INSIGHTS DESTACADOS */
@@ -1006,7 +992,6 @@ td,
 .tech-stack h4 {
   text-align: center;
   margin-top: 1rem;
-  padding: 1rem;
   gap: 0.5rem;
   color: #334155;
   font-size: 1.4rem;
@@ -1015,7 +1000,9 @@ td,
 }
 
 .tech-tags {
-  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   margin-top: 1rem;
   gap: 0.5rem;
   max-width: 100%;
@@ -1043,11 +1030,9 @@ td,
 }
 
 .profile-links {
-  text-align: center;
+  display: flex;
   gap: 1rem;
-  margin-top: 0.5rem;
   flex-wrap: wrap;
-  max-width: 100%;
 }
 
 .profile-link {
@@ -1061,8 +1046,6 @@ td,
   font-weight: 500;
   text-decoration: none;
   transition: background-color 0.3s ease;
-  max-width: 100%;
-  box-sizing: border-box;
 }
 
 .profile-link:hover {
