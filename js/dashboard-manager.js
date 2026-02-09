@@ -143,7 +143,7 @@ class DashboardManager {
         
         // Mapeo de targetId a href del menú (coinciden exactamente)
         const linkMap = {
-            'vision-general': '#dashboard-section',
+            'vision-general': '#vision-general',
             'accessibility-section': '#accessibility-section',
             'seniority-section': '#seniority-section'
         };

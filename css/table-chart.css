@@ -108,7 +108,6 @@
 .viability-icon {
   font-family: "Inter", sans-serif;
   font-weight: 500;
-  display: flex;
   align-items: center;
   gap: 6px;
   white-space: nowrap;
@@ -152,7 +151,7 @@
 .table-container .table-footer .footer-info em {
   font-style: italic;
   color: var(--neutral-gray);
-  font-size: 0.85rem;
+  font-size: 0.7rem;
   margin-left: 10px;
 }
 
@@ -398,7 +397,6 @@
     var(--secondary-blue) 100%
   );
   color: white;
-  border-right: 2px solid rgba(255, 255, 255, 0.3);
   font-weight: 700;
   font-size: 0.9rem;
   padding: 10px 4px;
@@ -822,9 +820,9 @@
   /* 2. REDUCIR BARRIO (Columna 1) */
   .data-table th:nth-child(1),
   .data-table td:nth-child(1) {
-    min-width: 80px !important;
+    min-width: 60px !important;
     max-width: 100px !important;
-    padding: 8px 6px !important;
+    padding: 8px 3px !important;
   }
 
   /* 3. REDUCIR % ESFUERZO (Columna 5) */
@@ -833,31 +831,30 @@
     min-width: 60px !important;
     max-width: 70px !important;
     padding: 8px 4px !important;
-    font-size: 0.8rem !important;
+    font-size: 0.7rem !important;
   }
 
   /* 4. REDUCIR VIABILIDAD (Columna 6) */
   .data-table th:nth-child(6),
   .data-table td:nth-child(6) {
     min-width: 50px !important;
-    max-width: 60px !important;
     padding: 8px 3px !important;
   }
 
   .data-table td.viability-icon {
-    font-size: 0.75rem !important;
+    font-size: 0.7rem !important;
   }
 
   /* 5. REDUCIR TABLA COMPLETA */
   .data-table {
     min-width: 400px !important;
-    font-size: 0.8rem !important;
+    font-size: 0.7rem !important;
   }
 
   /* 6. ENCABEZADOS MÁS COMPACTOS */
   .data-table th {
     font-size: 0.7rem !important;
-    padding: 8px 5px !important;
+    padding: 8px 3px !important;
     white-space: normal !important;
     line-height: 1.1 !important;
   }
@@ -886,7 +883,7 @@
   .data-table th,
   .data-table td {
     padding: 8px 10px;
-    font-size: 0.82rem;
+    font-size: 0.7rem;
   }
 
   /* Mantener alineación en móvil */
@@ -918,7 +915,7 @@
   }
 
   .footer-info {
-    font-size: 0.82rem;
+    font-size: 0.7rem;
     flex-direction: column;
     align-items: flex-start;
     gap: 8px;
@@ -1094,7 +1091,7 @@
   .data-table th,
   .data-table td {
     padding: 6px 8px;
-    font-size: 0.78rem;
+    font-size: 0.7rem;
   }
 
   /* Mantener alineación en móviles pequeños */

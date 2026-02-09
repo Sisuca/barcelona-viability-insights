@@ -117,13 +117,6 @@
     box-sizing: border-box;
   }
 
-  /* Filtros en columna única */
-  .filters-container {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-    padding: 1rem;
-  }
-
   /* KPIs en columna única */
   .kpi-cards-container {
     grid-template-columns: 1fr;

@@ -67,7 +67,7 @@ class TableManager {
                             <th>Distrito</th>
                             <th>Tipo</th>
                             <th>Alquiler</th>
-                            <th>% Esfuerzo</th>
+                            <th>Esfuerzo</th>
                             <th>Viabilidad</th>
                         </tr>
                     </thead>

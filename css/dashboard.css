@@ -6,6 +6,16 @@
   background-color: var(--white);
 }
 
+/* IMPORTANTE: No usar overflow-x: hidden aquí - rompe sticky */
+
+/* Contenedor para contenido dentro de la sección */
+.dashboard-section .container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
 .section-header {
   text-align: center;
   margin-bottom: 1.5rem;
@@ -40,7 +50,7 @@
   align-items: start; /* asegura que el sidebar sticky no se desplace verticalmente */
 }
 
-/* 3. MENÚ LATERAL - ESTILOS BASE */
+/* 3. MENÚ LATERAL DEL DASHBOARD- ESTILOS BASE */
 .dashboard-sidebar {
   background-color: var(--background-color);
   border: 1px solid #e5e7eb;
@@ -48,6 +58,8 @@
   padding: 1.2rem;
   height: fit-content;
   align-self: start;
+  position: sticky;
+  top: 100px; /* Debajo del header (72px + margen) */
   transition: all 0.3s ease;
 }
 
@@ -353,13 +365,6 @@
   font-size: 0.9rem;
 }
 
-@media (min-width: 769px) {
-  .dashboard-sidebar {
-    position: sticky;
-    top: 95px;
-  }
-}
-
 /* 8. TABLET (769px - 1024px) */
 @media (min-width: 769px) and (max-width: 1024px) {
   .dashboard-layout {
@@ -504,7 +509,7 @@
 
   /* C. SIDEBAR COMO MENÚ HORIZONTAL STICKY (CSS ONLY) */
   .dashboard-sidebar {
-    position: sticky !important;
+    position: sticky;
     top: 72px !important; /* Debajo del header */
     z-index: 90 !important;
     margin-bottom: 0.5rem;
@@ -522,7 +527,7 @@
   }
 
   /* Header scrolled (más compacto) */
-  .main-header.scrolled ~ .dashboard-section .dashboard-sidebar {
+  .main-header.scrolled ~ .dashboard-section {
     top: 60px !important;
   }
 
@@ -568,7 +573,7 @@
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: auto auto;
     gap: 0.8rem;
-    padding: 1rem;
+    padding: 0.5rem;
     background-color: #f8fafc;
     border: 1px solid #e2e8f0;
   }
