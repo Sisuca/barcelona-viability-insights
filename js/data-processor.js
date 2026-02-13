@@ -1,4 +1,4 @@
-// data-processor-final.js - PROCESADOR DE DATOS CON CARGUE ROBUSTO
+// data-processor.js - PROCESADOR DE DATOS CON CARGUE ROBUSTO
 // // Versión: 15.8 - Con método getDistrictRanking() corregido (mínimo esfuerzo por distrito)
 
 class DataProcessorFinal {
