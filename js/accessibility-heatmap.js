@@ -1,144 +1,476 @@
-// js/accessibility-heatmap.js - VERSIÓN 15.8
-// Matriz transpuesta con auto-renderizado y gráfico de ranking de distritos (sin funciones duplicadas)
+// js/accessibility-heatmap.js - VERSIÓN 17.3
+// Clases de viabilidad corregidas: cell-viable, cell-limitado, cell-inviable
+// Fondo blanco en contenedor
+// Ancho por Sants-Montjuïc
+// Salto de línea Sarrià-Sant Gervasi con data-district
+// Resize optimizado sin saltos visuales
+// SIN WRAPPER .mobile-tables-wrapper
 
 class AccessibilityHeatmapManager {
-    constructor() {
-        console.log('🔥 AccessibilityHeatmapManager V5.6 inicializando...');
-        
-        // Usar ID específico
-        this.container = document.getElementById('accessibility-heatmap-container');
-        this.dataProcessor = window.dataProcessorFinal;
-        this.hasRendered = false;
-        
-        // Inicializar automáticamente si el contenedor existe
+  constructor() {
+    console.log("🔥 AccessibilityHeatmapManager V17.3 inicializando...");
+
+    this.container = document.getElementById("accessibility-heatmap-container");
+    this.dataProcessor = window.dataProcessorFinal;
+    this.hasRendered = false;
+    this.currentHeatmapData = null;
+    this.resizeTimer = null;
+    this.currentView = null;
+
+    if (this.container) {
+      console.log("🎯 Contenedor de heatmap encontrado, inicializando...");
+      this.initialize();
+    } else {
+      console.warn(
+        "⚠️ Contenedor #accessibility-heatmap-container no encontrado",
+      );
+    }
+  }
+
+  initialize() {
+    if (
+      !this.dataProcessor ||
+      typeof this.dataProcessor.getAccessibilityMatrix !== "function"
+    ) {
+      console.log("⏳ Esperando DataProcessor...");
+      setTimeout(() => this.initialize(), 100);
+      return;
+    }
+
+    // ===== RESIZE SIN SALTOS VISUALES =====
+    window.addEventListener("resize", () => {
+      if (!this.currentHeatmapData) return;
+
+      clearTimeout(this.resizeTimer);
+
+      const newView = window.innerWidth <= 768 ? "mobile" : "desktop";
+
+      if (newView !== this.currentView) {
+        console.log(`📱 Resize: ${this.currentView} → ${newView}`);
+
+        // Ocultar inmediatamente para evitar saltos
         if (this.container) {
-            console.log('🎯 Contenedor de heatmap encontrado, inicializando...');
-            this.initialize();
-        } else {
-            console.warn('⚠️ Contenedor #accessibility-heatmap-container no encontrado');
+          this.container.style.visibility = "hidden";
         }
-    }
-    
-    initialize() {
-        // Esperar a que DataProcessor esté disponible
-        if (!this.dataProcessor || typeof this.dataProcessor.getAccessibilityMatrix !== 'function') {
-            console.log('⏳ Esperando DataProcessor...');
-            setTimeout(() => this.initialize(), 100);
-            return;
-        }
-        
-        // Renderizar heatmap inmediatamente
-        console.log('🚀 Renderizando heatmap automáticamente...');
-        this.renderHeatmap();
-        
-        // Renderizar gráfico de distritos inmediatamente
-        console.log('🚀 Renderizando gráfico de distritos automáticamente...');
-        setTimeout(() => this.renderDistrictChart(), 100);
-        
-        // Escuchar cambios de datos
-        document.addEventListener('dataLoaded', () => {
-            console.log('📊 Datos recargados, actualizando visualizaciones...');
-            this.renderHeatmap();
+
+        this.resizeTimer = setTimeout(() => {
+          this.renderHeatmap();
+          // Mostrar cuando esté listo
+          if (this.container) {
+            this.container.style.visibility = "visible";
+          }
+        }, 20);
+      }
+    });
+
+    this.renderHeatmap();
+
+    // ===== GRÁFICO DE RANKING DE DISTRITOS =====
+    setTimeout(() => {
+      const chartContainer = document.getElementById("district-ranking-chart");
+      if (chartContainer) {
+        console.log("✅ Contenedor district-ranking-chart encontrado");
+        this.renderDistrictChart();
+      } else {
+        console.log("⏳ Esperando contenedor district-ranking-chart...");
+        const interval = setInterval(() => {
+          if (document.getElementById("district-ranking-chart")) {
+            clearInterval(interval);
             this.renderDistrictChart();
-        });
-        
-        // También podemos escuchar filtrosChanged para ofrecer opción de actualizar
-        // (pero el heatmap es independiente de los filtros, así que solo logueamos)
-        document.addEventListener('filtersChanged', (event) => {
-            console.log('🔧 Filtros cambiados, heatmap permanece igual (datos completos)');
-        });
+          }
+        }, 200);
+      }
+    }, 300);
+
+    document.addEventListener("dataLoaded", () => {
+      this.renderHeatmap();
+      this.renderDistrictChart();
+    });
+  }
+
+  // ============================================================
+  // RENDER PRINCIPAL CON DOBLE VISTA SEGÚN VIEWPORT
+  // ============================================================
+
+  renderHeatmap() {
+    if (!this.container) return;
+
+    if (
+      !this.dataProcessor ||
+      typeof this.dataProcessor.getAccessibilityMatrix !== "function"
+    ) {
+      this.showErrorMessage("DataProcessor no disponible");
+      return;
     }
-    
-    renderHeatmap() {
-        console.log('📊 Renderizando matriz de calor transpuesta...');
-        
-        // Verificar que tenemos contenedor
-        if (!this.container) {
-            console.error('❌ Contenedor no encontrado (#accessibility-heatmap-container)');
-            return;
-        }
-        
-        if (!this.dataProcessor || typeof this.dataProcessor.getAccessibilityMatrix !== 'function') {
-            console.error('❌ DataProcessor no disponible');
-            this.showErrorMessage('DataProcessor no disponible');
-            return;
-        }
-        
-        try {
-            // Obtener datos de la matriz
-            const heatmapData = this.dataProcessor.getAccessibilityMatrix();
-            
-            if (!heatmapData || !heatmapData.matrixData || heatmapData.matrixData.length === 0) {
-                console.error('❌ No se obtuvieron datos para el heatmap');
-                this.showErrorMessage('No hay datos disponibles');
-                return;
+
+    try {
+      const heatmapData = this.dataProcessor.getAccessibilityMatrix();
+
+      if (!heatmapData?.matrixData?.length) {
+        this.showErrorMessage("No hay datos disponibles");
+        return;
+      }
+
+      this.currentHeatmapData = heatmapData;
+      this.currentView = window.innerWidth <= 768 ? "mobile" : "desktop";
+
+      if (window.innerWidth <= 768) {
+        this.createMobileHeatmapView(heatmapData);
+      } else {
+        this.createTransposedHeatmapTable(heatmapData);
+      }
+
+      this.hasRendered = true;
+    } catch (error) {
+      console.error("❌ Error:", error);
+      this.showErrorMessage(`Error: ${error.message}`);
+    }
+  }
+
+  // ============================================================
+  // VISTA MÓVIL: 7 tablas sueltas (SIN WRAPPER)
+  // ✅ Clases de viabilidad corregidas: cell-viable, cell-limitado, cell-inviable
+  // ✅ Fondo blanco en contenedor
+  // ✅ Ancho por Sants-Montjuïc
+  // ✅ Salto de línea Sarrià-Sant Gervasi
+  // ============================================================
+
+  createMobileHeatmapView(heatmapData) {
+    console.log(
+      "📱 Renderizando móvil (V17.3 - clases corregidas, fondo blanco, ancho fijo)...",
+    );
+
+    // LIMPIAR COMPLETAMENTE
+    this.container.innerHTML = "";
+
+    // ===== FONDO BLANCO EN EL CONTENEDOR =====
+    this.container.style.backgroundColor = "white";
+    this.container.style.padding = "0.5rem 0";
+    this.container.style.borderRadius = "0";
+    this.container.style.gap = "1.2rem";
+
+    const categories = ["Technology", "Marketing", "Design"];
+    const levels = ["Junior", "Mid", "Senior"];
+
+    // ===== CALCULAR ANCHO DE REFERENCIA (Sants-Montjuïc) =====
+    const measureDiv = document.createElement("div");
+    measureDiv.style.cssText = `
+            position: absolute;
+            visibility: hidden;
+            height: auto;
+            width: auto;
+            white-space: nowrap;
+            font-family: "Inter", sans-serif;
+            font-size: 0.95rem;
+            font-weight: 500;
+            padding: 0.75rem 0.5rem;
+        `;
+    document.body.appendChild(measureDiv);
+
+    // Medir "Sants-Montjuïc" como referencia de ancho
+    measureDiv.textContent = "Sants-Montjuïc";
+    const referenceWidth = 98;
+
+    // Medir "Sarrià-Sant Gervasi" para salto de línea
+    measureDiv.style.whiteSpace = "normal";
+    measureDiv.style.width = referenceWidth + "px";
+    measureDiv.textContent = "Sarrià-Sant Gervasi";
+    const sarriaHeight = measureDiv.offsetHeight;
+
+    document.body.removeChild(measureDiv);
+
+    // ===== GENERAR UNA TABLA POR CADA DISTRITO =====
+    heatmapData.districts.forEach((district) => {
+      const table = document.createElement("table");
+      table.className = "mobile-district-table";
+
+      // ================================================
+      // FILA 1: CABECERA (Distrito + Junior, Mid, Senior)
+      // ================================================
+      const headerRow = document.createElement("tr");
+
+      // Celda del distrito
+      const districtCell = document.createElement("th");
+      districtCell.textContent = district;
+      districtCell.className = "mobile-district-header";
+      districtCell.setAttribute("data-district", district);
+
+      // APLICAR ANCHO DE REFERENCIA (Sants-Montjuïc)
+      districtCell.style.width = referenceWidth + "px";
+      districtCell.style.minWidth = referenceWidth + "px";
+      districtCell.style.maxWidth = referenceWidth + "px";
+
+      // SALTO DE LÍNEA ESPECÍFICO PARA SARRIÀ-SANT GERVASI
+      if (district === "Sarrià-Sant Gervasi") {
+        districtCell.style.whiteSpace = "normal";
+        districtCell.style.wordBreak = "break-word";
+        districtCell.style.lineHeight = "1.2";
+        districtCell.style.paddingTop = "0.5rem";
+        districtCell.style.paddingBottom = "0.5rem";
+        districtCell.style.fontSize = "0.85rem";
+      }
+
+      headerRow.appendChild(districtCell);
+
+      // Celdas de niveles (JUNIOR, MID, SENIOR)
+      levels.forEach((level) => {
+        const levelCell = document.createElement("th");
+        levelCell.textContent = level.toUpperCase();
+        levelCell.className = "mobile-level-header";
+        headerRow.appendChild(levelCell);
+      });
+
+      table.appendChild(headerRow);
+
+      // ================================================
+      // FILAS DE DATOS (Technology, Marketing, Design)
+      // ================================================
+      categories.forEach((category) => {
+        const dataRow = document.createElement("tr");
+
+        // Celda de categoría
+        const categoryCell = document.createElement("td");
+        categoryCell.textContent = category;
+        categoryCell.className = "mobile-category-cell";
+        dataRow.appendChild(categoryCell);
+
+        // Celdas de porcentaje para cada nivel
+        levels.forEach((level) => {
+          const cellData = heatmapData.matrixData.find(
+            (c) => c.x === district && c.y === `${category} ${level}`,
+          );
+
+          const value = cellData?.v;
+
+          // ===== CORRECCIÓN CRÍTICA =====
+          // Añadir prefijo 'cell-' a la clase de viabilidad
+          const viabilityClass = cellData?.viability
+            ? `cell-${cellData.viability}`
+            : "";
+
+          const valueCell = document.createElement("td");
+          valueCell.className = `mobile-value-cell ${viabilityClass}`;
+
+          // Formato: coma decimal + símbolo %
+          valueCell.textContent = value
+            ? value.toFixed(2).replace(".", ",") + "%"
+            : "N/A";
+
+          dataRow.appendChild(valueCell);
+        });
+
+        table.appendChild(dataRow);
+      });
+
+      // AÑADIR LA TABLA DIRECTAMENTE AL CONTENEDOR (SIN WRAPPER)
+      this.container.appendChild(table);
+    });
+
+    console.log(
+      "✅ Vista móvil renderizada: 7 tablas sueltas, clases corregidas, fondo blanco, ancho unificado",
+    );
+  }
+
+  // ============================================================
+  // VISTA DESKTOP: Matriz transpuesta (SIN CAMBIOS)
+  // ============================================================
+
+  createTransposedHeatmapTable(heatmapData) {
+    console.log(
+      "🎨 Creando matriz transpuesta con agrupación por categorías...",
+    );
+
+    this.container.innerHTML = "";
+    this.container.style.backgroundColor = ""; // Restaurar fondo por defecto
+    this.container.style.padding = "";
+
+    const tableContainer = document.createElement("div");
+    tableContainer.className = "table-container";
+
+    const table = document.createElement("table");
+    table.className = "data-table heatmap-table transposed-matrix";
+
+    const thead = document.createElement("thead");
+
+    const headerRow1 = document.createElement("tr");
+    const cornerHeader1 = document.createElement("th");
+    cornerHeader1.textContent = "Distrito / Perfil";
+    cornerHeader1.rowSpan = 2;
+    cornerHeader1.className = "sticky-corner";
+    headerRow1.appendChild(cornerHeader1);
+
+    const categories = ["Technology", "Marketing", "Design"];
+    const levels = ["Junior", "Mid", "Senior"];
+
+    categories.forEach((category) => {
+      const categoryHeader = document.createElement("th");
+      categoryHeader.textContent = category;
+      categoryHeader.colSpan = 3;
+      categoryHeader.className = "category-header";
+      headerRow1.appendChild(categoryHeader);
+    });
+
+    thead.appendChild(headerRow1);
+
+    const headerRow2 = document.createElement("tr");
+
+    categories.forEach((category) => {
+      levels.forEach((level) => {
+        const levelHeader = document.createElement("th");
+        levelHeader.textContent = level;
+        levelHeader.className = "level-header";
+        headerRow2.appendChild(levelHeader);
+      });
+    });
+
+    thead.appendChild(headerRow2);
+    table.appendChild(thead);
+
+    const matrix = {};
+    const viabilityMatrix = {};
+
+    heatmapData.districts.forEach((district) => {
+      matrix[district] = {};
+      viabilityMatrix[district] = {};
+
+      categories.forEach((category) => {
+        levels.forEach((level) => {
+          const profileKey = `${category} ${level}`;
+          matrix[district][profileKey] = null;
+          viabilityMatrix[district][profileKey] = "no-data";
+        });
+      });
+    });
+
+    heatmapData.matrixData.forEach((cell) => {
+      if (matrix[cell.x] && matrix[cell.x][cell.y] !== undefined) {
+        matrix[cell.x][cell.y] = cell.v;
+        viabilityMatrix[cell.x][cell.y] = cell.viability;
+      }
+    });
+
+    const tbody = document.createElement("tbody");
+
+    heatmapData.districts.forEach((district, rowIndex) => {
+      const row = document.createElement("tr");
+      row.className = rowIndex % 2 === 0 ? "even" : "odd";
+
+      const districtCell = document.createElement("td");
+      districtCell.textContent = district;
+      districtCell.className = "district-cell sticky-district";
+      row.appendChild(districtCell);
+
+      categories.forEach((category) => {
+        levels.forEach((level) => {
+          const profileKey = `${category} ${level}`;
+          const effort = matrix[district][profileKey];
+          const viability = viabilityMatrix[district][profileKey];
+
+          const cell = document.createElement("td");
+
+          let displayText = "N/A";
+          if (effort !== null && effort !== undefined) {
+            displayText = effort.toFixed(2).replace(".", ",") + "%";
+          }
+
+          cell.textContent = displayText;
+          cell.className = "matrix-cell";
+
+          if (effort !== null && effort !== undefined) {
+            if (effort <= 30) {
+              cell.classList.add("cell-viable");
+            } else if (effort <= 45) {
+              cell.classList.add("cell-limitado");
+            } else {
+              cell.classList.add("cell-inviable");
             }
-            
-            console.log('✅ Datos obtenidos:', {
-                perfiles: heatmapData.profiles.length,
-                distritos: heatmapData.districts.length,
-                celdas: heatmapData.matrixData.length
-            });
-            
-            // Crear la matriz transpuesta
-            this.createTransposedHeatmapTable(heatmapData);
-            this.hasRendered = true;
-            
-        } catch (error) {
-            console.error('❌ Error renderizando heatmap:', error);
-            this.showErrorMessage(`Error: ${error.message}`);
-        }
+          } else {
+            cell.classList.add("cell-nodata");
+          }
+
+          if (effort !== null && effort !== undefined) {
+            const tooltipEffort = effort.toFixed(2).replace(".", ",") + "%";
+            cell.title = `${district} - ${profileKey}\nEsfuerzo: ${tooltipEffort}\nViabilidad: ${this.getViabilityText(viability)}`;
+          }
+
+          row.appendChild(cell);
+        });
+      });
+
+      tbody.appendChild(row);
+    });
+
+    table.appendChild(tbody);
+    tableContainer.appendChild(table);
+
+    const footer = document.createElement("div");
+    footer.className = "table-footer";
+
+    const footerInfo = document.createElement("p");
+    footerInfo.className = "footer-info";
+    footerInfo.innerHTML = `
+            <strong>Leyenda:</strong> 
+            ✅ Viable (≤30%) • ⚠️ Limitado (31-45%) • ❌ Inviable (≥46%)
+            • Porcentaje: menor esfuerzo salarial posible por distrito (sobre salario bruto).
+        `;
+
+    footer.appendChild(footerInfo);
+    tableContainer.appendChild(footer);
+
+    this.container.appendChild(tableContainer);
+    console.log("✅ Matriz transpuesta creada exitosamente");
+  }
+
+  // ============================================================
+  // GRÁFICO DE RANKING POR DISTRITOS
+  // ============================================================
+
+  renderDistrictChart() {
+    console.log("📊 Renderizando gráfico de ranking por distritos...");
+
+    const chartContainer = document.getElementById("district-ranking-chart");
+
+    if (!chartContainer) {
+      console.error("❌ Contenedor #district-ranking-chart no encontrado");
+      return;
     }
-    
-    // ===== MÉTODO PARA GRÁFICO DE DISTRITOS =====
-    
-    renderDistrictChart() {
-        console.log('📊 Renderizando gráfico de ranking por distritos...');
-        
-        // Contenedor específico para este gráfico
-        const chartContainer = document.getElementById('district-ranking-chart');
-        
-        if (!chartContainer) {
-            console.error('❌ Contenedor #district-ranking-chart no encontrado');
-            return;
-        }
-        
-        if (!this.dataProcessor || typeof this.dataProcessor.getDistrictRanking !== 'function') {
-            console.error('❌ DataProcessor.getDistrictRanking() no disponible');
-            chartContainer.innerHTML = `
+
+    if (
+      !this.dataProcessor ||
+      typeof this.dataProcessor.getDistrictRanking !== "function"
+    ) {
+      console.error("❌ DataProcessor.getDistrictRanking() no disponible");
+      chartContainer.innerHTML = `
                 <div class="data-message">
                     <div class="message-icon">📭</div>
                     <h4>Datos no disponibles</h4>
                     <p>El procesador de datos no está listo para calcular el ranking de distritos.</p>
                 </div>
             `;
-            return;
-        }
-        
-        try {
-            // Obtener ranking ordenado (menor a mayor esfuerzo)
-            const districtRanking = this.dataProcessor.getDistrictRanking();
-            
-            if (!districtRanking || districtRanking.length === 0) {
-                throw new Error('No se obtuvieron datos de ranking');
-            }
-            
-            // Encontrar esfuerzo máximo para escalar las barras
-            const maxEffort = Math.max(...districtRanking.map(d => d.minEffort));
-            
-            // Generar HTML idéntico al gráfico de barrios (mismo CSS)
-            let chartHTML = `
+      return;
+    }
+
+    try {
+      const districtRanking = this.dataProcessor.getDistrictRanking();
+
+      if (!districtRanking || districtRanking.length === 0) {
+        throw new Error("No se obtuvieron datos de ranking");
+      }
+
+      const maxEffort = Math.max(...districtRanking.map((d) => d.minEffort));
+
+      let chartHTML = `
                 <div class="html-chart">
                     <div class="bars-container">
             `;
-            
-            districtRanking.forEach(district => {
-                const barWidth = Math.min(100, (district.minEffort / maxEffort) * 100);
-                const viabilityIcon = this.getViabilityIcon(district.viability);
-                const effortFormatted = district.minEffort.toFixed(2).replace('.', ',') + '%';
-                
-                // MISMA ESTRUCTURA GRID 2-3-1 QUE GRÁFICO DE BARRIOS
-                chartHTML += `
+
+      districtRanking.forEach((district) => {
+        const barWidth = Math.min(100, (district.minEffort / maxEffort) * 100);
+        const viabilityIcon = this.getViabilityIcon(district.viability);
+        const effortFormatted =
+          district.minEffort.toFixed(2).replace(".", ",") + "%";
+
+        chartHTML += `
                     <div class="bar-item">
                         <div class="bar-label">
                             <strong>${district.district}</strong>
@@ -154,272 +486,104 @@ class AccessibilityHeatmapManager {
                         </div>
                     </div>
                 `;
-            });
-            
-            chartHTML += `
+      });
+
+      chartHTML += `
                     </div>
                     <div class="chart-footer">
                         <p class="footer-info">
-                            <strong>Leyenda:</strong> ✅ Viable (≤30%) • ⚠️ Limitado (31-45%) • ❌ Inviable (≥46%)<br>
-                            Porcentaje del menor esfuerzo salarial posible por distrito, calculado con la mediana salarial de todos los perfiles profesionales (sobre el salario bruto).
+                            <strong>Leyenda:</strong> 
+                            ✅ Viable (≤30%) • ⚠️ Limitado (31-45%) • ❌ Inviable (≥46%)
+                            • Porcentaje: menor esfuerzo salarial posible en el distrito.
                         </p>
                     </div>
                 </div>
             `;
-            
-            chartContainer.innerHTML = chartHTML;
-            console.log(`✅ Gráfico de distritos renderizado: ${districtRanking.length} distritos`);
-            
-        } catch (error) {
-            console.error('❌ Error renderizando gráfico de distritos:', error);
-            chartContainer.innerHTML = `
+
+      chartContainer.innerHTML = chartHTML;
+      console.log(
+        `✅ Gráfico de distritos renderizado: ${districtRanking.length} distritos`,
+      );
+    } catch (error) {
+      console.error("❌ Error renderizando gráfico de distritos:", error);
+      chartContainer.innerHTML = `
                 <div class="data-message">
                     <div class="message-icon">📭</div>
                     <h4>Gráfico no disponible</h4>
-                    <p>${error.message || 'No se pudieron cargar los datos del ranking de distritos'}</p>
+                    <p>${error.message || "No se pudieron cargar los datos del ranking de distritos"}</p>
                     <button class="retry-btn" onclick="window.accessibilityHeatmapManager.renderDistrictChart()">
                         <i class="fas fa-redo"></i> Reintentar
                     </button>
                 </div>
             `;
-        }
     }
-    
-    createTransposedHeatmapTable(heatmapData) {
-        console.log('🎨 Creando matriz transpuesta con agrupación por categorías...');
-        
-        // Limpiar contenedor
-        this.container.innerHTML = '';
-        
-        // ===== CREAR SECCIÓN VISUAL (YA EXISTE EL CONTENEDOR CON TÍTULO EN HTML) =====
-        // Solo necesitamos crear la tabla, no el título
-        
-        // Crear contenedor principal (MISMO QUE TABLA DE RESUMEN)
-        const tableContainer = document.createElement('div');
-        tableContainer.className = 'table-container';
-        
-        // Crear tabla con clases unificadas
-        const table = document.createElement('table');
-        table.className = 'data-table heatmap-table transposed-matrix';
-        
-        // ===== CREAR ENCABEZADO CON AGRUPACIÓN POR CATEGORÍAS =====
-        const thead = document.createElement('thead');
-        
-        // Fila 1: Encabezado principal con colspan para categorías
-        const headerRow1 = document.createElement('tr');
-        
-        // Primera celda (vacía para la esquina)
-        const cornerHeader1 = document.createElement('th');
-        cornerHeader1.textContent = 'Distrito / Perfil';
-        cornerHeader1.rowSpan = 2;
-        cornerHeader1.className = 'sticky-corner';
-        headerRow1.appendChild(cornerHeader1);
-        
-        // Definir categorías y niveles
-        const categories = ['Technology', 'Marketing', 'Design'];
-        const levels = ['Junior', 'Mid', 'Senior'];
-        
-        // Crear encabezados de categorías con colspan=3
-        categories.forEach(category => {
-            const categoryHeader = document.createElement('th');
-            categoryHeader.textContent = category;
-            categoryHeader.colSpan = 3;
-            categoryHeader.className = 'category-header';
-            headerRow1.appendChild(categoryHeader);
-        });
-        
-        thead.appendChild(headerRow1);
-        
-        // Fila 2: Encabezado de niveles
-        const headerRow2 = document.createElement('tr');
-        
-        // Repetir para cada categoría: Junior, Mid, Senior
-        categories.forEach(category => {
-            levels.forEach(level => {
-                const levelHeader = document.createElement('th');
-                levelHeader.textContent = level;
-                levelHeader.className = 'level-header';
-                headerRow2.appendChild(levelHeader);
-            });
-        });
-        
-        thead.appendChild(headerRow2);
-        table.appendChild(thead);
-        
-        // ===== ORGANIZAR DATOS EN ESTRUCTURA TRANSPUESTA =====
-        const matrix = {};
-        const viabilityMatrix = {};
-        
-        // Inicializar estructura: distritos como claves principales
-        heatmapData.districts.forEach(district => {
-            matrix[district] = {};
-            viabilityMatrix[district] = {};
-            
-            // Para cada combinación categoría-nivel
-            categories.forEach(category => {
-                levels.forEach(level => {
-                    const profileKey = `${category} ${level}`;
-                    matrix[district][profileKey] = null;
-                    viabilityMatrix[district][profileKey] = 'no-data';
-                });
-            });
-        });
-        
-        // Llenar con datos
-        heatmapData.matrixData.forEach(cell => {
-            if (matrix[cell.x] && matrix[cell.x][cell.y] !== undefined) {
-                matrix[cell.x][cell.y] = cell.v;
-                viabilityMatrix[cell.x][cell.y] = cell.viability;
-            }
-        });
-        
-        // ===== CREAR CUERPO DE TABLA =====
-        const tbody = document.createElement('tbody');
-        
-        // Crear una fila por cada distrito
-        heatmapData.districts.forEach((district, rowIndex) => {
-            const row = document.createElement('tr');
-            row.className = rowIndex % 2 === 0 ? 'even' : 'odd';
-            
-            // Celda del distrito (primera columna)
-            const districtCell = document.createElement('td');
-            districtCell.textContent = district;
-            districtCell.className = 'district-cell sticky-district';
-            row.appendChild(districtCell);
-            
-            // Celdas de datos para cada combinación categoría-nivel
-            categories.forEach(category => {
-                levels.forEach(level => {
-                    const profileKey = `${category} ${level}`;
-                    const effort = matrix[district][profileKey];
-                    const viability = viabilityMatrix[district][profileKey];
-                    
-                    const cell = document.createElement('td');
-                    
-                    // FORMATO: 2 decimales con coma
-                    let displayText = 'N/A';
-                    if (effort !== null && effort !== undefined) {
-                        displayText = effort.toFixed(2).replace('.', ',') + '%';
-                    }
-                    
-                    cell.textContent = displayText;
-                    cell.className = 'matrix-cell';
-                    
-                    // Aplicar clase según viabilidad
-                    if (effort !== null && effort !== undefined) {
-                        if (effort <= 30) {
-                            cell.classList.add('cell-viable');
-                        } else if (effort <= 45) {
-                            cell.classList.add('cell-limitado');
-                        } else {
-                            cell.classList.add('cell-inviable');
-                        }
-                    } else {
-                        cell.classList.add('cell-nodata');
-                    }
-                    
-                    // Tooltip
-                    if (effort !== null && effort !== undefined) {
-                        const tooltipEffort = effort.toFixed(2).replace('.', ',') + '%';
-                        cell.title = `${district} - ${profileKey}\nEsfuerzo: ${tooltipEffort}\nViabilidad: ${this.getViabilityText(viability)}`;
-                    }
-                    
-                    row.appendChild(cell);
-                });
-            });
-            
-            tbody.appendChild(row);
-        });
-        
-        table.appendChild(tbody);
-        tableContainer.appendChild(table);
-        
-        // ===== FOOTER MATRIZ DE CALOR DE ACCESIBILIDAD (MISMO QUE TABLA DE RESUMEN) =====
-        const footer = document.createElement('div');
-        footer.className = 'table-footer';
-        
-        const footerInfo = document.createElement('p');
-        footerInfo.className = 'footer-info';
-        footerInfo.innerHTML = `
-            <strong>Leyenda:</strong> ✅ Viable (≤30%) • ⚠️ Limitado (31-45%) • ❌ Inviable (≥46%)<br>
-            Porcentaje del menor esfuerzo salarial posible por distrito, calculado para cada categoría y nivel profesional (sobre salario bruto).
-        `;
-        
-        footer.appendChild(footerInfo);
-        tableContainer.appendChild(footer);
-        
-        // Finalmente, agregar el tableContainer al contenedor principal
-        this.container.appendChild(tableContainer);
-        
-        console.log('✅ Matriz transpuesta creada exitosamente');
+  }
+
+  // ============================================================
+  // FUNCIONES AUXILIARES
+  // ============================================================
+
+  getViabilityIcon(viability) {
+    if (
+      window.tableManager &&
+      typeof window.tableManager.getViabilityIcon === "function"
+    ) {
+      return window.tableManager.getViabilityIcon(viability);
     }
-    
-    // ===== FUNCIONES AUXILIARES PARA VIABILIDAD (MANTENIDAS LOCALMENTE PARA INDEPENDENCIA) =====
-    
-    /**
-     * Obtiene el icono de viabilidad (versión local para independencia)
-     * @param {string} viability - 'viable', 'limitado', 'inviable'
-     * @returns {string} Emoji del icono
-     */
-    getViabilityIcon(viability) {
-        // Primero intentar usar tableManager si está disponible
-        if (window.tableManager && typeof window.tableManager.getViabilityIcon === 'function') {
-            return window.tableManager.getViabilityIcon(viability);
-        }
-        
-        // Fallback local
-        switch(viability) {
-            case 'viable': return '✅';
-            case 'limitado': return '⚠️';
-            case 'inviable': return '❌';
-            default: return '❓';
-        }
+    switch (viability) {
+      case "viable":
+        return "✅";
+      case "limitado":
+        return "⚠️";
+      case "inviable":
+        return "❌";
+      default:
+        return "❓";
     }
-    
-    /**
-     * Obtiene el texto de viabilidad (versión local para independencia)
-     * @param {string} viability - 'viable', 'limitado', 'inviable'
-     * @returns {string} Texto de viabilidad
-     */
-    getViabilityText(viability) {
-        // Primero intentar usar tableManager si está disponible
-        if (window.tableManager && typeof window.tableManager.getViabilityText === 'function') {
-            return window.tableManager.getViabilityText(viability);
-        }
-        
-        // Fallback local
-        switch(viability) {
-            case 'viable': return 'Viable';
-            case 'limitado': return 'Limitado';
-            case 'inviable': return 'Inviable';
-            default: return 'Desconocido';
-        }
+  }
+
+  getViabilityText(viability) {
+    if (
+      window.tableManager &&
+      typeof window.tableManager.getViabilityText === "function"
+    ) {
+      return window.tableManager.getViabilityText(viability);
     }
-    
-    showErrorMessage(message) {
-        this.container.innerHTML = `
+    switch (viability) {
+      case "viable":
+        return "Viable";
+      case "limitado":
+        return "Limitado";
+      case "inviable":
+        return "Inviable";
+      default:
+        return "Desconocido";
+    }
+  }
+
+  showErrorMessage(message) {
+    if (!this.container) return;
+
+    this.container.innerHTML = `
             <div class="data-message">
-                <div class="message-icon">🔥</div>
+                <div class="message-icon">⚠️</div>
                 <h4>Matriz de calor no disponible</h4>
                 <p>${message}</p>
-                <button class="retry-btn" id="retryHeatmapBtn">
+                <button class="retry-btn" onclick="window.accessibilityHeatmapManager.renderHeatmap()">
                     <i class="fas fa-redo"></i> Reintentar
                 </button>
             </div>
         `;
-        
-        const retryBtn = document.getElementById('retryHeatmapBtn');
-        if (retryBtn) {
-            retryBtn.addEventListener('click', () => {
-                this.renderHeatmap();
-            });
-        }
-    }
+  }
 }
 
 // Inicializar cuando el DOM esté listo
-document.addEventListener('DOMContentLoaded', () => {
-    console.log('🏁 DOM listo - Inicializando AccessibilityHeatmapManager V5.6...');
-    window.accessibilityHeatmapManager = new AccessibilityHeatmapManager();
-    console.log('✅ AccessibilityHeatmapManager V5.6 cargado (sin funciones duplicadas)');
+document.addEventListener("DOMContentLoaded", () => {
+  console.log(
+    "🏁 DOM listo - Inicializando AccessibilityHeatmapManager V17.3...",
+  );
+  window.accessibilityHeatmapManager = new AccessibilityHeatmapManager();
+  console.log(
+    "✅ AccessibilityHeatmapManager V17.3 cargado (clases corregidas, fondo blanco, ancho fijo)",
+  );
 });

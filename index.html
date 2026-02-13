@@ -2,7 +2,10 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, viewport-fit=cover"
+    />
     <title>
       Barcelona Viability Insights | Análisis Salarios vs Alquiler 2026
     </title>
@@ -174,8 +177,8 @@
                 ¿En qué distrito de Barcelona te puedes permitir vivir según tu
                 perfil profesional?<br />
                 Analizamos cuál es el distrito económicamente más viable, los
-                barrios más accesibles y el porcentaje de esfuerzo salarial requerido en
-                cada uno.
+                barrios más accesibles y el porcentaje de esfuerzo salarial
+                requerido en cada uno.
               </p>
 
               <!-- FILTROS INTERACTIVOS -->
@@ -435,7 +438,7 @@
               </section>
             </article>
 
-            <!-- FIN DE LA SECCIÓN DASHBOARD -->
+            <!-- NO HAY MÁS PÁGINAS REDIRECCIONALES -->
           </main>
         </div>
       </div>
@@ -822,26 +825,50 @@
               <div class="tech-stack">
                 <h4><i class="fas fa-tools"></i> Stack Tecnológico</h4>
                 <div class="tech-tags">
-                  <span class="tech-tag"><i class="fa-solid fa-file-excel"></i> Excel</span>
-                  <span class="tech-tag"><i class="fa-solid fa-magnifying-glass-chart"></i> Power Query</span>
-                  <span class="tech-tag"><i class="fa-jelly-fill fa-regular fa-chart-bar"></i> Power BI</span>
-                  <span class="tech-tag"><i class="fa-brands fa-html5"></i> HTML</span>
-                  <span class="tech-tag"><i class="fa-brands fa-css3-alt"></i> CSS</span>
-                  <span class="tech-tag"><i class="fa-brands fa-js"></i> JavaScript</span>
-                  <span class="tech-tag"><i class="fa-brands fa-git-alt"></i> Git</span>
+                  <span class="tech-tag"
+                    ><i class="fa-solid fa-file-excel"></i> Excel</span
+                  >
+                  <span class="tech-tag"
+                    ><i class="fa-solid fa-magnifying-glass-chart"></i> Power
+                    Query</span
+                  >
+                  <span class="tech-tag"
+                    ><i class="fa-jelly-fill fa-regular fa-chart-bar"></i> Power
+                    BI</span
+                  >
+                  <span class="tech-tag"
+                    ><i class="fa-brands fa-html5"></i> HTML</span
+                  >
+                  <span class="tech-tag"
+                    ><i class="fa-brands fa-css3-alt"></i> CSS</span
+                  >
+                  <span class="tech-tag"
+                    ><i class="fa-brands fa-js"></i> JavaScript</span
+                  >
+                  <span class="tech-tag"
+                    ><i class="fa-brands fa-git-alt"></i> Git</span
+                  >
                 </div>
               </div>
-                        
+
               <div class="links-contacto">
                 <h4><i class="fa-solid fa-message"></i> Contacto</h4>
-              </div>
-              <div class="profile-links">
-                <a href="https://www.linkedin.com/in/abadisabel" target="_blank" class="profile-link">
-                  <i class="fab fa-linkedin"></i> LinkedIn
-                </a>
-                <a href="https://github.com/Sisuca" target="_blank" class="profile-link">
-                  <i class="fab fa-github"></i> GitHub
-                </a>
+                <div class="profile-links">
+                  <a
+                    href="https://www.linkedin.com/in/abadisabel"
+                    target="_blank"
+                    class="profile-link"
+                  >
+                    <i class="fab fa-linkedin"></i> LinkedIn
+                  </a>
+                  <a
+                    href="https://github.com/Sisuca"
+                    target="_blank"
+                    class="profile-link"
+                  >
+                    <i class="fab fa-github"></i> GitHub
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -925,7 +952,156 @@
     <!-- 8. Funcionalidades generales -->
     <script src="js/main.js"></script>
 
-    <!-- 9. Scroll spy para dashboard nav -->
-    <script src="js/dashboard-scroll-spy.js"></script>
+    <!-- 9. NAVEGACIÓN ACTIVA PARA SUBMENÚ DASHBOARD (SOLO SCROLL) - VERSIÓN SIMPLIFICADA -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const sidebar = document.querySelector(".dashboard-sidebar");
+        const header = document.querySelector(".main-header");
+        const dashboardSection = document.querySelector("#dashboard-section");
+
+        // Solo proceder si existen los elementos necesarios
+        if (!sidebar || !dashboardSection) return;
+
+        // IDs de las subsecciones a observar
+        const subsectionIds = [
+          "vision-general",
+          "accessibility-section",
+          "seniority-section",
+        ];
+        const subsectionElements = {};
+        const navItems = {};
+
+        // Inicializar elementos
+        subsectionIds.forEach((id) => {
+          const element = document.getElementById(id);
+          if (element) {
+            subsectionElements[id] = element;
+
+            const navItem = document.querySelector(
+              `.dashboard-nav-item[href="#${id}"]`,
+            );
+            if (navItem) {
+              navItems[id] = navItem;
+            }
+          }
+        });
+
+        // Función para actualizar el enlace activo según scroll
+        function updateActiveNav() {
+          const headerHeight = header ? header.offsetHeight : 72;
+          const isMobileView = window.innerWidth <= 768;
+
+          // Ajuste de offset según dispositivo
+          const scrollOffset = isMobileView
+            ? headerHeight + 100 // Móvil: header + espacio extra
+            : headerHeight + 50; // Desktop: header + margen
+
+          const scrollY = window.scrollY + scrollOffset;
+          let activeId = null;
+          let closestDistance = Infinity;
+
+          Object.entries(subsectionElements).forEach(([id, element]) => {
+            if (!element) return;
+
+            const rect = element.getBoundingClientRect();
+            const elementTop = window.scrollY + rect.top;
+            const elementBottom = elementTop + rect.height;
+
+            // Verificar si el elemento está en el viewport (con offset)
+            const isInViewport =
+              scrollY >= elementTop && scrollY <= elementBottom;
+            const distanceToTop = Math.abs(scrollY - elementTop);
+
+            // Priorizar elementos en viewport, luego el más cercano
+            if (isInViewport) {
+              closestDistance = 0;
+              activeId = id;
+            } else if (distanceToTop < closestDistance && closestDistance > 0) {
+              closestDistance = distanceToTop;
+              activeId = id;
+            }
+          });
+
+          // Si encontramos una sección activa, actualizar menú
+          if (activeId) {
+            Object.entries(navItems).forEach(([id, navItem]) => {
+              if (navItem) {
+                if (id === activeId) {
+                  navItem.classList.add("active");
+                } else {
+                  navItem.classList.remove("active");
+                }
+              }
+            });
+          }
+
+          // Si no hay ninguna activa y estamos en la parte superior, activar "Resumen"
+          if (!activeId && scrollY < 300 && navItems["vision-general"]) {
+            Object.entries(navItems).forEach(([id, navItem]) => {
+              if (navItem) {
+                navItem.classList.remove("active");
+              }
+            });
+            navItems["vision-general"].classList.add("active");
+          }
+        }
+
+        // Scroll suave al hacer clic en los enlaces del submenú
+        document.querySelectorAll(".dashboard-nav-item").forEach((item) => {
+          item.addEventListener("click", function (e) {
+            if (this.getAttribute("href").startsWith("#")) {
+              e.preventDefault();
+              const targetId = this.getAttribute("href").substring(1);
+              const targetElement = document.getElementById(targetId);
+
+              if (targetElement) {
+                const headerHeight = header ? header.offsetHeight : 72;
+                const isMobileView = window.innerWidth <= 768;
+                const sidebarOffset = isMobileView ? 140 : 130;
+                const offset = headerHeight + sidebarOffset;
+
+                const targetPosition = targetElement.offsetTop - offset;
+
+                window.scrollTo({
+                  top: targetPosition,
+                  behavior: "smooth",
+                });
+
+                // Actualizar activo inmediatamente
+                document
+                  .querySelectorAll(".dashboard-nav-item")
+                  .forEach((nav) => {
+                    nav.classList.remove("active");
+                  });
+                this.classList.add("active");
+              }
+            }
+          });
+        });
+
+        // Actualizar navegación activa durante el scroll
+        let navUpdateTimeout;
+        const activeNavScrollHandler = function () {
+          if (navUpdateTimeout) {
+            cancelAnimationFrame(navUpdateTimeout);
+          }
+          navUpdateTimeout = requestAnimationFrame(updateActiveNav);
+        };
+
+        // Escuchar scroll para navegación activa
+        window.addEventListener("scroll", activeNavScrollHandler);
+        // También actualizar en resize (por si cambia de móvil a desktop)
+        window.addEventListener("resize", function () {
+          setTimeout(updateActiveNav, 100);
+        });
+
+        // Inicializar al cargar
+        updateActiveNav();
+
+        console.log(
+          "✅ Navegación activa del dashboard inicializada (solo scroll)",
+        );
+      });
+    </script>
   </body>
 </html>

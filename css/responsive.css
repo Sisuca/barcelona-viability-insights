@@ -1,29 +1,7 @@
-/* ===== RESPONSIVE.CSS - VERSIÓN LIMPIA ===== */
+/* ===== RESPONSIVE.CSS - VERSIÓN COMPATIBLE CON STICKY ===== */
 
-/* 0. CORRECCIÓN GLOBAL DE DESBORDAMIENTO (SOLO EN MÓVIL) */
-@media (max-width: 768px) {
-  html,
-  body {
-    max-width: 100vw;
-    overflow-x: hidden;
-    position: relative;
-  }
-
-  /* Contención segura para secciones principales */
-  .dashboard-section,
-  .highlighted-insights,
-  .methodology,
-  .about {
-    max-width: 100vw;
-    overflow-x: hidden;
-  }
-
-  .container {
-    max-width: 100vw;
-    padding-left: 1rem !important;
-    padding-right: 1rem !important;
-  }
-}
+/* 0. CORRECCIÓN GLOBAL PARA NO ROMPER STICKY */
+/* IMPORTANTE: No usar overflow-x: hidden en elementos que contengan sticky */
 
 /* 1. HEADER MOBILE */
 @media (max-width: 768px) {
@@ -102,19 +80,15 @@
   }
 }
 
-/* 3. DASHBOARD MOBILE - SOLO CORRECCIONES NECESARIAS */
+/* 3. DASHBOARD MOBILE - STICKY FUNCIONANDO */
 @media (max-width: 768px) {
-  /* Mantener sidebar como menú horizontal (CSS sticky) */
-  .dashboard-layout {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  /* Solo asegurar que no haya desbordamiento */
+  /* El sidebar sticky ya está configurado en dashboard.css */
+  /* Solo asegurar que no haya overflow que lo rompa */
+  .dashboard-section,
+  .container,
+  .dashboard-layout,
   .dashboard-main {
-    width: 100%;
-    box-sizing: border-box;
+    overflow-x: visible !important;
   }
 
   /* KPIs en columna única */
@@ -187,13 +161,13 @@
   }
 
   .profile-links {
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
   }
 
   .profile-link {
     width: 100%;
-    max-width: 250px;
+    max-width: 300px;
     justify-content: center;
   }
 }
@@ -215,7 +189,6 @@
     justify-content: center;
   }
 }
-
 /* 9. AJUSTES PARA MÓVILES MUY PEQUEÑOS */
 @media (max-width: 480px) {
   .hero-title {
@@ -241,7 +214,7 @@
   }
 }
 
-/* 10. CORRECCIÓN ESPECÍFICA PARA TABLAS ANCHAS */
+/* 10. CORRECCIÓN ESPECÍFICA PARA TABLAS ANCHAS (sin romper sticky) */
 @media (max-width: 1024px) {
   /* Contenedor para cualquier tabla que pueda desbordar */
   .table-scroll-wrapper {
@@ -254,10 +227,13 @@
   }
 
   /* Aplicar a tus tablas existentes (YA ESTÁ EN table-chart.css) */
-  .data-table,
   .accessibility-table,
   .insights-table {
-    min-width: 700px; /* Permite scroll si es necesario */
+    min-width: 700px;
+  }
+
+  .data-table {
+    min-width: unset !important;
   }
 }
 
@@ -276,28 +252,62 @@
   .chart-container,
   .table-container {
     max-width: 100%;
+    overflow-x: auto; /* Scroll horizontal solo donde sea necesario */
   }
 }
 
-/* 12. CORRECCIÓN ESPECÍFICA PARA STICKY EN MÓVIL */
+/* 12. REGLA ESPECÍFICA PARA ASEGURAR STICKY EN MÓVIL */
 @media (max-width: 768px) {
-  /* Asegurar que ningún padre tenga overflow que rompa sticky */
-  html,
-  body {
-    overflow-x: visible !important;
-  }
-
-  /* Forzar sticky en sidebar móvil */
   .dashboard-sidebar {
-    position: -webkit-sticky !important; /* Safari */
     position: sticky !important;
+    top: 72px !important;
+    z-index: 90 !important;
+    background-color: var(--white) !important;
+  }
+}
+
+/* ===== AJUSTES ESPECÍFICOS PARA METODOLOGÍA Y ABOUT EN MÓVIL ===== */
+@media (max-width: 768px) {
+  /* METODOLOGÍA EN MÓVIL */
+  .methodology .container,
+  .about .container {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
   }
 
-  /* Remover cualquier transform o filter en padres que rompan sticky */
-  .dashboard-section,
-  .dashboard-layout {
-    transform: none !important;
-    filter: none !important;
-    perspective: none !important;
+  .accordion {
+    max-width: 100% !important; /* Forzar ancho completo en móvil */
+    width: 100%;
+  }
+
+  .methodology-footer {
+    max-width: 100% !important; /* Forzar ancho completo en móvil */
+    width: 100%;
+  }
+
+  /* ABOUT EN MÓVIL */
+  .about-card {
+    max-width: 100% !important; /* Forzar ancho completo en móvil */
+    width: 100%;
+    padding: 1.5rem; /* Un poco menos de padding en móvil */
+  }
+
+  .about-card-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .profile-info {
+    text-align: center;
+  }
+
+  .profile-tags {
+    justify-content: center;
+  }
+
+  .capabilities-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
   }
 }
