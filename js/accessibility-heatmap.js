@@ -8,7 +8,7 @@
 
 class AccessibilityHeatmapManager {
   constructor() {
-    console.log("🔥 AccessibilityHeatmapManager V17.3 inicializando...");
+    // ELIMINADO: console.log("🔥 AccessibilityHeatmapManager V17.3 inicializando...");
 
     this.container = document.getElementById("accessibility-heatmap-container");
     this.dataProcessor = window.dataProcessorFinal;
@@ -18,12 +18,10 @@ class AccessibilityHeatmapManager {
     this.currentView = null;
 
     if (this.container) {
-      console.log("🎯 Contenedor de heatmap encontrado, inicializando...");
+      // ELIMINADO: console.log("🎯 Contenedor de heatmap encontrado, inicializando...");
       this.initialize();
     } else {
-      console.warn(
-        "⚠️ Contenedor #accessibility-heatmap-container no encontrado",
-      );
+      // ELIMINADO: console.warn("⚠️ Contenedor #accessibility-heatmap-container no encontrado");
     }
   }
 
@@ -32,7 +30,7 @@ class AccessibilityHeatmapManager {
       !this.dataProcessor ||
       typeof this.dataProcessor.getAccessibilityMatrix !== "function"
     ) {
-      console.log("⏳ Esperando DataProcessor...");
+      // ELIMINADO: console.log("⏳ Esperando DataProcessor...");
       setTimeout(() => this.initialize(), 100);
       return;
     }
@@ -46,7 +44,7 @@ class AccessibilityHeatmapManager {
       const newView = window.innerWidth <= 768 ? "mobile" : "desktop";
 
       if (newView !== this.currentView) {
-        console.log(`📱 Resize: ${this.currentView} → ${newView}`);
+        // ELIMINADO: console.log(`📱 Resize: ${this.currentView} → ${newView}`);
 
         // Ocultar inmediatamente para evitar saltos
         if (this.container) {
@@ -69,10 +67,10 @@ class AccessibilityHeatmapManager {
     setTimeout(() => {
       const chartContainer = document.getElementById("district-ranking-chart");
       if (chartContainer) {
-        console.log("✅ Contenedor district-ranking-chart encontrado");
+        // ELIMINADO: console.log("✅ Contenedor district-ranking-chart encontrado");
         this.renderDistrictChart();
       } else {
-        console.log("⏳ Esperando contenedor district-ranking-chart...");
+        // ELIMINADO: console.log("⏳ Esperando contenedor district-ranking-chart...");
         const interval = setInterval(() => {
           if (document.getElementById("district-ranking-chart")) {
             clearInterval(interval);
@@ -122,7 +120,7 @@ class AccessibilityHeatmapManager {
 
       this.hasRendered = true;
     } catch (error) {
-      console.error("❌ Error:", error);
+      // ELIMINADO: console.error("❌ Error:", error);
       this.showErrorMessage(`Error: ${error.message}`);
     }
   }
@@ -136,9 +134,7 @@ class AccessibilityHeatmapManager {
   // ============================================================
 
   createMobileHeatmapView(heatmapData) {
-    console.log(
-      "📱 Renderizando móvil (V17.3 - clases corregidas, fondo blanco, ancho fijo)...",
-    );
+    // ELIMINADO: console.log("📱 Renderizando móvil (V17.3 - clases corregidas, fondo blanco, ancho fijo)...");
 
     // LIMPIAR COMPLETAMENTE
     this.container.innerHTML = "";
@@ -266,9 +262,7 @@ class AccessibilityHeatmapManager {
       this.container.appendChild(table);
     });
 
-    console.log(
-      "✅ Vista móvil renderizada: 7 tablas sueltas, clases corregidas, fondo blanco, ancho unificado",
-    );
+    // ELIMINADO: console.log("✅ Vista móvil renderizada: 7 tablas sueltas, clases corregidas, fondo blanco, ancho unificado");
   }
 
   // ============================================================
@@ -276,9 +270,7 @@ class AccessibilityHeatmapManager {
   // ============================================================
 
   createTransposedHeatmapTable(heatmapData) {
-    console.log(
-      "🎨 Creando matriz transpuesta con agrupación por categorías...",
-    );
+    // ELIMINADO: console.log("🎨 Creando matriz transpuesta con agrupación por categorías...");
 
     this.container.innerHTML = "";
     this.container.style.backgroundColor = ""; // Restaurar fondo por defecto
@@ -418,7 +410,7 @@ class AccessibilityHeatmapManager {
     tableContainer.appendChild(footer);
 
     this.container.appendChild(tableContainer);
-    console.log("✅ Matriz transpuesta creada exitosamente");
+    // ELIMINADO: console.log("✅ Matriz transpuesta creada exitosamente");
   }
 
   // ============================================================
@@ -426,12 +418,12 @@ class AccessibilityHeatmapManager {
   // ============================================================
 
   renderDistrictChart() {
-    console.log("📊 Renderizando gráfico de ranking por distritos...");
+    // ELIMINADO: console.log("📊 Renderizando gráfico de ranking por distritos...");
 
     const chartContainer = document.getElementById("district-ranking-chart");
 
     if (!chartContainer) {
-      console.error("❌ Contenedor #district-ranking-chart no encontrado");
+      // ELIMINADO: console.error("❌ Contenedor #district-ranking-chart no encontrado");
       return;
     }
 
@@ -439,7 +431,7 @@ class AccessibilityHeatmapManager {
       !this.dataProcessor ||
       typeof this.dataProcessor.getDistrictRanking !== "function"
     ) {
-      console.error("❌ DataProcessor.getDistrictRanking() no disponible");
+      // ELIMINADO: console.error("❌ DataProcessor.getDistrictRanking() no disponible");
       chartContainer.innerHTML = `
                 <div class="data-message">
                     <div class="message-icon">📭</div>
@@ -501,11 +493,9 @@ class AccessibilityHeatmapManager {
             `;
 
       chartContainer.innerHTML = chartHTML;
-      console.log(
-        `✅ Gráfico de distritos renderizado: ${districtRanking.length} distritos`,
-      );
+      // ELIMINADO: console.log(`✅ Gráfico de distritos renderizado: ${districtRanking.length} distritos`);
     } catch (error) {
-      console.error("❌ Error renderizando gráfico de distritos:", error);
+      // ELIMINADO: console.error("❌ Error renderizando gráfico de distritos:", error);
       chartContainer.innerHTML = `
                 <div class="data-message">
                     <div class="message-icon">📭</div>
@@ -579,11 +569,7 @@ class AccessibilityHeatmapManager {
 
 // Inicializar cuando el DOM esté listo
 document.addEventListener("DOMContentLoaded", () => {
-  console.log(
-    "🏁 DOM listo - Inicializando AccessibilityHeatmapManager V17.3...",
-  );
+  // ELIMINADO: console.log("🏁 DOM listo - Inicializando AccessibilityHeatmapManager V17.3...");
   window.accessibilityHeatmapManager = new AccessibilityHeatmapManager();
-  console.log(
-    "✅ AccessibilityHeatmapManager V17.3 cargado (clases corregidas, fondo blanco, ancho fijo)",
-  );
+  // ELIMINADO: console.log("✅ AccessibilityHeatmapManager V17.3 cargado (clases corregidas, fondo blanco, ancho fijo)");
 });
