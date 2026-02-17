@@ -3,7 +3,7 @@
 
 class FiltersManager {
   constructor() {
-    console.log("🎛️ FiltersManager V15.8.2 inicializando...");
+    // ELIMINADO: console.log("🎛️ FiltersManager V15.8.2 inicializando...");
 
     // Referencias a los elementos del DOM
     this.categoryFilter = document.getElementById("categoryFilter");
@@ -29,14 +29,14 @@ class FiltersManager {
 
   init() {
     if (!this.validateElements()) {
-      console.error("❌ No se encontraron todos los elementos de filtro");
+      // ELIMINADO: console.error("❌ No se encontraron todos los elementos de filtro");
       return;
     }
 
-    console.log("✅ Todos los elementos de filtro encontrados");
+    // ELIMINADO: console.log("✅ Todos los elementos de filtro encontrados");
 
     // 1. NO CARGAR estado desde URL - usar filtros por defecto siempre
-    console.log("📥 Usando filtros por defecto:", this.currentFilters);
+    // ELIMINADO: console.log("📥 Usando filtros por defecto:", this.currentFilters);
 
     // 2. Configurar el filtro de distritos con opciones dinámicas
     this.populateDistrictFilter();
@@ -54,11 +54,8 @@ class FiltersManager {
       // this.updateURL(); ← ELIMINADO
     }, 500);
 
-    console.log("✅ FiltersManager inicializado correctamente");
-    console.log(
-      "🔄 Filtros iniciales (siempre por defecto):",
-      this.currentFilters,
-    );
+    // ELIMINADO: console.log("✅ FiltersManager inicializado correctamente");
+    // ELIMINADO: console.log("🔄 Filtros iniciales (siempre por defecto):", this.currentFilters);
   }
 
   validateElements() {
@@ -154,7 +151,7 @@ class FiltersManager {
   }
 
   handleFilterChange(filterType, value) {
-    console.log(`🔄 Cambio en filtro ${filterType}: ${value}`);
+    // ELIMINADO: console.log(`🔄 Cambio en filtro ${filterType}: ${value}`);
 
     // Actualizar el estado
     this.currentFilters[filterType] = value;
@@ -171,7 +168,7 @@ class FiltersManager {
     // Notificar a otros managers
     this.notifyOtherManagers();
 
-    console.log("📊 Filtros actuales:", this.currentFilters);
+    // ELIMINADO: console.log("📊 Filtros actuales:", this.currentFilters);
   }
 
   updateFilterUI(filterType) {
@@ -208,7 +205,7 @@ class FiltersManager {
     });
 
     document.dispatchEvent(filterEvent);
-    console.log("📢 Evento filtersChanged despachado");
+    // ELIMINADO: console.log("📢 Evento filtersChanged despachado");
   }
 
   saveState() {
@@ -217,9 +214,9 @@ class FiltersManager {
         "dashboardFilters",
         JSON.stringify(this.currentFilters),
       );
-      console.log("💾 Estado guardado en localStorage");
+      // ELIMINADO: console.log("💾 Estado guardado en localStorage");
     } catch (error) {
-      console.warn("⚠️ No se pudo guardar en localStorage:", error);
+      // ELIMINADO: console.warn("⚠️ No se pudo guardar en localStorage:", error);
     }
   }
 
@@ -242,7 +239,7 @@ class FiltersManager {
 
   // ✅ Mantenemos resetFilters pero sin actualizar URL
   resetFilters() {
-    console.log("🔄 Reiniciando filtros a valores por defecto...");
+    // ELIMINADO: console.log("🔄 Reiniciando filtros a valores por defecto...");
 
     // Restaurar filtros por defecto
     this.currentFilters = {
@@ -265,7 +262,7 @@ class FiltersManager {
     this.saveState();
     this.notifyOtherManagers();
 
-    console.log("✅ Filtros reiniciados:", this.currentFilters);
+    // ELIMINADO: console.log("✅ Filtros reiniciados:", this.currentFilters);
 
     // Mostrar mensaje de confirmación
     this.showResetConfirmation();
@@ -335,9 +332,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const initFiltersManager = () => {
     if (window.dataProcessorFinal) {
       window.filtersManager = new FiltersManager();
-      console.log(
-        "🚀 FiltersManager V15.8.2 cargado y listo (sin dependencia de URL)",
-      );
+      // ELIMINADO: console.log("🚀 FiltersManager V15.8.2 cargado y listo (sin dependencia de URL)");
     } else {
       setTimeout(initFiltersManager, 100);
     }
