@@ -1,9 +1,7 @@
-// ===== MAIN.JS - VERSIÓN COMPLETA CON SCROLL SPY =====
+// ===== MAIN.JS - VERSIÓN LIMPIA CON SCROLL EN ACORDEÓN CORREGIDO =====
 // Excluye completamente el menú del dashboard - manejado por dashboard-manager.js
 
 document.addEventListener("DOMContentLoaded", function () {
-  console.log("DOM cargado - Inicializando funcionalidades...");
-
   // ===== 1. HEADER Y NAVEGACIÓN CON SCROLL SPY =====
   const mobileMenuToggle = document.getElementById("mobileMenuToggle");
   const mainNav = document.getElementById("mainNav");
@@ -82,9 +80,6 @@ document.addEventListener("DOMContentLoaded", function () {
         this.closest(".dashboard-sidebar") ||
         this.classList.contains("dashboard-nav-item")
       ) {
-        console.log(
-          "Enlace del dashboard - dejando que dashboard-manager.js lo maneje",
-        );
         return;
       }
 
@@ -111,51 +106,53 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // ===== 4. ACORDEÓN METODOLOGÍA - VERSIÓN CORREGIDA =====
+  // ===== 4. ACORDEÓN METODOLOGÍA - VERSIÓN LIMPIA Y DEFINITIVA =====
   const accordionItems = document.querySelectorAll(".accordion-item");
 
   if (accordionItems.length > 0) {
-    console.log("Acordeón encontrado:", accordionItems.length, "items");
-
     accordionItems.forEach((item) => {
       const header = item.querySelector(".accordion-header");
 
       if (header) {
-        header.addEventListener("click", () => {
-          console.log("Click en acordeón");
+        header.addEventListener("click", (event) => {
+          // Prevenir comportamiento por defecto del botón
+          event.preventDefault();
 
-          // Verificar si el item actual ya está activo
           const isActive = item.classList.contains("active");
 
-          // Cerrar todos los items primero
+          // Cerrar todos los demás items
           accordionItems.forEach((otherItem) => {
-            otherItem.classList.remove("active");
+            if (otherItem !== item) {
+              otherItem.classList.remove("active");
+            }
           });
 
-          // Si el item clickeado NO estaba activo, abrirlo
+          // Si el item clickeado NO estaba activo, abrirlo y hacer scroll
           if (!isActive) {
             item.classList.add("active");
-          }
 
-          // Opcional: Desplazar suavemente hacia el acordeón si está colapsado
-          if (!isActive && window.innerWidth < 768) {
-            setTimeout(() => {
-              item.scrollIntoView({
+            // Scroll suave al inicio de la sección metodología
+            const methodologySection = document.getElementById(
+              "methodology-section",
+            );
+            if (methodologySection) {
+              methodologySection.scrollIntoView({
                 behavior: "smooth",
-                block: "nearest",
+                block: "start",
               });
-            }, 300);
+            }
+          } else {
+            // Si estaba activo, simplemente cerrarlo
+            item.classList.remove("active");
           }
         });
       }
     });
 
-    // Verificar que el primer item está activo por defecto
-    const firstItem = document.querySelector(".accordion-item");
+    // Asegurar que el primer item está activo por defecto
+    const firstItem = accordionItems[0];
     if (firstItem && !firstItem.classList.contains("active")) {
       firstItem.classList.add("active");
     }
-  } else {
-    console.warn("No se encontraron elementos del acordeón");
   }
 });

@@ -64,6 +64,10 @@ body {
   /* IMPORTANTE: No usar overflow-x: hidden aquí si afecta sticky */
 }
 
+#methodology-section {
+  scroll-margin-top: 90px; /* header 72px + margen extra */
+}
+
 /* ===== TIPOGRAFÍA SEGÚN GUÍA ===== */
 
 /* H1: Semibold 600 · 52px (en desktop) - REVERTIDO A ESTILO ORIGINAL */
