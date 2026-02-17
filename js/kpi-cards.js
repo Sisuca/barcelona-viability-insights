@@ -2,7 +2,7 @@
 
 class KPICardsManager {
   constructor() {
-    console.log("📊 KPICardsManager V15.8 inicializando...");
+    // ELIMINADO: console.log('📊 KPICardsManager V15.8 inicializando...');
     this.kpiContainer = document.getElementById("kpiCardsContainer");
     this.dataProcessor = window.dataProcessorFinal;
 
@@ -16,15 +16,13 @@ class KPICardsManager {
   }
 
   updateKPICards(filters) {
-    console.log("🔄 Actualizando KPI cards con filtros:", filters);
+    // ELIMINADO: console.log('🔄 Actualizando KPI cards con filtros:', filters);
 
     if (
       !this.dataProcessor ||
       typeof this.dataProcessor.processData !== "function"
     ) {
-      console.warn(
-        "⚠️ DataProcessor no disponible, usando valores por defecto",
-      );
+      // ELIMINADO: console.warn('⚠️ DataProcessor no disponible, usando valores por defecto');
       this.updateCardsWithFallback(filters);
       return;
     }
@@ -35,17 +33,17 @@ class KPICardsManager {
       if (data && data.kpiMetrics) {
         this.updateCardsWithData(data.kpiMetrics, filters);
       } else {
-        console.warn("⚠️ No se obtuvieron métricas KPI, usando fallback");
+        // ELIMINADO: console.warn('⚠️ No se obtuvieron métricas KPI, usando fallback');
         this.updateCardsWithFallback(filters);
       }
     } catch (error) {
-      console.error("❌ Error actualizando KPI cards:", error);
+      // ELIMINADO: console.error('❌ Error actualizando KPI cards:', error);
       this.updateCardsWithFallback(filters);
     }
   }
 
   updateCardsWithData(metrics, filters) {
-    console.log("🎯 Actualizando KPI cards con datos reales:", metrics);
+    // ELIMINADO: console.log('🎯 Actualizando KPI cards con datos reales:', metrics);
 
     // Formatear números manualmente
     const salaryFormatted = this.formatNumber(metrics.salary) + " €";
@@ -98,7 +96,7 @@ class KPICardsManager {
   }
 
   updateCardsWithFallback(filters) {
-    console.log("🔄 Usando valores de fallback para KPI cards");
+    // ELIMINADO: console.log('🔄 Usando valores de fallback para KPI cards');
 
     // Valores por defecto
     const salary =
@@ -186,5 +184,5 @@ class KPICardsManager {
 // Exportar al global scope
 if (typeof window !== "undefined") {
   window.kpiCardsManager = new KPICardsManager();
-  console.log("✅ KPICardsManager V15.8 cargado");
+  // ELIMINADO: console.log('✅ KPICardsManager V15.8 cargado');
 }
