@@ -710,10 +710,11 @@
     font-size: 1.4rem;
   }
 
-  /* J. SUBSECCIÓN ACCESIBILIDAD EN MÓVIL */
-  #accessibility-section {
-    margin-top: 2rem;
-    padding-top: 1.5rem;
+  /* J. SUBSECCIÓN ACCESIBILIDAD Y SENIORITY EN MÓVIL */
+  #accessibility-section,
+  #seniority-section {
+    margin-top: 3rem;
+    padding-top: 3rem;
   }
 }
 
