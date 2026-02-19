@@ -6,12 +6,10 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, viewport-fit=cover"
     />
-    <title>
-      Barcelona Viability Insights | Análisis Salarios vs Alquiler 2026
-    </title>
+    <title>Salarios vs alquiler en Barcelona 2026 | Sector digital</title>
     <meta
       name="description"
-      content="Data product interactivo que analiza la viabilidad de vivir en Barcelona cruzando datos reales de salarios y alquileres."
+      content="¿Te puedes permitir vivir en Barcelona? Analiza salarios reales del sector digital y compáralos con el alquiler medio por distrito."
     />
 
     <!-- Fuentes -->
@@ -89,8 +87,7 @@
             ¿Puedes permitirte vivir en Barcelona con tu salario?
           </p>
           <p class="hero-description">
-            Estudio socioeconómico multidimensional de alto impacto para el
-            sector tecnológico y digital
+            Descubre la viabilidad real de cada distrito para profesionales del sector tecnológico y digital
           </p>
 
           <div class="hero-stats">
@@ -117,8 +114,8 @@
             </div>
             <div class="stat-label">
               <em
-                >*Relación entre el alquiler promedio mensual y la mediana del
-                salario bruto mensual agregado.</em
+                >*Porcentaje del salario bruto mensual destinado al alquiler
+                (según valores medios del estudio).</em
               >
             </div>
           </div>
@@ -437,8 +434,6 @@
                 </div>
               </section>
             </article>
-
-            <!-- NO HAY MÁS PÁGINAS REDIRECCIONALES -->
           </main>
         </div>
       </div>
@@ -955,7 +950,7 @@
     <!-- 8. Funcionalidades generales -->
     <script src="js/main.js"></script>
 
-    <!-- 9. NAVEGACIÓN ACTIVA PARA SUBMENÚ DASHBOARD (SOLO SCROLL) - VERSIÓN SIMPLIFICADA -->
+    <!-- 9. Dashboard: Scrollspy submenú -->
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         const sidebar = document.querySelector(".dashboard-sidebar");
@@ -1100,10 +1095,6 @@
 
         // Inicializar al cargar
         updateActiveNav();
-
-        console.log(
-          "✅ Navegación activa del dashboard inicializada (solo scroll)",
-        );
       });
     </script>
   </body>
