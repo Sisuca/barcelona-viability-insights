@@ -22,9 +22,10 @@
 }
 
 .section-header .dashboard-intro {
-  color: var(--neutral-gray);
-  max-width: 800px;
+  color: var(--text-color);
+  max-width: 750px;
   margin: 0 auto;
+  padding: 1.2rem 0;
   font-size: 1rem;
   line-height: 1.6;
   text-align: center;
