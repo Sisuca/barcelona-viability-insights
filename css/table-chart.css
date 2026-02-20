@@ -646,14 +646,6 @@
   max-width: 100%;
 }
 
-.subsection-header .page-description {
-  color: var(--neutral-gray);
-  font-size: 0.95rem;
-  line-height: 1.5;
-  margin-bottom: 0;
-  max-width: 100%;
-}
-
 /* Ajustes para el contenedor de visualización en subsecciones */
 #accessibility-heatmap-container {
   width: 100%;

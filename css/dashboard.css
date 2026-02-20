@@ -310,16 +310,20 @@
 }
 
 .section-description {
-  color: var(--neutral-gray);
-  font-size: 0.9rem;
+  font-size: 0.95rem;
+  color: var(--text-color);
+  opacity: 0.8;
   line-height: 1.5;
-  margin-bottom: 1rem;
+  margin-bottom: 1.2rem;
+  padding-bottom: 1.2rem;
 }
 
 .section-description small {
   font-size: 0.85rem;
-  color: var(--neutral-gray);
+  color: var(--text-color);
   opacity: 0.8;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
 }
 
 /* FIX RESPONSIVE CHARTS */
@@ -347,12 +351,6 @@
 
 #accessibility-section .subsection-header {
   margin-bottom: 2rem;
-}
-
-#accessibility-section .page-description {
-  color: var(--neutral-gray);
-  font-size: 0.95rem;
-  line-height: 1.5;
 }
 
 /* 7. VISUALIZATION CONTAINER */
