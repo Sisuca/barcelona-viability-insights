@@ -2,7 +2,6 @@
 
 class TableManager {
   constructor() {
-    // ELIMINADO: console.log('📋 TableManager V11.8 inicializando...');
     this.tableContainer = document.getElementById("detail-table");
     this.chartContainer = document.getElementById("chart-visualization");
     this.dataProcessor = window.dataProcessorFinal;
@@ -17,13 +16,10 @@ class TableManager {
   }
 
   onFiltersChanged(filters) {
-    // ELIMINADO: console.log('🔄 TableManager: Filtros cambiados', filters);
-
     if (
       !this.dataProcessor ||
       typeof this.dataProcessor.processData !== "function"
     ) {
-      // ELIMINADO: console.warn('⚠️ DataProcessor no disponible, usando datos de fallback');
       this.renderFallbackData();
       return;
     }
@@ -35,18 +31,14 @@ class TableManager {
         this.renderTable(data.tableData);
         this.renderChart(data.chartData);
       } else {
-        // ELIMINADO: console.warn('⚠️ No se obtuvieron datos para tabla/gráfico');
         this.renderFallbackData();
       }
     } catch (error) {
-      // ELIMINADO: console.error('❌ Error procesando datos:', error);
       this.renderFallbackData();
     }
   }
 
   renderTable(tableData) {
-    // ELIMINADO: console.log('📊 Renderizando tabla con', tableData.length, 'elementos');
-
     if (!tableData || tableData.length === 0) {
       this.tableContainer.innerHTML = `
                 <div class="data-message">
@@ -100,7 +92,7 @@ class TableManager {
                 <div class="table-footer">
                     <p class="footer-info">
                         <strong>Leyenda:</strong> 
-                        ✅ Viable (≤30%) • ⚠️ Limitado (31-45%) • ❌ Inviable (≥46%)
+                        ✅ Viable (≤30%) • ⚠️ Limitado (>30% y ≤45%) • ❌ Inviable (>45%)
                     </p>
                 </div>
             </div>
@@ -110,8 +102,6 @@ class TableManager {
   }
 
   renderChart(chartData) {
-    // ELIMINADO: console.log('📈 Renderizando gráfico con', chartData.length, 'elementos');
-
     if (!chartData || chartData.length === 0) {
       this.chartContainer.innerHTML = `
                 <div class="data-message">
@@ -162,7 +152,7 @@ class TableManager {
                 <div class="chart-footer">
                     <p class="footer-info">
                         <strong>Leyenda:</strong> 
-                        ✅ Viable (≤30%) • ⚠️ Limitado (31-45%) • ❌ Inviable (≥46%)
+                        ✅ Viable (≤30%) • ⚠️ Limitado (>30% y ≤45%) • ❌ Inviable (>45%)
                     </p>
                 </div>
             </div>
@@ -172,8 +162,6 @@ class TableManager {
   }
 
   renderFallbackData() {
-    // ELIMINADO: console.log('🔄 Renderizando datos de fallback');
-
     // Datos de ejemplo
     const fallbackTableData = [
       {
@@ -216,7 +204,6 @@ class TableManager {
   }
 
   initializeWithFallback() {
-    // ELIMINADO: console.log('🎬 Inicializando TableManager con datos de fallback');
     this.renderFallbackData();
   }
 
@@ -264,5 +251,4 @@ class TableManager {
 // Exportar al global scope
 if (typeof window !== "undefined") {
   window.tableManager = new TableManager();
-  // ELIMINADO: console.log('✅ TableManager V11.8 cargado (gráfico alineado 6 columnas)');
 }

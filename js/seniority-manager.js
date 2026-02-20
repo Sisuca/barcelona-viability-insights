@@ -1,10 +1,8 @@
-// js/seniority-manager.js - VERSIÓN 1.4 COMPLETA Y CORREGIDA
+// js/seniority-manager.js
 // Manager para gráficos de la subsección Seniority
 
 class SeniorityManager {
   constructor() {
-    // ELIMINADO: console.log("👥 SeniorityManager V1.4 inicializando...");
-
     // Referencias a contenedores (ahora ya son .html-chart)
     this.comparisonChartContainer = document.getElementById(
       "seniority-comparison-chart",
@@ -18,14 +16,8 @@ class SeniorityManager {
 
     // Inicializar automáticamente si los contenedores existen
     if (this.comparisonChartContainer || this.allCategoriesChartContainer) {
-      // ELIMINADO: console.log("🎯 Contenedores de Seniority encontrados, inicializando...");
       this.initialize();
     } else {
-      // ELIMINADO: console.warn("⚠️ Contenedores de Seniority no encontrados");
-      // ELIMINADO: console.log("🔍 Buscando contenedores:", {
-      // ELIMINADO:   comparison: this.comparisonChartContainer,
-      // ELIMINADO:   allCategories: this.allCategoriesChartContainer,
-      // ELIMINADO: });
     }
   }
 
@@ -35,21 +27,16 @@ class SeniorityManager {
       !this.dataProcessor ||
       typeof this.dataProcessor.getSeniorityComparisonData !== "function"
     ) {
-      // ELIMINADO: console.log("⏳ Esperando DataProcessor...");
       setTimeout(() => this.initialize(), 100);
       return;
     }
 
-    // ELIMINADO: console.log("✅ DataProcessor disponible");
-
     // Renderizar gráficos inmediatamente
-    // ELIMINADO: console.log("🚀 Renderizando gráficos de Seniority...");
     this.renderComparisonChart();
     this.renderAllCategoriesChart();
 
     // Escuchar recarga de datos
     document.addEventListener("dataLoaded", () => {
-      // ELIMINADO: console.log("📊 Datos recargados, actualizando gráficos de Seniority...");
       this.renderComparisonChart();
       this.renderAllCategoriesChart();
     });
@@ -60,10 +47,7 @@ class SeniorityManager {
    * AHORA: Genera solo el contenido interno, sin div .html-chart adicional
    */
   renderComparisonChart() {
-    // ELIMINADO: console.log("📊 Renderizando gráfico de comparativa Junior vs Senior por categoría...");
-
     if (!this.comparisonChartContainer) {
-      // ELIMINADO: console.error("❌ Contenedor #seniority-comparison-chart no encontrado");
       return;
     }
 
@@ -71,7 +55,6 @@ class SeniorityManager {
       !this.dataProcessor ||
       typeof this.dataProcessor.getSeniorityComparisonData !== "function"
     ) {
-      // ELIMINADO: console.error("❌ DataProcessor.getSeniorityComparisonData() no disponible");
       this.showErrorMessage(
         this.comparisonChartContainer,
         "DataProcessor no disponible",
@@ -88,8 +71,6 @@ class SeniorityManager {
           "No se obtuvieron datos para el gráfico de comparativa",
         );
       }
-
-      // ELIMINADO: console.log("✅ Datos obtenidos para gráfico de comparativa:", chartData);
 
       // ESCALA FIJA: 0% a 50% (según especificaciones)
       const maxEffort = 50; // Escala fija, no dinámica
@@ -155,16 +136,14 @@ class SeniorityManager {
                             <span class="color-box" style="background-color: var(--secondary-blue)"></span>
                             Senior
                         </span>
-                        • Porcentaje: % esfuerzo salarial mínimo por categoría y nivel (sobre salario bruto).
+                        • Porcentaje de esfuerzo salarial mínimo por categoría y nivel (sobre salario bruto).
                     </p>
                 </div>
             `;
 
       // Insertar directamente en el contenedor (que ya es .html-chart)
       this.comparisonChartContainer.innerHTML = chartHTML;
-      // ELIMINADO: console.log(`✅ Gráfico de comparativa renderizado: ${chartData.length} columnas con eje Y (0-50%), SIN doble div`);
     } catch (error) {
-      // ELIMINADO: console.error("❌ Error renderizando gráfico de comparativa:", error);
       this.showErrorMessage(
         this.comparisonChartContainer,
         error.message ||
@@ -178,10 +157,7 @@ class SeniorityManager {
    * AHORA: Genera solo el contenido interno, sin div .html-chart adicional
    */
   renderAllCategoriesChart() {
-    // ELIMINADO: console.log("📊 Renderizando gráfico de todas las categorías Junior vs Senior...");
-
     if (!this.allCategoriesChartContainer) {
-      // ELIMINADO: console.error("❌ Contenedor #salary-difference-chart no encontrado");
       return;
     }
 
@@ -189,7 +165,6 @@ class SeniorityManager {
       !this.dataProcessor ||
       typeof this.dataProcessor.getAllCategoriesComparisonData !== "function"
     ) {
-      // ELIMINADO: console.error("❌ DataProcessor.getAllCategoriesComparisonData() no disponible");
       this.showErrorMessage(
         this.allCategoriesChartContainer,
         "DataProcessor no disponible",
@@ -206,8 +181,6 @@ class SeniorityManager {
           "No se obtuvieron datos para el gráfico de todas las categorías",
         );
       }
-
-      // ELIMINADO: console.log("✅ Datos obtenidos para gráfico de todas las categorías:", chartData);
 
       // Ordenar: Junior primero, Senior segundo
       const sortedData = [...chartData].sort((a, b) =>
@@ -262,16 +235,14 @@ class SeniorityManager {
                             <span class="color-box" style="background-color: var(--secondary-blue)"></span>
                             Senior
                         </span>
-                        • Porcentaje: % esfuerzo salarial mínimo para todas las categorías (sobre salario bruto).
+                        • Porcentaje de esfuerzo salarial mínimo para todas las categorías (sobre salario bruto).
                     </p>
                 </div>
             `;
 
       // Insertar directamente en el contenedor (que ya es .html-chart)
       this.allCategoriesChartContainer.innerHTML = chartHTML;
-      // ELIMINADO: console.log(`✅ Gráfico de todas las categorías renderizado: ${sortedData.length} barras, SIN doble div`);
     } catch (error) {
-      // ELIMINADO: console.error("❌ Error renderizando gráfico de todas las categorías:", error);
       this.showErrorMessage(
         this.allCategoriesChartContainer,
         error.message ||
@@ -323,7 +294,5 @@ class SeniorityManager {
 
 // Inicializar cuando el DOM esté listo
 document.addEventListener("DOMContentLoaded", () => {
-  // ELIMINADO: console.log("🏁 DOM listo - Inicializando SeniorityManager V1.4...");
   window.seniorityManager = new SeniorityManager();
-  // ELIMINADO: console.log("✅ SeniorityManager V1.4 cargado (sin doble div, estructura optimizada)");
 });

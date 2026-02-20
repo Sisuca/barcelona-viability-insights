@@ -1,15 +1,6 @@
 // js/accessibility-heatmap.js - VERSIÓN 17.3
-// Clases de viabilidad corregidas: cell-viable, cell-limitado, cell-inviable
-// Fondo blanco en contenedor
-// Ancho por Sants-Montjuïc
-// Salto de línea Sarrià-Sant Gervasi con data-district
-// Resize optimizado sin saltos visuales
-// SIN WRAPPER .mobile-tables-wrapper
-
 class AccessibilityHeatmapManager {
   constructor() {
-    // ELIMINADO: console.log("🔥 AccessibilityHeatmapManager V17.3 inicializando...");
-
     this.container = document.getElementById("accessibility-heatmap-container");
     this.dataProcessor = window.dataProcessorFinal;
     this.hasRendered = false;
@@ -18,10 +9,8 @@ class AccessibilityHeatmapManager {
     this.currentView = null;
 
     if (this.container) {
-      // ELIMINADO: console.log("🎯 Contenedor de heatmap encontrado, inicializando...");
       this.initialize();
     } else {
-      // ELIMINADO: console.warn("⚠️ Contenedor #accessibility-heatmap-container no encontrado");
     }
   }
 
@@ -30,7 +19,6 @@ class AccessibilityHeatmapManager {
       !this.dataProcessor ||
       typeof this.dataProcessor.getAccessibilityMatrix !== "function"
     ) {
-      // ELIMINADO: console.log("⏳ Esperando DataProcessor...");
       setTimeout(() => this.initialize(), 100);
       return;
     }
@@ -44,8 +32,6 @@ class AccessibilityHeatmapManager {
       const newView = window.innerWidth <= 768 ? "mobile" : "desktop";
 
       if (newView !== this.currentView) {
-        // ELIMINADO: console.log(`📱 Resize: ${this.currentView} → ${newView}`);
-
         // Ocultar inmediatamente para evitar saltos
         if (this.container) {
           this.container.style.visibility = "hidden";
@@ -67,10 +53,8 @@ class AccessibilityHeatmapManager {
     setTimeout(() => {
       const chartContainer = document.getElementById("district-ranking-chart");
       if (chartContainer) {
-        // ELIMINADO: console.log("✅ Contenedor district-ranking-chart encontrado");
         this.renderDistrictChart();
       } else {
-        // ELIMINADO: console.log("⏳ Esperando contenedor district-ranking-chart...");
         const interval = setInterval(() => {
           if (document.getElementById("district-ranking-chart")) {
             clearInterval(interval);
@@ -120,23 +104,17 @@ class AccessibilityHeatmapManager {
 
       this.hasRendered = true;
     } catch (error) {
-      // ELIMINADO: console.error("❌ Error:", error);
       this.showErrorMessage(`Error: ${error.message}`);
     }
   }
 
   // ============================================================
-  // VISTA MÓVIL: 7 tablas sueltas (SIN WRAPPER)
-  // ✅ Clases de viabilidad corregidas: cell-viable, cell-limitado, cell-inviable
-  // ✅ Fondo blanco en contenedor
-  // ✅ Ancho por Sants-Montjuïc
-  // ✅ Salto de línea Sarrià-Sant Gervasi
+  // VISTA MÓVIL: 7 tablas y gráficos
+  // Ancho por Sants-Montjuïc
+  // Salto de línea Sarrià-Sant Gervasi
   // ============================================================
 
   createMobileHeatmapView(heatmapData) {
-    // ELIMINADO: console.log("📱 Renderizando móvil (V17.3 - clases corregidas, fondo blanco, ancho fijo)...");
-
-    // LIMPIAR COMPLETAMENTE
     this.container.innerHTML = "";
 
     // ===== FONDO BLANCO EN EL CONTENEDOR =====
@@ -261,8 +239,6 @@ class AccessibilityHeatmapManager {
       // AÑADIR LA TABLA DIRECTAMENTE AL CONTENEDOR (SIN WRAPPER)
       this.container.appendChild(table);
     });
-
-    // ELIMINADO: console.log("✅ Vista móvil renderizada: 7 tablas sueltas, clases corregidas, fondo blanco, ancho unificado");
   }
 
   // ============================================================
@@ -270,8 +246,6 @@ class AccessibilityHeatmapManager {
   // ============================================================
 
   createTransposedHeatmapTable(heatmapData) {
-    // ELIMINADO: console.log("🎨 Creando matriz transpuesta con agrupación por categorías...");
-
     this.container.innerHTML = "";
     this.container.style.backgroundColor = ""; // Restaurar fondo por defecto
     this.container.style.padding = "";
@@ -402,15 +376,14 @@ class AccessibilityHeatmapManager {
     footerInfo.className = "footer-info";
     footerInfo.innerHTML = `
             <strong>Leyenda:</strong> 
-            ✅ Viable (≤30%) • ⚠️ Limitado (31-45%) • ❌ Inviable (≥46%)
-            • Porcentaje: menor esfuerzo salarial posible por distrito (sobre salario bruto).
+            ✅ Viable (≤30%) • ⚠️ Limitado (>30% y ≤45%) • ❌ Inviable (>45%)
+            • Porcentaje de menor esfuerzo salarial posible por distrito (sobre salario bruto).
         `;
 
     footer.appendChild(footerInfo);
     tableContainer.appendChild(footer);
 
     this.container.appendChild(tableContainer);
-    // ELIMINADO: console.log("✅ Matriz transpuesta creada exitosamente");
   }
 
   // ============================================================
@@ -418,12 +391,9 @@ class AccessibilityHeatmapManager {
   // ============================================================
 
   renderDistrictChart() {
-    // ELIMINADO: console.log("📊 Renderizando gráfico de ranking por distritos...");
-
     const chartContainer = document.getElementById("district-ranking-chart");
 
     if (!chartContainer) {
-      // ELIMINADO: console.error("❌ Contenedor #district-ranking-chart no encontrado");
       return;
     }
 
@@ -431,7 +401,6 @@ class AccessibilityHeatmapManager {
       !this.dataProcessor ||
       typeof this.dataProcessor.getDistrictRanking !== "function"
     ) {
-      // ELIMINADO: console.error("❌ DataProcessor.getDistrictRanking() no disponible");
       chartContainer.innerHTML = `
                 <div class="data-message">
                     <div class="message-icon">📭</div>
@@ -485,17 +454,15 @@ class AccessibilityHeatmapManager {
                     <div class="chart-footer">
                         <p class="footer-info">
                             <strong>Leyenda:</strong> 
-                            ✅ Viable (≤30%) • ⚠️ Limitado (31-45%) • ❌ Inviable (≥46%)
-                            • Porcentaje: menor esfuerzo salarial posible en el distrito.
+                            ✅ Viable (≤30%) • ⚠️ Limitado (>30% y ≤45%) • ❌ Inviable (>45%)
+                            • Porcentaje de menor esfuerzo salarial posible por distrito (sobre salario bruto).
                         </p>
                     </div>
                 </div>
             `;
 
       chartContainer.innerHTML = chartHTML;
-      // ELIMINADO: console.log(`✅ Gráfico de distritos renderizado: ${districtRanking.length} distritos`);
     } catch (error) {
-      // ELIMINADO: console.error("❌ Error renderizando gráfico de distritos:", error);
       chartContainer.innerHTML = `
                 <div class="data-message">
                     <div class="message-icon">📭</div>
@@ -569,7 +536,5 @@ class AccessibilityHeatmapManager {
 
 // Inicializar cuando el DOM esté listo
 document.addEventListener("DOMContentLoaded", () => {
-  // ELIMINADO: console.log("🏁 DOM listo - Inicializando AccessibilityHeatmapManager V17.3...");
   window.accessibilityHeatmapManager = new AccessibilityHeatmapManager();
-  // ELIMINADO: console.log("✅ AccessibilityHeatmapManager V17.3 cargado (clases corregidas, fondo blanco, ancho fijo)");
 });

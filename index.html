@@ -563,10 +563,12 @@
                 </p>
                 <ul>
                   <li>
-                    Ofertas a jornada completa y con salario publicado
-                    (diciembre 2025).
+                    Solo se incluyeron ofertas a jornada completa con salario
+                    publicado (diciembre 2025).
                   </li>
-                  <li>Categorías: Informática, Marketing y Diseño.</li>
+                  <li>
+                    Categorías analizadas: Tecnología, Marketing y Diseño.
+                  </li>
                 </ul>
 
                 <p>
@@ -574,28 +576,33 @@
                   en alquiler (Idealista).
                 </p>
                 <ul>
-                  <li>Muestreo por orden de publicación. (enero 2026).</li>
+                  <li>Muestreo por orden de publicación (enero 2026).</li>
                   <li>
                     Tipologías: 10 estudios y 10 viviendas de 1 habitación por
-                    distrito. Los distritos que no alcanzaron este umbral
+                    distrito. Los distritos con muestra insuficiente
                     (Horta-Guinardó, Nou Barris y Sant Andreu) fueron excluidos
-                    del análisis para evitar sesgos derivados de una muestra
-                    insuficiente.
+                    para evitar sesgos.
                   </li>
                 </ul>
 
                 <h4>Procesamiento y Limpieza</h4>
                 <ul>
                   <li>
-                    Uso de <strong>salario bruto mensual</strong>, extraído del
-                    valor medio del rango salarial de las ofertas publicadas.
+                    Salario mensual: se ha utilizado el
+                    <strong>salario bruto mensual</strong>, calculando el valor
+                    medio del rango publicado en las ofertas.
                   </li>
                   <li>
-                    Uso de <strong>medianas</strong> en lugar de promedios para
-                    el salario mensual por categoría y/o nivel, reduciendo el
-                    impacto de valores atípicos.
+                    Mediana salarial: se ha calculado la
+                    <strong>mediana</strong> de cada categoría y nivel
+                    profesional para reducir el impacto de valores atípicos.
                   </li>
-                  <li>Unificación de formatos de distritos y barrios.</li>
+                  <li>
+                    Unificación de tipologías: se han incluido
+                    <strong>10 estudios y 10 viviendas de 1 habitación</strong>
+                    de cada distrito, para garantizar consistencia en los
+                    resultados.
+                  </li>
                 </ul>
               </div>
             </div>
@@ -627,9 +634,9 @@
 
                 <h4>Clasificación de viabilidad</h4>
                 <ul>
-                  <li>✅ Viable (&lt;30%)</li>
-                  <li>⚠️ Limitado (31-45%)</li>
-                  <li>❌ Inviable (&gt;46%)</li>
+                  <li>✅ Viable (≤30%)</li>
+                  <li>⚠️ Limitado (>30% y ≤45%)</li>
+                  <li>❌ Inviable (>45%)</li>
                 </ul>
 
                 <h4>Modelado de Datos</h4>
