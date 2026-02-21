@@ -1,18 +1,15 @@
-// ================================
-// APP INITIALIZER - VERSIÓN V15.8.1
-// ================================
+// ================
+// APP INITIALIZER
+// ================
 
 class AppInitializer {
   constructor() {
-    // ELIMINADO: console.log('🚀 AppInitializer V15.8.1 inicializando...');
     this.initAttempts = 0;
     this.maxAttempts = 10;
     this.init();
   }
 
   init() {
-    // ELIMINADO: console.log('🎯 Iniciando secuencia de arranque...');
-
     // Escuchar cuando el DOM esté listo
     if (document.readyState === "loading") {
       document.addEventListener("DOMContentLoaded", () =>
@@ -24,11 +21,8 @@ class AppInitializer {
   }
 
   startInitialization() {
-    // ELIMINADO: console.log('🔍 Verificando dependencias...');
-
     // Verificar que los datos básicos estén cargados
     if (!this.areDataFilesLoaded()) {
-      // ELIMINADO: console.warn('⚠️ Datos aún no cargados, reintentando...');
       this.retryInitialization();
       return;
     }
@@ -43,15 +37,10 @@ class AppInitializer {
       typeof RENT_DATA !== "undefined" && RENT_DATA.length > 0;
     const profilesDataLoaded =
       typeof PROFILES_DATA !== "undefined" && PROFILES_DATA.length > 0;
-
-    // ELIMINADO: console.log(`📊 Datos cargados: Rentas=${rentDataLoaded ? '✅' : '❌'}, Perfiles=${profilesDataLoaded ? '✅' : '❌'}`);
-
     return rentDataLoaded && profilesDataLoaded;
   }
 
   checkManagers() {
-    // ELIMINADO: console.log('👨‍💼 Verificando managers...');
-
     const managers = {
       dataProcessorFinal: window.dataProcessorFinal,
       filtersManager: window.filtersManager,
@@ -61,22 +50,11 @@ class AppInitializer {
       seniorityManager: window.seniorityManager,
     };
 
-    // DIAGNÓSTICO ESPECÍFICO PARA SENIORITY MANAGER
-    // ELIMINADO: console.log('🔍 Diagnóstico SeniorityManager:', {
-    // ELIMINADO:   existeEnWindow: 'seniorityManager' in window,
-    // ELIMINADO:   tipo: typeof window.seniorityManager,
-    // ELIMINADO:   valor: window.seniorityManager
-    // ELIMINADO: });
-
     // Si seniorityManager no existe, intentar crearlo manualmente
     if (!window.seniorityManager && typeof SeniorityManager !== "undefined") {
-      // ELIMINADO: console.log('🔄 Intentando instanciar SeniorityManager manualmente...');
       try {
         window.seniorityManager = new SeniorityManager();
-        // ELIMINADO: console.log('✅ SeniorityManager instanciado manualmente');
-      } catch (error) {
-        // ELIMINADO: console.error('❌ Error instanciando SeniorityManager:', error);
-      }
+      } catch (error) {}
     }
 
     const essentialManagersReady =
@@ -86,10 +64,8 @@ class AppInitializer {
       managers.tableManager;
 
     if (essentialManagersReady) {
-      // ELIMINADO: console.log('✅ Managers esenciales listos:', Object.keys(managers).filter(k => managers[k]).join(', '));
       this.initializeDashboard();
     } else {
-      // ELIMINADO: console.log('⏳ Esperando managers...', Object.keys(managers).filter(k => !managers[k]));
       this.retryInitialization();
     }
   }
@@ -98,15 +74,6 @@ class AppInitializer {
     this.initAttempts++;
 
     if (this.initAttempts >= this.maxAttempts) {
-      // ELIMINADO: console.error('❌ Máximo de intentos alcanzado. Verifica:');
-      // ELIMINADO: console.error('1. Orden de scripts en index.html');
-      // ELIMINADO: console.error('2. Variables globales: RENT_DATA, PROFILES_DATA');
-      // ELIMINADO: console.error('3. Managers: dataProcessorFinal, filtersManager, etc.');
-      // ELIMINADO: console.error('4. SeniorityManager:', {
-      // ELIMINADO:     enWindow: 'seniorityManager' in window,
-      // ELIMINADO:     claseDisponible: typeof SeniorityManager !== 'undefined',
-      // ELIMINADO:     scriptsCargados: document.querySelectorAll('script[src*="seniority"]').length
-      // ELIMINADO: });
       this.showErrorState();
       return;
     }
@@ -115,20 +82,15 @@ class AppInitializer {
   }
 
   initializeDashboard() {
-    // ELIMINADO: console.log('🎬 Inicializando dashboard con filtros por defecto...');
-
     try {
       // Obtener filtros iniciales
       const initialFilters = window.filtersManager.getCurrentFilters();
-      // ELIMINADO: console.log('🔧 Filtros iniciales:', initialFilters);
-
       // Inicializar KPIs
       if (
         window.kpiCardsManager &&
         typeof window.kpiCardsManager.updateKPICards === "function"
       ) {
         window.kpiCardsManager.updateKPICards(initialFilters);
-        // ELIMINADO: console.log('✅ KPIs inicializados');
       }
 
       // Inicializar tabla y gráfico
@@ -137,7 +99,6 @@ class AppInitializer {
         typeof window.tableManager.onFiltersChanged === "function"
       ) {
         window.tableManager.onFiltersChanged(initialFilters);
-        // ELIMINADO: console.log('✅ Tabla y gráfico inicializados');
       }
 
       // Inicializar matriz de calor si está en la página correcta
@@ -151,7 +112,6 @@ class AppInitializer {
           document.querySelector("#salary-ratio.dashboard-page.active");
 
         if (isAccessibilityPage) {
-          // ELIMINADO: console.log('🔥 Inicializando matriz de calor...');
           setTimeout(
             () => window.accessibilityHeatmapManager.renderHeatmap(),
             300,
@@ -164,24 +124,13 @@ class AppInitializer {
         window.seniorityManager &&
         typeof window.seniorityManager.renderComparisonChart === "function"
       ) {
-        // ELIMINADO: console.log('👥 SeniorityManager disponible, renderizando gráficos...');
         setTimeout(() => {
           try {
             window.seniorityManager.renderComparisonChart();
             window.seniorityManager.renderAllCategoriesChart();
-            // ELIMINADO: console.log('✅ Gráficos de Seniority renderizados');
-          } catch (error) {
-            // ELIMINADO: console.error('❌ Error renderizando gráficos de Seniority:', error);
-          }
+          } catch (error) {}
         }, 500);
       } else {
-        // ELIMINADO: console.warn('⚠️ SeniorityManager no disponible o no tiene métodos requeridos');
-        // ELIMINADO: console.log('🔍 Estado SeniorityManager:', {
-        // ELIMINADO:     existe: !!window.seniorityManager,
-        // ELIMINADO:     tieneRenderComparisonChart: window.seniorityManager && typeof window.seniorityManager.renderComparisonChart,
-        // ELIMINADO:     tieneRenderAllCategoriesChart: window.seniorityManager && typeof window.seniorityManager.renderAllCategoriesChart
-        // ELIMINADO: });
-
         // Intentar renderizar manualmente si los contenedores existen
         const comparisonContainer = document.getElementById(
           "seniority-comparison-chart",
@@ -191,17 +140,13 @@ class AppInitializer {
         );
 
         if (comparisonContainer && allCategoriesContainer) {
-          // ELIMINADO: console.log('🔄 Intentando renderizar gráficos de Seniority manualmente...');
           this.renderSeniorityFallbackCharts();
         }
       }
 
       // Configurar event listeners para cambios de filtros
       this.setupEventListeners();
-
-      // ELIMINADO: console.log('🎉 Dashboard inicializado correctamente');
     } catch (error) {
-      // ELIMINADO: console.error('❌ Error inicializando dashboard:', error);
       this.showErrorState();
     }
   }
@@ -210,8 +155,6 @@ class AppInitializer {
    * Método de fallback para renderizar gráficos de Seniority si el manager no funciona
    */
   renderSeniorityFallbackCharts() {
-    // ELIMINADO: console.log('🔄 Renderizando gráficos de Seniority de fallback...');
-
     // Datos estáticos para gráfico de comparativa
     const comparisonData = [
       { category: "Technology", level: "Junior", effort: 35.73 },
@@ -272,7 +215,6 @@ class AppInitializer {
             </p></div></div>`;
 
       comparisonContainer.innerHTML = html;
-      // ELIMINADO: console.log('✅ Gráfico de comparativa (fallback) renderizado');
     }
 
     // Renderizar gráfico de todas las categorías
@@ -322,30 +264,23 @@ class AppInitializer {
             </p></div></div>`;
 
       allCategoriesContainer.innerHTML = html;
-      // ELIMINADO: console.log('✅ Gráfico de todas las categorías (fallback) renderizado');
     }
   }
 
   setupEventListeners() {
     // Los managers ya tienen sus propios listeners, esto es para coordinación adicional
-    // ELIMINADO: console.log('👂 Configurando listeners de aplicación...');
 
     // Escuchar errores de carga
-    window.addEventListener("error", (event) => {
-      // ELIMINADO: console.error('🚨 Error capturado:', event.error);
-    });
+    window.addEventListener("error", (event) => {});
 
     // Escuchar cambios de página para inicializar componentes específicos
     document.addEventListener("pageChanged", (event) => {
-      // ELIMINADO: console.log('📄 Cambio de página detectado:', event.detail.pageId);
-
       // Si se cambia a la página de accesibilidad, inicializar la matriz
       if (
         event.detail.pageId === "salary-ratio" &&
         window.accessibilityHeatmapManager &&
         typeof window.accessibilityHeatmapManager.renderHeatmap === "function"
       ) {
-        // ELIMINADO: console.log('🔥 Página de accesibilidad detectada, renderizando matriz...');
         setTimeout(
           () => window.accessibilityHeatmapManager.renderHeatmap(),
           200,
@@ -354,19 +289,15 @@ class AppInitializer {
 
       // Si se cambia a la página de seniority, inicializar los gráficos
       if (event.detail.pageId === "seniority-section") {
-        // ELIMINADO: console.log('👥 Página de seniority detectada');
-
         if (
           window.seniorityManager &&
           typeof window.seniorityManager.renderComparisonChart === "function"
         ) {
-          // ELIMINADO: console.log('🔄 Renderizando gráficos de Seniority...');
           setTimeout(() => {
             window.seniorityManager.renderComparisonChart();
             window.seniorityManager.renderAllCategoriesChart();
           }, 200);
         } else {
-          // ELIMINADO: console.log('🔄 Usando fallback para gráficos de Seniority...');
           setTimeout(() => this.renderSeniorityFallbackCharts(), 200);
         }
       }
@@ -412,5 +343,3 @@ class AppInitializer {
 document.addEventListener("DOMContentLoaded", () => {
   window.appInitializer = new AppInitializer();
 });
-
-// ELIMINADO: console.log('📦 AppInitializer V15.8.1 cargado (esperando DOM)');

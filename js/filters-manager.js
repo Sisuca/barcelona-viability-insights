@@ -1,10 +1,8 @@
 // js/filters-manager.js - GESTOR DE FILTROS ACTUALIZADO
-// Versión: 15.8.2 - Sin dependencia de URL, siempre filtros por defecto
+// Versión sin dependencia de URL, siempre filtros por defecto
 
 class FiltersManager {
   constructor() {
-    // ELIMINADO: console.log("🎛️ FiltersManager V15.8.2 inicializando...");
-
     // Referencias a los elementos del DOM
     this.categoryFilter = document.getElementById("categoryFilter");
     this.levelFilter = document.getElementById("levelFilter");
@@ -29,15 +27,10 @@ class FiltersManager {
 
   init() {
     if (!this.validateElements()) {
-      // ELIMINADO: console.error("❌ No se encontraron todos los elementos de filtro");
       return;
     }
 
-    // ELIMINADO: console.log("✅ Todos los elementos de filtro encontrados");
-
     // 1. NO CARGAR estado desde URL - usar filtros por defecto siempre
-    // ELIMINADO: console.log("📥 Usando filtros por defecto:", this.currentFilters);
-
     // 2. Configurar el filtro de distritos con opciones dinámicas
     this.populateDistrictFilter();
 
@@ -50,12 +43,9 @@ class FiltersManager {
     // 5. Notificar estado inicial a otros componentes
     setTimeout(() => {
       this.notifyOtherManagers();
-      // 🚫 NO guardar en URL
+      // NO guardar en URL
       // this.updateURL(); ← ELIMINADO
     }, 500);
-
-    // ELIMINADO: console.log("✅ FiltersManager inicializado correctamente");
-    // ELIMINADO: console.log("🔄 Filtros iniciales (siempre por defecto):", this.currentFilters);
   }
 
   validateElements() {
@@ -68,12 +58,6 @@ class FiltersManager {
 
     return elements.every((element) => element !== null);
   }
-
-  // 🚫 MÉTODO ELIMINADO - No cargamos filtros desde URL
-  // loadInitialState() { ... } ← COMPLETAMENTE ELIMINADO
-
-  // 🚫 MÉTODO ELIMINADO - No validamos filtros de URL
-  // validateUrlFilters() { ... } ← COMPLETAMENTE ELIMINADO
 
   populateDistrictFilter() {
     if (!this.districtFilter) return;
@@ -151,24 +135,20 @@ class FiltersManager {
   }
 
   handleFilterChange(filterType, value) {
-    // ELIMINADO: console.log(`🔄 Cambio en filtro ${filterType}: ${value}`);
-
     // Actualizar el estado
     this.currentFilters[filterType] = value;
 
     // Actualizar la UI del filtro específico
     this.updateFilterUI(filterType);
 
-    // 🚫 NO guardar estado en URL
+    // NO guardar estado en URL
     // this.updateURL(); ← ELIMINADO
 
-    // ✅ Solo guardar en localStorage (opcional)
+    // Solo guardar en localStorage (opcional)
     this.saveState();
 
     // Notificar a otros managers
     this.notifyOtherManagers();
-
-    // ELIMINADO: console.log("📊 Filtros actuales:", this.currentFilters);
   }
 
   updateFilterUI(filterType) {
@@ -205,7 +185,6 @@ class FiltersManager {
     });
 
     document.dispatchEvent(filterEvent);
-    // ELIMINADO: console.log("📢 Evento filtersChanged despachado");
   }
 
   saveState() {
@@ -214,33 +193,11 @@ class FiltersManager {
         "dashboardFilters",
         JSON.stringify(this.currentFilters),
       );
-      // ELIMINADO: console.log("💾 Estado guardado en localStorage");
-    } catch (error) {
-      // ELIMINADO: console.warn("⚠️ No se pudo guardar en localStorage:", error);
-    }
+    } catch (error) {}
   }
 
-  // 🚫 MÉTODO ELIMINADO - No actualizamos URL con filtros
-  /*
-    updateURL() {
-        const params = new URLSearchParams();
-        if (this.currentFilters.category !== 'Technology') params.set('category', this.currentFilters.category);
-        if (this.currentFilters.level !== 'Senior') params.set('level', this.currentFilters.level);
-        if (this.currentFilters.type !== 'Estudio') params.set('type', this.currentFilters.type);
-        if (this.currentFilters.district !== 'Ciutat Vella') params.set('district', this.currentFilters.district);
-        
-        const queryString = params.toString();
-        const newHash = queryString ? `#vision-general?${queryString}` : '#vision-general';
-        
-        history.replaceState(null, null, newHash);
-        console.log('🔗 URL actualizada:', newHash);
-    }
-    */
-
-  // ✅ Mantenemos resetFilters pero sin actualizar URL
+  // Mantenemos resetFilters pero sin actualizar URL
   resetFilters() {
-    // ELIMINADO: console.log("🔄 Reiniciando filtros a valores por defecto...");
-
     // Restaurar filtros por defecto
     this.currentFilters = {
       category: "Technology",
@@ -255,14 +212,9 @@ class FiltersManager {
     // Actualizar distritos (por si hubo cambios)
     this.populateDistrictFilter();
 
-    // 🚫 NO actualizar URL
-    // this.updateURL(); ← ELIMINADO
-
-    // ✅ Solo guardar en localStorage y notificar
+    // Solo guardar en localStorage y notificar
     this.saveState();
     this.notifyOtherManagers();
-
-    // ELIMINADO: console.log("✅ Filtros reiniciados:", this.currentFilters);
 
     // Mostrar mensaje de confirmación
     this.showResetConfirmation();
@@ -332,7 +284,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const initFiltersManager = () => {
     if (window.dataProcessorFinal) {
       window.filtersManager = new FiltersManager();
-      // ELIMINADO: console.log("🚀 FiltersManager V15.8.2 cargado y listo (sin dependencia de URL)");
     } else {
       setTimeout(initFiltersManager, 100);
     }

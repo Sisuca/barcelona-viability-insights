@@ -1,20 +1,13 @@
 // data-processor.js - PROCESADOR DE DATOS CON CARGUE ROBUSTO
-// // Versión: 15.8 - Con método getDistrictRanking() corregido (mínimo esfuerzo por distrito)
 
 class DataProcessorFinal {
   constructor() {
-    // ELIMINADO: console.log('🧮 DataProcessorFinal V4.3.3 inicializando...');
-
     // INTELIGENTE: Buscar datos en múltiples ubicaciones posibles
     this.profilesData = this.findProfilesData();
     this.rentData = this.findRentData();
 
-    // ELIMINADO: console.log(`✅ ${this.profilesData.length} perfiles cargados`);
-    // ELIMINADO: console.log(`✅ ${this.rentData.length} alquileres cargados`);
-
     // Si no hay datos, esperar y reintentar
     if (this.profilesData.length === 0 || this.rentData.length === 0) {
-      // ELIMINADO: console.warn('⚠️ Datos insuficientes, se intentará recargar en uso');
     }
   }
 
@@ -22,33 +15,26 @@ class DataProcessorFinal {
    * Busca datos de perfiles en múltiples ubicaciones
    */
   findProfilesData() {
-    // ELIMINADO: console.log('🔍 Buscando datos de perfiles...');
-
     // 1. Primero intentar window.PROFILES_DATA (mayúsculas)
     if (window.PROFILES_DATA && Array.isArray(window.PROFILES_DATA)) {
-      // ELIMINADO: console.log('📥 Encontrado: window.PROFILES_DATA');
       return window.PROFILES_DATA;
     }
 
     // 2. Intentar window.profilesData (minúsculas)
     if (window.profilesData && Array.isArray(window.profilesData)) {
-      // ELIMINADO: console.log('📥 Encontrado: window.profilesData');
       return window.profilesData;
     }
 
     // 3. Intentar variable global PROFILES_DATA
     if (typeof PROFILES_DATA !== "undefined" && Array.isArray(PROFILES_DATA)) {
-      // ELIMINADO: console.log('📥 Encontrado: PROFILES_DATA (global)');
       return PROFILES_DATA;
     }
 
     // 4. Intentar variable global profilesData
     if (typeof profilesData !== "undefined" && Array.isArray(profilesData)) {
-      // ELIMINADO: console.log('📥 Encontrado: profilesData (global)');
       return profilesData;
     }
 
-    // ELIMINADO: console.error('❌ No se encontraron datos de perfiles en ningún lugar');
     return [];
   }
 
@@ -56,33 +42,26 @@ class DataProcessorFinal {
    * Busca datos de alquileres en múltiples ubicaciones
    */
   findRentData() {
-    // ELIMINADO: console.log('🔍 Buscando datos de alquileres...');
-
     // 1. Primero intentar window.RENT_DATA (mayúsculas)
     if (window.RENT_DATA && Array.isArray(window.RENT_DATA)) {
-      // ELIMINADO: console.log('📥 Encontrado: window.RENT_DATA');
       return window.RENT_DATA;
     }
 
     // 2. Intentar window.rentData (minúsculas)
     if (window.rentData && Array.isArray(window.rentData)) {
-      // ELIMINADO: console.log('📥 Encontrado: window.rentData');
       return window.rentData;
     }
 
     // 3. Intentar variable global RENT_DATA
     if (typeof RENT_DATA !== "undefined" && Array.isArray(RENT_DATA)) {
-      // ELIMINADO: console.log('📥 Encontrado: RENT_DATA (global)');
       return RENT_DATA;
     }
 
     // 4. Intentar variable global rentData
     if (typeof rentData !== "undefined" && Array.isArray(rentData)) {
-      // ELIMINADO: console.log('📥 Encontrado: rentData (global)');
       return rentData;
     }
 
-    // ELIMINADO: console.error('❌ No se encontraron datos de alquileres en ningún lugar');
     return [];
   }
 
@@ -94,22 +73,17 @@ class DataProcessorFinal {
    * @returns {Object} Datos procesados para tabla, gráfico y KPIs
    */
   processData(filters) {
-    // ELIMINADO: console.log('🔧 Procesando datos con filtros:', filters);
-
     // Si no hay datos, intentar recargar
     if (this.profilesData.length === 0) {
-      // ELIMINADO: console.log('🔄 Reintentando cargar datos de perfiles...');
       this.profilesData = this.findProfilesData();
     }
 
     if (this.rentData.length === 0) {
-      // ELIMINADO: console.log('🔄 Reintentando cargar datos de alquileres...');
       this.rentData = this.findRentData();
     }
 
     // Si aún no hay datos, usar datos de ejemplo
     if (this.profilesData.length === 0 || this.rentData.length === 0) {
-      // ELIMINADO: console.warn('⚠️ Usando datos de ejemplo');
       return this.getSampleData(filters);
     }
 
@@ -195,7 +169,6 @@ class DataProcessorFinal {
     );
 
     if (!profile) {
-      // ELIMINADO: console.warn(`⚠️ Perfil no encontrado: ${category} - ${level}`);
       // Buscar en datos brutos como última opción
       const allData = window.PROFILES_DATA || window.profilesData || [];
       const fallbackProfile = allData.find(
@@ -203,7 +176,6 @@ class DataProcessorFinal {
       );
 
       if (fallbackProfile) {
-        // ELIMINADO: console.log(`✅ Perfil encontrado en datos globales: ${fallbackProfile.Salary}`);
         return fallbackProfile.Salary || 0;
       }
 
@@ -224,13 +196,11 @@ class DataProcessorFinal {
       filtered = filtered.filter((rent) => rent.district === district);
     }
 
-    // ELIMINADO: console.log(`🏠 ${filtered.length} alquileres filtrados`);
     return filtered;
   }
 
   calculateEfforts(salary, rents) {
     if (salary <= 0) {
-      // ELIMINADO: console.warn('⚠️ Salario es 0, no se pueden calcular esfuerzos');
       return rents.map((rent) => ({
         ...rent,
         effort: 0,
@@ -414,8 +384,6 @@ class DataProcessorFinal {
   }
 
   getSampleData(filters) {
-    // ELIMINADO: console.log('🧪 Generando datos de ejemplo...');
-
     return {
       tableData: [
         {
@@ -478,8 +446,6 @@ class DataProcessorFinal {
    * @returns {Object} Datos para heatmap: {matrixData, profiles, districts}
    */
   getAccessibilityMatrix() {
-    // ELIMINADO: console.log('🔥 Generando matriz de accesibilidad...');
-
     // 1. Obtener todos los perfiles (9)
     const profiles = this.profilesData;
 
@@ -533,8 +499,6 @@ class DataProcessorFinal {
       });
     });
 
-    // ELIMINADO: console.log(`✅ Matriz generada: ${matrixData.length} celdas`);
-
     return {
       matrixData: matrixData,
       profiles: profiles.map((p) => `${p.category} ${p.level}`),
@@ -552,12 +516,9 @@ class DataProcessorFinal {
    * @returns {Array} Distritos ordenados por esfuerzo mínimo
    */
   getDistrictRanking() {
-    // ELIMINADO: console.log('🏆 Generando ranking de distritos por esfuerzo mínimo...');
-
     try {
       // 1. Obtener salario promedio general (categoría="all", nivel="all")
       const averageSalary = this.getProfileSalary("all", "all");
-      // ELIMINADO: console.log(`💰 Salario promedio general: ${averageSalary}€`);
 
       // 2. Obtener todos los distritos
       const districts = this.getUniqueDistricts();
@@ -568,7 +529,6 @@ class DataProcessorFinal {
         const districtRents = this.getFilteredRents("all", district);
 
         if (districtRents.length === 0) {
-          // ELIMINADO: console.warn(`⚠️ No hay alquileres para el distrito: ${district}`);
           return {
             district,
             minEffort: 0,
@@ -604,20 +564,13 @@ class DataProcessorFinal {
       const validRanking = districtRanking.filter((d) => d.rentCount > 0);
       validRanking.sort((a, b) => a.minEffort - b.minEffort);
 
-      // ELIMINADO: console.log('✅ Ranking de distritos generado:');
-      // ELIMINADO: validRanking.forEach(d => {
-      // ELIMINADO:     console.log(`   ${d.district}: ${d.minEffort}% (${d.minPrice}€ / ${d.averageSalary}€)`);
-      // ELIMINADO: });
-
       // 5. Si hay datos insuficientes, usar datos de ejemplo
       if (validRanking.length === 0) {
-        // ELIMINADO: console.warn('⚠️ No se pudieron calcular datos, usando ejemplo');
         return this.getSampleDistrictRanking();
       }
 
       return validRanking;
     } catch (error) {
-      // ELIMINADO: console.error('❌ Error generando ranking de distritos:', error);
       return this.getSampleDistrictRanking();
     }
   }
@@ -705,8 +658,6 @@ class DataProcessorFinal {
    * @returns {Array} Datos para gráfico de columnas
    */
   getSeniorityComparisonData() {
-    // ELIMINADO: console.log('📊 Generando datos para comparativa Junior vs Senior por categoría...');
-
     // Valores estáticos según especificaciones
     return [
       { category: "Technology", level: "Junior", effort: 35.73 },
@@ -723,8 +674,6 @@ class DataProcessorFinal {
    * @returns {Array} Datos para gráfico de barras
    */
   getAllCategoriesComparisonData() {
-    // ELIMINADO: console.log('📊 Generando datos para comparativa todas las categorías Junior vs Senior...');
-
     // Valores estáticos según especificaciones (corregidos)
     return [
       { level: "Junior", effort: 36.55 },
@@ -735,4 +684,3 @@ class DataProcessorFinal {
 
 // Inicializar y exportar globalmente
 window.dataProcessorFinal = new DataProcessorFinal();
-// ELIMINADO: console.log('🚀 DataProcessorFinal V4.3.3 cargado y listo (con ranking de distritos corregido y métodos Seniority)');

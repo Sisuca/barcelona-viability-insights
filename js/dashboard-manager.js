@@ -3,37 +3,27 @@
 
 class DashboardManager {
   constructor() {
-    // ELIMINADO: console.log("✅ Dashboard Manager V15.8.2 inicializando...");
     this.currentPage = "vision-general";
     this.init();
   }
 
   init() {
-    // ELIMINADO: console.log("🎯 Iniciando Dashboard Manager (enlaces al inicio de subsecciones)...");
-
     // Verificar que los elementos del menú existan
     const navItems = document.querySelectorAll(".dashboard-nav-item");
-    // ELIMINADO: console.log(`🔍 Encontrados ${navItems.length} elementos del menú lateral`);
-
     if (navItems.length === 0) {
-      // ELIMINADO: console.error("❌ ERROR: No se encontraron elementos .dashboard-nav-item");
       return;
     }
 
     this.bindEvents();
     this.setupInitialState();
-    // ELIMINADO: console.log("✅ Dashboard Manager inicializado (enlaces corregidos)");
   }
 
   bindEvents() {
-    // ELIMINADO: console.log("👂 Configurando event listeners...");
-
     const navItems = document.querySelectorAll(".dashboard-nav-item");
 
     navItems.forEach((item, index) => {
       const href = item.getAttribute("href");
       const text = item.querySelector(".nav-text")?.textContent || "sin texto";
-      // ELIMINADO: console.log(`  ${index + 1}. ${text} → ${href}`);
 
       // Remover listeners previos
       const newItem = item.cloneNode(true);
@@ -46,13 +36,10 @@ class DashboardManager {
     // Manejar popstate (navegación con botones atrás/adelante)
     window.addEventListener("popstate", (e) => {
       const hash = window.location.hash.substring(1);
-      // ELIMINADO: console.log("🔙 Popstate detectado - Ignorando navegación por hash");
       // No hacer nada con el hash, mantener vista de inicio
       this.showPage("vision-general");
       this.updateActiveNavItem("vision-general");
     });
-
-    // ELIMINADO: console.log(`✅ Listeners configurados para ${navItems.length} elementos`);
   }
 
   handleNavClick(e) {
@@ -61,54 +48,36 @@ class DashboardManager {
     e.stopImmediatePropagation();
 
     const href = e.currentTarget.getAttribute("href");
-    // ELIMINADO: console.log("🖱️ Click en menú lateral:", href);
 
     if (href && href.startsWith("#")) {
       const targetId = href.substring(1);
-      // ELIMINADO: console.log(`🎯 Navegando a inicio de subsección: ${targetId}`);
 
       // NO actualizar URL con hash - mantener URL limpia
-      // history.pushState(null, null, href); ← ELIMINADO
-
       // Manejar navegación
       this.handleNavigation(targetId);
     }
   }
 
   setupInitialState() {
-    // ELIMINADO: console.log("⚙️ Configurando estado inicial - SIEMPRE vista de inicio");
-
-    // 🚫 NO LEER el hash - forzamos inicio siempre
-    // const hash = window.location.hash.substring(1); ← ELIMINADO
-
-    // ELIMINADO: console.log("📍 Forzando vista de inicio sin hash en URL");
-
     // Mostrar Resumen por defecto SIEMPRE
     this.showPage("vision-general");
-
-    // 🚫 NO navegar a ningún hash aunque exista en la URL
-    // ELIMINADO: if (hash) { setTimeout(() => this.handleNavigation(hash, false), 100); }
 
     // Marcar el elemento activo por defecto (Resumen)
     this.updateActiveNavItem("vision-general");
 
-    // ✅ LIMPIAR el hash de la URL completamente
+    // LIMPIAR el hash de la URL completamente
     if (window.location.hash) {
       // Limpiar URL sin recargar la página
       history.replaceState(null, null, window.location.pathname);
-      // ELIMINADO: console.log("🧹 Hash eliminado de la URL");
     }
 
     // También limpiar cualquier parámetro de filtro en la URL
     if (window.location.search || window.location.hash.includes("?")) {
       history.replaceState(null, null, window.location.pathname);
-      // ELIMINADO: console.log("🧹 Parámetros de URL eliminados");
     }
   }
 
   handleNavigation(targetId, fromPopstate = false) {
-    // ELIMINADO: console.log(`🔄 handleNavigation: ${targetId} (fromPopstate: ${fromPopstate})`);
-
     // Actualizar elemento activo en el menú
     this.updateActiveNavItem(targetId);
 
@@ -127,7 +96,6 @@ class DashboardManager {
         this.scrollToSection(targetId, !fromPopstate);
       }, 50);
     } else {
-      // ELIMINADO: console.warn(`⚠️ Destino no reconocido: ${targetId}`);
       this.scrollToDashboard();
     }
 
@@ -137,7 +105,6 @@ class DashboardManager {
   showPage(pageId) {
     // Solo manejamos vision-general (página unificada)
     if (pageId !== "vision-general") {
-      // ELIMINADO: console.log(`ℹ️ Redirigiendo ${pageId} a vision-general`);
       pageId = "vision-general";
     }
 
@@ -150,13 +117,10 @@ class DashboardManager {
     const targetPage = document.getElementById(pageId);
     if (targetPage) {
       targetPage.classList.add("active");
-      // ELIMINADO: console.log(`📄 Página activa: ${pageId}`);
     }
   }
 
   updateActiveNavItem(targetId) {
-    // ELIMINADO: console.log(`🎯 Actualizando menú activo para: ${targetId}`);
-
     // Mapeo de targetId a href del menú (coinciden exactamente)
     const linkMap = {
       "vision-general": "#vision-general",
@@ -165,8 +129,6 @@ class DashboardManager {
     };
 
     const targetHref = linkMap[targetId] || `#${targetId}`;
-    // ELIMINADO: console.log(`  ↳ Buscando enlace con href: ${targetHref}`);
-
     // Remover clase active de todos
     document.querySelectorAll(".dashboard-nav-item").forEach((item) => {
       item.classList.remove("active");
@@ -178,28 +140,18 @@ class DashboardManager {
     );
     if (activeItem) {
       activeItem.classList.add("active");
-      // ELIMINADO: console.log(`  ✅ Menú activo: ${targetHref}`);
     } else {
-      // ELIMINADO: console.warn(`  ⚠️ No se encontró enlace con href="${targetHref}"`);
-
       // Fallback: activar el primer elemento
       const firstItem = document.querySelector(".dashboard-nav-item");
       if (firstItem) {
         firstItem.classList.add("active");
-        // ELIMINADO: console.log("  ✅ Fallback: activado primer elemento del menú");
       }
     }
   }
 
   scrollToSection(sectionId, smooth = true) {
-    // ELIMINADO: console.log(`📍 Scroll al INICIO de subsección: ${sectionId} (smooth: ${smooth})`);
-
     const section = document.getElementById(sectionId);
     if (!section) {
-      // ELIMINADO: console.error(`❌ Sección no encontrada: #${sectionId}`);
-      // ELIMINADO: console.log("   🔍 Buscando elementos con esa ID...");
-      // ELIMINADO: console.log('   • Elementos con id "accessibility-section":', document.querySelectorAll("#accessibility-section").length);
-      // ELIMINADO: console.log('   • Elementos con id "seniority-section":', document.querySelectorAll("#seniority-section").length);
       return;
     }
 
@@ -214,8 +166,6 @@ class DashboardManager {
     // Posición final con offset para header
     const scrollPosition = absoluteSectionTop - headerHeight - 20; // -20px de margen
 
-    // ELIMINADO: console.log(`  ↳ Posición calculada: ${scrollPosition}px`);
-
     window.scrollTo({
       top: scrollPosition,
       behavior: smooth ? "smooth" : "auto",
@@ -223,8 +173,6 @@ class DashboardManager {
   }
 
   scrollToDashboard() {
-    // ELIMINADO: console.log("📍 Scroll al inicio del dashboard (Resumen)");
-
     const dashboardSection = document.getElementById("dashboard-section");
     const header = document.getElementById("mainHeader");
 
@@ -240,8 +188,6 @@ class DashboardManager {
   }
 
   handleDownload() {
-    // ELIMINADO: console.log("📥 Simulando descarga del informe PDF...");
-
     const downloadBtn = document.getElementById("downloadReportBtn");
     if (!downloadBtn) return;
 
@@ -262,7 +208,5 @@ class DashboardManager {
 
 // Inicializar cuando el DOM esté listo
 document.addEventListener("DOMContentLoaded", () => {
-  // ELIMINADO: console.log("=== 🏁 DOM CARGADO - INICIANDO DASHBOARD MANAGER V15.8.2 ===");
   window.dashboardManager = new DashboardManager();
-  // ELIMINADO: console.log("=== ✅ DASHBOARD MANAGER V15.8.2 LISTO (URL siempre limpia) ===");
 });
