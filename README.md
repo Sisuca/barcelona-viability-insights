@@ -1,143 +1,161 @@
 # Barcelona Viability Insights 2026
 
-**Análisis socioeconómico multidimensional** que cruza datos reales de salarios y precios de alquiler para determinar la viabilidad económica de vivir en Barcelona en 2026.
+**Análisis interactivo de viabilidad económica** que cruza datos reales de salarios del sector digital con precios de alquiler para evaluar dónde es económicamente sostenible vivir en Barcelona.
 
-## 🎯 Objetivo
+## Objetivo
 
-Conectar a través de datos reales con la situación socioeconómica de profesionales del mundo tecnológico y creativo digital, analizando la viabilidad real de vivir en Barcelona comparando ingresos medios con coste de alquiler.
+Evaluar la viabilidad real de vivir en Barcelona para profesionales del sector tecnológico y digital, analizando la relación entre salario bruto mensual y precio de alquiler por distrito.
 
-### Capacidades demostradas:
-1. **Análisis integrado** - Fusión de múltiples fuentes de datos
-2. **Exploración de variaciones** - Detección de patrones relevantes
-3. **Storytelling con datos** - Comunicación clara de hallazgos complejos
-4. **Generación de insights** - Conclusiones prácticas sobre accesibilidad a la vivienda
+El proyecto combina análisis cuantitativo, visualización de datos y arquitectura frontend modular para construir un dashboard interactivo con filtros dinámicos y generación automática de métricas.
 
-## 📊 Metodología
+## Capacidades demostradas
+
+- **Integración de fuentes reales** — Consolidación y normalización de datos de múltiples plataformas (InfoJobs, Domestika, Idealista)
+- **Análisis comparativo multidimensional** — Perfil profesional × seniority × distrito × tipo de vivienda
+- **Storytelling con datos** — Síntesis clara de hallazgos complejos
+- **Generación de insights accionables** — Traducción de datos en implicaciones prácticas
+- **Arquitectura frontend modular** — Separación de responsabilidades y procesamiento centralizado
+
+## Metodología
 
 ### Fuentes de datos
-- **Salarios**: 153 ofertas reales de InfoJobs y Domestika (Diciembre 2025)
-- **Alquileres**: 140 inmuebles reales de Idealista (Enero 2026)
-- **Perfiles profesionales**: 9 combinaciones categoría-nivel (Technology/Marketing/Design × Junior/Mid/Senior)
+
+- **Salarios:** 153 ofertas reales del sector tecnológico y digital (InfoJobs y Domestika, diciembre 2025)
+- **Alquileres:** 140 anuncios reales de vivienda (Idealista, enero 2026)
+- **Perfiles analizados:** 9 combinaciones (Tecnología, Marketing, Diseño × Junior, Mid, Senior)
+- **Distritos:** 7 distritos con muestra mínima homogénea (10 estudios + 10 viviendas de 1 habitación por distrito)
 
 ### Fórmula principal
 
 Esfuerzo financiero (%) = (Precio Alquiler / Salario Bruto del Perfil) × 100
 
+### Clasificación de viabilidad
 
-### Rangos de viabilidad (análisis interno)
-- **Viable**: ≤ 30% del salario destinado al alquiler
-- **Limitado**: 31-45% del salario destinado al alquiler  
-- **Inviable**: ≥ 46% del salario destinado al alquiler
+- ✅ **Viable:** ≤ 30% del salario
+- ⚠️ **Limitado:** > 30% y ≤ 45%
+- ❌ **Inviable:** > 45%
 
-## 🚀 Cómo usar el dashboard
+## Hallazgos clave
 
-### Navegación principal
-1. **Dashboard Interactivo** - Análisis cruzado con filtros dinámicos
-2. **Insights Destacados** - Hallazgos clave para lectura rápida
-3. **Metodología** - Proceso completo de análisis y desarrollo
-4. **Sobre el Proyecto** - Contexto profesional y stack tecnológico
+- En todos los distritos analizados, los **perfiles junior superan el 30% de esfuerzo salarial** en vivienda individual.
+- Solo los **seniors de tecnología alcanzan escenarios con esfuerzo inferior al 20%** en los distritos más accesibles.
+- **Diseñadores junior** presentan los niveles de vulnerabilidad más altos (~39% de esfuerzo mínimo).
+- **Gràcia** registra el mayor esfuerzo salarial mínimo del estudio (+34%).
+- **Sant Martí y Sants-Montjuïc** aparecen como los distritos más accesibles en términos relativos.
+
+### Implicaciones prácticas
+
+- **Para profesionales junior:** necesidad de compartir vivienda o priorizar distritos más accesibles.
+- **Para empresas:** posible desalineación entre salarios junior y coste real de vivienda.
+- **Responsables públicos y policy makers:** evidencia cuantitativa sobre presión habitacional en perfiles digitales cualificados.
+
+## 🚀 Dashboard interactivo
+
+**Acceso al proyecto:**  
+https://sisuca.github.io/barcelona-viability-insights
+
+### Secciones principales
+
+- **Dashboard Interactivo** — Análisis cruzado con filtros dinámicos
+- **Insights Destacados** — Resumen ejecutivo de hallazgos
+- **Metodología** — Explicación del proceso analítico
+- **Sobre el Proyecto** — Contexto profesional y enfoque técnico
 
 ### Filtros disponibles
-- **Categoría laboral**: Technology, Marketing, Design
-- **Nivel profesional**: Junior, Mid, Senior
-- **Tipo de vivienda**: Estudio, 1 habitación
-- **Distrito**: 7 distritos de Barcelona
 
-### Visualizaciones
-- **KPIs**: Salario bruto, alquiler promedio, esfuerzo mínimo
-- **Tabla detallada**: Viviendas individuales con esfuerzo calculado
-- **Gráfico de barras**: Esfuerzo por barrio ordenado por impacto
+- **Categoría laboral:** Tecnología, Marketing, Diseño
+- **Nivel profesional:** Junior, Mid, Senior
+- **Tipo de vivienda:** Estudio, 1 habitación
+- **Distrito:** 7 distritos de Barcelona
+
+### Visualizaciones incluidas
+
+- **KPIs:** salario bruto mensual, alquiler promedio y porcentaje de esfuerzo mínimo
+- **Tabla de análisis de viabilidad** según los filtros aplicados
+- **Gráficos de barras** con porcentaje de esfuerzo salarial por barrios y por distritos
+- **Tabla de porcentaje de esfuerzo salarial** por perfil y distrito
+- **Comparativa Junior vs Senior** con porcentaje de esfuerzo salarial entre perfiles
 
 ## 🛠️ Stack tecnológico
 
 ### Frontend
-- HTML5, CSS3 (Custom properties, Grid, Flexbox)
-- JavaScript ES6+ (Módulos, Classes, Events)
-- Chart.js para visualizaciones
-- Font Awesome para iconografía
+
+- HTML5
+- CSS3 (Custom Properties, Grid, Flexbox)
+- JavaScript ES6+ (módulos, clases, arquitectura event-driven)
+- Chart.js
+- Font Awesome
+- Google Fonts (Inter, JetBrains Mono)
 
 ### Arquitectura
-- **DataProcessor**: Procesamiento y cálculo centralizado
-- **Managers modularizados**: Filtros, KPIs, Tabla, Gráficos
-- **Event-driven**: Comunicación entre componentes
-- **Mobile-first**: Diseño responsive
+
+- **DataProcessor:** capa central de procesamiento que actúa como fuente única de verdad para cálculos y métricas.
+- **Managers modulares:** filtros, KPIs, tablas y gráficos gestionados de forma independiente.
+- **Event-driven:** comunicación desacoplada mediante eventos personalizados.
+- **Mobile-first:** diseño responsive optimizado.
 
 ### Herramientas
+
 - Git para control de versiones
-- VS Code como editor principal
-- Google Fonts (Inter, JetBrains Mono)
+- VS Code como entorno principal de desarrollo
 
 ## 📁 Estructura del proyecto
 
 barcelona-viability/
-├── index.html # Punto de entrada principal
+├── assets/
+│ ├── images/
+│ └── favicon.svg
 ├── css/
-│ ├── main.css # Estilos base y utilidades
-│ ├── dashboard.css # Estilos específicos del dashboard
-│ ├── table-chart.css # Estilos para tabla y gráficos
-│ └── responsive.css # Media queries y ajustes móviles
+│ ├── main.css
+│ ├── dashboard.css
+│ ├── responsive.css
+│ └── table-chart.css
+├── docs/
+│ ├── architecture.md
+│ ├── barcelona-viability-insights.pdf
+│ └── design-system.md
 ├── js/
-│ ├── data/ # Datos estáticos
-│ │ ├── rent-data.js # Precios de alquiler
-│ │ └── profiles-data.js # Perfiles profesionales
+│ ├── data/
+│ │ ├── profiles-data.js
+│ │ └── rent-data.js
+│ ├── accessibility-heatmap.js
+│ ├── app-initializer.js
+│ ├── dashboard-manager.js
+│ ├── data-processor.js
+│ ├── filters-manager.js
+│ ├── kpi-cards.js
 │ ├── main.js
-│ ├── data-processor-final.js # Procesador central
-│ ├── data-processor-v2.js # Procesador central (anterior, eliminar si no se utiliza)
-│ ├── dashboard-manager.js # Procesador central
-│ ├── filters-manager.js # Gestor de filtros
-│ ├── kpi-cards.js # Tarjetas de métricas
-│ ├── table-manager.js # Gestor de tabla y gráfico
-│ └── app-initializer.js # Inicializador principal
-└── assets/ # Imágenes, iconos, recursos
+│ ├── seniority-manager.js
+│ └── table-manager.js
+├── index.html
+├── README.md
+└── .gitignore
 
+## 📚 Documentación técnica ampliada
 
-
-## 📚 Documentación técnica
-
-Para detalles completos sobre el sistema de diseño, arquitectura JavaScript y decisiones técnicas:
-
-- **Guía de estilos completo** → `docs/styles.md`  
-  Paleta de colores, tipografía, componentes y reglas de diseño
-
-- **Arquitectura JavaScript** → `docs/ARCHITECTURE.md`  
-  Diagrama de módulos, flujo de datos, managers y patrones implementados
-
-*Nota: Esta documentación está dirigida a desarrolladores y analistas técnicos.*
-
-
-
-## 🔍 Insights clave
-
-### Hallazgos principales
-1. **95% de los profesionales junior** necesitan compartir piso para vivir en Barcelona
-2. Solo los **seniors de tecnología** mantienen un ratio salario/alquiler saludable (<35%)
-3. **Diseñadores junior** son el perfil más vulnerable (57% del salario para alquiler)
-4. **Brecha de €2,705 mensuales** entre distritos más y menos caros
-
-### Implicaciones prácticas
-- **Para juniors**: Necesidad de compartir vivienda o buscar distritos periféricos
-- **Para empresas**: Revisión de políticas salariales para retención de talento
-- **Para legisladores**: Datos para políticas de vivienda accesible
+- **architecture.md** — Arquitectura JavaScript, flujo de datos y modularización
+- **design-system.md** — Sistema de diseño, tipografía, componentes y convenciones visuales
+- **barcelona-viability-insights.pdf** — Informe analítico descargable
 
 ## 📄 Licencia y uso
 
 ### Propósito
-Proyecto de portfolio profesional que demuestra capacidades de:
-- Análisis de datos integrado
-- Visualización de información compleja
-- Storytelling con datos
-- Desarrollo frontend modular
+
+Proyecto de portfolio profesional orientado a demostrar:
+
+- Análisis de datos aplicado
+- Visualización estructurada de información compleja
+- Diseño orientado a claridad
+- Arquitectura frontend modular y escalable
 
 ### Limitaciones
-- Instantánea de Diciembre 2025 - Enero 2026
-- No incluye gastos adicionales (comunidad, suministros)
-- Precios pueden variar según estado del inmueble
 
-### Créditos
-**Isabel Abad** - Analista de Datos & Data Storyteller  
-[LinkedIn](https://linkedin.com/in/tuperfil) | [GitHub](https://github.com/tuusuario)
+- Instantánea del mercado: diciembre 2025 – enero 2026
+- No incluye gastos adicionales (suministros, comunidad u otros)
+- Resultados condicionados por muestra y contexto temporal
 
 ---
 
-*"El diseño no debe llamar la atención, el análisis sí."*
-
+**Isabel Abad**  
+Data Analyst & Data Storyteller
+[LinkedIn](https://linkedin.com/in/abadisabel)
