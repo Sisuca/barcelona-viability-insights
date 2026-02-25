@@ -1,12 +1,21 @@
-# Barcelona Viability Insights 2026
+# Barcelona Viability Insights
 
-**Análisis interactivo de viabilidad económica** que cruza datos reales de salarios del sector digital con precios de alquiler para evaluar dónde es económicamente sostenible vivir en Barcelona.
+**Análisis interactivo de viabilidad económica** que cruza datos reales de salarios del sector digital con precios de alquiler por distrito para evaluar dónde es financieramente sostenible vivir en Barcelona.
+
+![Preview](assets/images/screenshot-dashboard.png)
+
+## Enlaces
+- [GitHub Pages](https://sisuca.github.io/barcelona-viability-insights)
+- [Repositorio GitHub](https://github.com/Sisuca/barcelona-viability-insights)
+- [Informe en PDF](docs/barcelona-viability-insights.pdf)
+
 
 ## Objetivo
 
 Evaluar la viabilidad real de vivir en Barcelona para profesionales del sector tecnológico y digital, analizando la relación entre salario bruto mensual y precio de alquiler por distrito.
 
 El proyecto combina análisis cuantitativo, visualización de datos y arquitectura frontend modular para construir un dashboard interactivo con filtros dinámicos y generación automática de métricas.
+
 
 ## Capacidades demostradas
 
@@ -52,7 +61,7 @@ Esfuerzo financiero (%) = (Precio Alquiler / Salario Bruto del Perfil) × 100
 ## Dashboard interactivo
 
 **Acceso al proyecto:**  
-https://sisuca.github.io/barcelona-viability-insights
+[GitHub Pages](https://sisuca.github.io/barcelona-viability-insights)
 
 ### Secciones principales
 
@@ -101,6 +110,7 @@ https://sisuca.github.io/barcelona-viability-insights
 
 ## Estructura del proyecto
 
+```text
 barcelona-viability/
 ├── assets/
 │ ├── images/
@@ -130,6 +140,8 @@ barcelona-viability/
 ├── index.html
 ├── README.md
 └── .gitignore
+
+```
 
 ## Documentación técnica ampliada
 
