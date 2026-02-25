@@ -49,7 +49,7 @@ Esfuerzo financiero (%) = (Precio Alquiler / Salario Bruto del Perfil) × 100
 - **Para empresas:** posible desalineación entre salarios junior y coste real de vivienda.
 - **Responsables públicos y policy makers:** evidencia cuantitativa sobre presión habitacional en perfiles digitales cualificados.
 
-## 🚀 Dashboard interactivo
+## Dashboard interactivo
 
 **Acceso al proyecto:**  
 https://sisuca.github.io/barcelona-viability-insights
@@ -76,7 +76,7 @@ https://sisuca.github.io/barcelona-viability-insights
 - **Tabla de porcentaje de esfuerzo salarial** por perfil y distrito
 - **Comparativa Junior vs Senior** con porcentaje de esfuerzo salarial entre perfiles
 
-## 🛠️ Stack tecnológico
+## Stack tecnológico
 
 ### Frontend
 
@@ -99,7 +99,7 @@ https://sisuca.github.io/barcelona-viability-insights
 - Git para control de versiones
 - VS Code como entorno principal de desarrollo
 
-## 📁 Estructura del proyecto
+## Estructura del proyecto
 
 barcelona-viability/
 ├── assets/
@@ -131,13 +131,13 @@ barcelona-viability/
 ├── README.md
 └── .gitignore
 
-## 📚 Documentación técnica ampliada
+## Documentación técnica ampliada
 
 - **architecture.md** — Arquitectura JavaScript, flujo de datos y modularización
 - **design-system.md** — Sistema de diseño, tipografía, componentes y convenciones visuales
 - **barcelona-viability-insights.pdf** — Informe analítico descargable
 
-## 📄 Licencia y uso
+## Licencia y uso
 
 ### Propósito
 
